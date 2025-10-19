@@ -1,5 +1,5 @@
 # Scrum masters log
-1. aaaa aaaa (aaaaa)
+1. Miguel Cordeiro (68338)
 2. bbbb bbbb (bbbbb)
 3. cccc cccc (ccccc)
 4. dddd dddd (ddddd)

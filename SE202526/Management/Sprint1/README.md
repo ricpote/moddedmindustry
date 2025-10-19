@@ -6,36 +6,36 @@
 
 ## Scrum master
 
-Student name and number
+Miguel Cordeiro 68338
 
 ## Management info
 ### Sprint Planning Meeting: 
-*(This meeting is held at the beginning of the sprint to define the primary purpose and goal of the sprint. The Scrum team, comprising the product manager, development team, and Scrum Master, selects and commits to a set of product backlog items (PBIs) referred to as the sprint backlog. You can use this section to log what happened during this meeting. A few bullet points should be enough.)*
+Nesta reunião decidimos estudar o código em profundidade e jogamos o jogo para entender melhor as suas funcionalidades.
 
 ### Sprint Review Meeting: 
-*(Held at the end of the sprint, this meeting is attended by all stakeholders to demo the completed work and validate if the sprint goal has been met.)*
+Após a discussão concluimos que o estudo não foi suficiente e deve prosseguir para o próximo sprint.
 
 ### Sprint Retrospective Meeting: 
-*(This meeting happens after the sprint review and before the next sprint planning meeting. The team reflects on what went well, what needs improvement, and how to enhance their processes for future sprints.)*
-
+Concluímos que temos de melhorar a nossa abordagem à forma como vamos estudar o código no próximo sprint.
 ## Relevant resources
 
 ### Scrum Board at the beginning of the sprint
 
-Please add the scrumboard picture here.
+![img.png](img.png)
 
 ### Scrum Board in the middle of the sprint
 
-Please add the scrumboard picture here.
+![img_1.png](img_1.png)
 
 ### Scrum Board at the end of the sprint
 
-Please add the scrumboard picture here.
+![img_2.png](img_2.png)
 
 ### Burndown Chart for the sprint
 
-Please add the burndown chart here.
+[Burndown chart template (1).xlsx](Burndown%20chart%20template%20%281%29.xlsx)
 
 ### Gantt Chart
 
-Please add the Gantt chart here.
+[Gantt Template.xlsx](Gantt%20Template.xlsx)
+
