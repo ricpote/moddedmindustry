@@ -7,8 +7,8 @@
 
 ## Reviewer(s)
 
-- name surname (number)
-- name surname (number)
+-Ricardo Pote (68245)
+-Miguel Cordeiro (68338)
 
 ### User story
 
@@ -21,7 +21,7 @@ Seria interessante que existisse meteoritos,tsunamis, terramotos e tempestades. 
 impactando o jogo de maneira diferente, não o tornando impossível mas sim desafiante.
 
 ### Review
-*(Please add your review here)*
+Uma alteração interessante e curiosa sugerida com uma user story bem formada e completa não sendo preciso fazer alterações à sugestão.
 
 
 #### Change Log
