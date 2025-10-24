@@ -7,8 +7,8 @@
 
 ## Reviewer(s)
 
-- name surname (number)
-- name surname (number)
+- João Rodrigues (67912)
+- Tomás Silva (68725)
 
 ### User story
 
@@ -19,8 +19,8 @@
 *Não existe uma barra de HP de cada Wave de inimigos, o que torna a análise ao estado da defesa algo confusa.*
 
 ### Review
-*(Please add your review here)*
+*Parece uma ideia muito boa, para solucionar um problema real, que sentimos durante a "gameplay". Posto isto, queriamos só propor adicionar também uma barra de HP para o jogador e outra para a base*
 
 #### Change Log
 
-*(date: change description)*
+*24/10/2025*
