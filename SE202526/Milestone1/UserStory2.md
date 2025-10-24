@@ -2,8 +2,8 @@
 
 ## Author(s)
 
-- name surname (number)
-- name surname (number)
+- André Narquel (67870)
+- João Fernandes (68180)
 
 ## Reviewer(s)
 
@@ -12,11 +12,11 @@
 
 ### User story
 
-*( please write up the User story here.)*
+*Como jogadores sentimos dificuldade em perceber o HP (Health Points) de cada Wave de inimigos, e como esse valor é alterado pela ação das nossas defesas.*
 
 #### Notes
 
-*(Please add any notes about this user story here.)*
+*Não existe uma barra de HP de cada Wave de inimigos, o que torna a análise ao estado da defesa algo confusa.*
 
 ### Review
 *(Please add your review here)*
