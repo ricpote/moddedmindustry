@@ -15,11 +15,9 @@ Ricardo Miguel Paredes Pote nº68245
 A atividade principal deste sprint é o desenvolvimento de user stories paar implementação nos próximos sprints pra realização destes vamos dividir os nossos esforços em tres equipas e as equipas devem depois de submeter a sua propria user sotry fazer review de uma das outras de maneira a que não haja conflito.
 
 ### Sprint Review Meeting: 
-*(Held at the end of the sprint, this meeting is attended by all stakeholders to demo the completed work and validate if the sprint goal has been met.)*
-T
+O objetivo do sprint foi completo visto que as user stories foram entregues com sucesso e uma maior compreensão do codigo original foi alcançada.
 ### Sprint Retrospective Meeting: 
-*(This meeting happens after the sprint review and before the next sprint planning meeting. The team reflects on what went well, what needs improvement, and how to enhance their processes for future sprints.)*
-
+Nada a de relevo a referir foi uma boa gestão de tempo tendo em contra o pouco tempo de que disponhamos talvez da proxima uma processo de organização mais rapido para que o trabalho possa começa-se a fazer mais raápido possivel.
 ## Relevant resources
 
 ### Scrum Board at the beginning of the sprint
