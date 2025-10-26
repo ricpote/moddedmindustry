@@ -23,16 +23,23 @@ T
 ## Relevant resources
 
 ### Scrum Board at the beginning of the sprint
-
 Please add the scrumboard picture here.
+![scrumBoard](https://github.com/user-attachments/assets/25b98364-cd2f-421d-9254-4a15c07385f3)
+
+
 
 ### Scrum Board in the middle of the sprint
 
 Please add the scrumboard picture here.
 
-### Scrum Board at the end of the sprint
+![scrum2](https://github.com/user-attachments/assets/f5c5b99a-56f7-4d47-a1e6-820912ea5364)
 
+
+
+### Scrum Board at the end of the sprint
 Please add the scrumboard picture here.
+![scrum3](https://github.com/user-attachments/assets/a5ae0290-c976-41b9-be90-0ba980a9a0ff)
+
 
 ### Burndown Chart for the sprint
 
