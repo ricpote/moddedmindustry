@@ -26,7 +26,7 @@ Neste sprint o objetivo será identificar design patterns.
 
 ### Scrum Board in the middle of the sprint
 
-Please add the scrumboard picture here.
+![img_2.png](img_2.png)
 
 ### Scrum Board at the end of the sprint
 
