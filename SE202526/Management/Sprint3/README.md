@@ -13,11 +13,13 @@ João Rodrigues 67912
 Neste sprint o objetivo será identificar design patterns.
 
 ### Sprint Review Meeting: 
-*(Held at the end of the sprint, this meeting is attended by all stakeholders to demo the completed work and validate if the sprint goal has been met.)*
+O objetivo do sprint não foi concluído conforme planeado, permancendo as tarefas para o próximo sprint, dado à falta de 
+disponibilidade dos membros da equipa.
 
 ### Sprint Retrospective Meeting: 
-*(This meeting happens after the sprint review and before the next sprint planning meeting. The team reflects on what went well, what needs improvement, and how to enhance their processes for future sprints.)*
-
+Neste sprint devíamos ter-nos organizado melhor. Apesar de nenhum membro da equipa ter tido disponibilidade suficiente,
+devíamos ter previsto a situação e ter começado mais cedo. Para os próximos sprints vamos ter de nos organizar melhor
+garantindo tempo para realizar as tarefas.
 ## Relevant resources
 
 ### Scrum Board at the beginning of the sprint
@@ -30,12 +32,12 @@ Neste sprint o objetivo será identificar design patterns.
 
 ### Scrum Board at the end of the sprint
 
-Please add the scrumboard picture here.
+![img_2.png](img_2.png)
 
 ### Burndown Chart for the sprint
 
-Please add the burndown chart here.
+[Burndown Sprint 3](SE202526/Management/Sprint3/BurndownSprint3.xlsx)
 
 ### Gantt Chart
 
-Please add the Gantt chart here.
+[Gantt Sprint 3](SE202526/Management/Sprint3/GantSprint3.xlsx)
