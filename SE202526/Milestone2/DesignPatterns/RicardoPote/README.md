@@ -92,4 +92,15 @@ making it so Net class doesnt need to know how to handle all different kinds of 
     }
     The observer interfaces are the interfaces of the collections in this case cons and cons2 and the concrete observers the classe is (Snet.java with update method on line 52)
 
+
+
+2ºFactory Object Design Pattern:
+Said design pattern is found in core/src/content/Items class.
+
+
+
+
+
+
     
+
