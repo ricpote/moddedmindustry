@@ -1,6 +1,7 @@
 1º Code Smell - Long method:
 
 Este code smell localiza-se em core/src/mindustry/core/Control.java e foi escolhido como long method pois o construtor da classe é constituído por 225 linhas de código tornando-se difícil de perceber o que faz e se pretendermos mudar alguma funcionalidade, esta mudança pode afetar o resto do método. Para resolver este code smell temos de factorizar parte do código num método independente, podemos então criar métodos que fazem a partes dos events listeners simplificando este long method.Aqui está o long method:
+    
     public Control(){
         saves = new Saves();
         sound = new SoundControl();
@@ -227,3 +228,84 @@ Este code smell localiza-se em core/src/mindustry/core/Control.java e foi escolh
             state.set(State.playing);
         });
     }
+
+2º Code Smell - Duplicated Code:
+
+Este code smell localiza-se em core/src/mindustry/core/World.java e foi escolhido como duplicated code porque existe duas funções que são quase idênticas mas só muda o que os dois primeiros if's dentro do ciclo fazem. Isto implica que se quisermos fazer uma mudança ou adicionar uma funcionalidade nesta classe temos de atualizar o código em vários lugares, o que não é nada prático. Para resolvermos este code smell podemos deixar o segundo método que retorna um boolean e no primeiro método chamamos o segundo método e ignoramos o boolean, pois terá o mesmo resultado uma vez que vai sair do ciclo quando retornaro boolean. Aqui esta o código:
+
+public static void raycastEach(int x1, int y1, int x2, int y2, Raycaster cons){
+        int x = x1, dx = Math.abs(x2 - x), sx = x < x2 ? 1 : -1;
+        int y = y1, dy = Math.abs(y2 - y), sy = y < y2 ? 1 : -1;
+        int e2, err = dx - dy;
+
+        while(true){
+            if(cons.accept(x, y)) break;
+            if(x == x2 && y == y2) break;
+
+            e2 = 2 * err;
+            if(e2 > -dy){
+                err -= dy;
+                x += sx;
+            }
+
+            if(e2 < dx){
+                err += dx;
+                y += sy;
+            }
+        }
+    }
+
+    public static boolean raycast(int x1, int y1, int x2, int y2, Raycaster cons){
+        int x = x1, dx = Math.abs(x2 - x), sx = x < x2 ? 1 : -1;
+        int y = y1, dy = Math.abs(y2 - y), sy = y < y2 ? 1 : -1;
+        int e2, err = dx - dy;
+
+        while(true){
+            if(cons.accept(x, y)) return true;
+            if(x == x2 && y == y2) return false;
+
+            e2 = 2 * err;
+            if(e2 > -dy){
+                err = err - dy;
+                x = x + sx;
+            }
+
+            if(e2 < dx){
+                err = err + dx;
+                y = y + sy;
+            }
+        }
+    }
+
+
+3º Code Smell - Data Class:
+
+Este code smell localiza-se em core/src/mindustry/game/EventType.java e foi escolhido como Data Class porque dentro da classe em si há outras classes que simplesmente guardam dados mas não executam nenhum método. Isto pode ser um sinal que essas mini-classes podem nem ser necessárias sendo que não têm nenhum método. Para resolver este code smell podemos transformá-las em record classes e adicionar métodos relacionados com a classe de forma a ter uma classe útil que simplesmente faz mais que guardar as variáveis. Aqui estão alguns exemplos dessas classes:
+
+
+public static class SaveLoadEvent{
+        public final boolean isMap;
+
+        public SaveLoadEvent(boolean isMap){
+            this.isMap = isMap;
+        }
+    }
+
+    /** Called when a sector is destroyed by waves when you're not there. */
+    public static class SectorLoseEvent{
+        public final Sector sector;
+
+        public SectorLoseEvent(Sector sector){
+            this.sector = sector;
+        }
+    }
+
+    /** Called when a sector is destroyed by waves when you're not there. */
+    public static class SectorInvasionEvent{
+        public final Sector sector;
+
+        public SectorInvasionEvent(Sector sector){
+            this.sector = sector;
+        }
+    }
+
