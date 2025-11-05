@@ -233,7 +233,7 @@ Este code smell localiza-se em core/src/mindustry/core/Control.java e foi escolh
 
 Este code smell localiza-se em core/src/mindustry/core/World.java e foi escolhido como duplicated code porque existe duas funções que são quase idênticas mas só muda o que os dois primeiros if's dentro do ciclo fazem. Isto implica que se quisermos fazer uma mudança ou adicionar uma funcionalidade nesta classe temos de atualizar o código em vários lugares, o que não é nada prático. Para resolvermos este code smell podemos deixar o segundo método que retorna um boolean e no primeiro método chamamos o segundo método e ignoramos o boolean, pois terá o mesmo resultado uma vez que vai sair do ciclo quando retornaro boolean. Aqui esta o código:
 
-public static void raycastEach(int x1, int y1, int x2, int y2, Raycaster cons){
+    public static void raycastEach(int x1, int y1, int x2, int y2, Raycaster cons){
         int x = x1, dx = Math.abs(x2 - x), sx = x < x2 ? 1 : -1;
         int y = y1, dy = Math.abs(y2 - y), sy = y < y2 ? 1 : -1;
         int e2, err = dx - dy;
@@ -283,7 +283,7 @@ public static void raycastEach(int x1, int y1, int x2, int y2, Raycaster cons){
 Este code smell localiza-se em core/src/mindustry/game/EventType.java e foi escolhido como Data Class porque dentro da classe em si há outras classes que simplesmente guardam dados mas não executam nenhum método. Isto pode ser um sinal que essas mini-classes podem nem ser necessárias sendo que não têm nenhum método. Para resolver este code smell podemos transformá-las em record classes e adicionar métodos relacionados com a classe de forma a ter uma classe útil que simplesmente faz mais que guardar as variáveis. Aqui estão alguns exemplos dessas classes:
 
 
-public static class SaveLoadEvent{
+    public static class SaveLoadEvent{
         public final boolean isMap;
 
         public SaveLoadEvent(boolean isMap){
