@@ -143,8 +143,6 @@
 
 Class Diagram:![Template Method Diagram](SE202526/Milestone2/DesignPatterns/JoaoRodrigues/TemplateMethodImg.png)
 
-# Review
--
 
 # Singleton
 
@@ -182,9 +180,7 @@ Class Diagram:![Template Method Diagram](SE202526/Milestone2/DesignPatterns/Joao
 Unique instance proof: ![UniqueInstance.png](UniqueInstance.png)
 
 Class Diagram: ![SingletonImg.png](SingletonImg.png)
-  
-# Review:
--
+
 
 
 # Adapter
@@ -260,8 +256,7 @@ Class Diagram: ![SingletonImg.png](SingletonImg.png)
 
 Class Diagram: ![AdapterImg.png](AdapterImg.png)
 
-# Review:
--
+
     
 
 
