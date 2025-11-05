@@ -96,6 +96,26 @@ making it so Net class doesnt need to know how to handle all different kinds of 
 
 2ºFactory Object Design Pattern:
 Said design pattern is found in core/src/content/Items class.
+This class defines a factory of Item objects that are alrady configured uses load() method to create and initialize all Item instances 
+
+<img width="232" height="468" alt="imagem_2025-11-05_174909357" src="https://github.com/user-attachments/assets/9312f82d-77a6-4a95-bf24-a9b59422060e" />
+
+Product(interface/class):Item
+All created objects belong to this class
+Concrete prodcuts:ex:new Item("copper") These are the specific Item class instances configured
+Creator:Items class
+Factory Method:load() method this handles object creation and configuration.
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -103,4 +123,5 @@ Said design pattern is found in core/src/content/Items class.
 
 
     
+
 
