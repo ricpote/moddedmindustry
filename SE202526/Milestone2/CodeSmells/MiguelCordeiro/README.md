@@ -1,0 +1,2 @@
+1º Code Smell - Long method
+Este code smell localiza-se em core/src/mindustry/core/Control.java e foi escolhido como long method pois o construtor da classe é constituído por 225 linhas de código tornando-se difícil de perceber o que faz e se pretendermos mudar alguma funcionalidade, esta mudança pode afetar o resto do método.
