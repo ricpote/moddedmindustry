@@ -53,14 +53,6 @@ such a big value for this metric might be indicate that this class has too big o
 this amplifies preocupations that the last metric created since this class seems to have a high level of coupling and control responsability along whit having 
 too big of a response set this indicates that we might be in the presence of a god class code smell or of a feature envy code smell.
 
-Moving breefly to a project wide analasys shows us that the god class code smell guess might be correct:
-
-
-
-
-
-
-<img width="1570" height="699" alt="image" src="https://github.com/user-attachments/assets/624dd008-15c9-4019-a76d-e7f375e1f1e7" />
 
 
 
@@ -69,6 +61,7 @@ Before making rash decisions we should first take a look at the class and see wh
 
 The ClientLauncher class takes on the role of initializing most major components of the game and managing the lifecycle of those systems. This central responsibility explains its unusually high RFC = 96 and CBO = 27 values. However, this also leads to the presence of clear code smells, most notably the God Class smell, as it handles many unrelated concerns. 
 Despite this, the design choice is somewhat understandable given the class’s critical role in initializing the game client. Still, this structure increases the complexity helping to create a system that is harder to maintain, test, and extend over time.
+
 
 
 
