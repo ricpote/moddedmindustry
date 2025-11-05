@@ -108,13 +108,7 @@ Factory Method:load() method this handles object creation and configuration.
 3ºFacade Design Pattern:
 I identified this design pattern in core/src/mindustry/core/ContentLoader class.
 This class loads all game content(items,blocks,unitc,etc...) offering a simple interface for loading game content whitout revealing the complexity of these classes 
-
-
-
-
-
-
-
+[![](https://img.plantuml.biz/plantuml/svg/XLH1Ri8m4Bpx5JvIKNX0X10AvO045HAfUdQT1I8SExMTgeWYzJLzM5zI9x53abhoAVRExCQUcMIXD96wp1b2AECQv85Gm4jXbbpZwwrJt9AY86yC70YVvf6gBXbucRjzSYcWgY7AY58uPeAUxNgj8RVBJVPUPgdTlF2iRhFRlIQwLAl30QYsfHqZ7DmcBXc3RiCh47q2wTfDcv0x2Qhjs8CiIYOIeAT4WcjRIJXdiYqYTsHxaOqWAKXyHHYFgJIlW9WefyBe0KVuGvWhjEXMf3umCvVh5PYP-w-m54n8rIiVGSUNzTD8cuj6NNKVSPP6s1XKiMV9q91vs_nCSl2rSrEFZCmouyV1Z87PzImWz3IYWgi84qcdXvBJgS7Lp97kfnxZt-yVZ6wLcCW5PFOrcGm7es6gQb8J5YzKPyUBs2XviJPPNhGND2_3viv_s7iClRXBfV_LtP0E61LXc5WFPH3VVcedatcZfh4c9vmSGU6vXrF96g0q-WP8JkW0hQjuWDf87o3TFGWGhHcXutLS2L9x1WNOVQzwv8Nvxfh_CFe3)](https://editor.plantuml.com/uml/XLH1Ri8m4Bpx5JvIKNX0X10AvO045HAfUdQT1I8SExMTgeWYzJLzM5zI9x53abhoAVRExCQUcMIXD96wp1b2AECQv85Gm4jXbbpZwwrJt9AY86yC70YVvf6gBXbucRjzSYcWgY7AY58uPeAUxNgj8RVBJVPUPgdTlF2iRhFRlIQwLAl30QYsfHqZ7DmcBXc3RiCh47q2wTfDcv0x2Qhjs8CiIYOIeAT4WcjRIJXdiYqYTsHxaOqWAKXyHHYFgJIlW9WefyBe0KVuGvWhjEXMf3umCvVh5PYP-w-m54n8rIiVGSUNzTD8cuj6NNKVSPP6s1XKiMV9q91vs_nCSl2rSrEFZCmouyV1Z87PzImWz3IYWgi84qcdXvBJgS7Lp97kfnxZt-yVZ6wLcCW5PFOrcGm7es6gQb8J5YzKPyUBs2XviJPPNhGND2_3viv_s7iClRXBfV_LtP0E61LXc5WFPH3VVcedatcZfh4c9vmSGU6vXrF96g0q-WP8JkW0hQjuWDf87o3TFGWGhHcXutLS2L9x1WNOVQzwv8Nvxfh_CFe3)
 
 
 
@@ -126,6 +120,7 @@ This class loads all game content(items,blocks,unitc,etc...) offering a simple i
 
 
     
+
 
 
 
