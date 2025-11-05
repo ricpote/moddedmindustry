@@ -105,6 +105,9 @@ All created objects belong to this class
 Concrete prodcuts:ex:new Item("copper") These are the specific Item class instances configured
 Creator:Items class
 Factory Method:load() method this handles object creation and configuration.
+3ºFacade Design Pattern:
+I identified this design pattern in core/src/mindustry/core/ContentLoader class.
+This class loads all game content(items,blocks,unitc,etc...) offering a simple interface for loading game content whitout revealing the complexity of these classes 
 
 
 
@@ -123,5 +126,6 @@ Factory Method:load() method this handles object creation and configuration.
 
 
     
+
 
 
