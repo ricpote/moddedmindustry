@@ -412,3 +412,65 @@ Class Diagram:
 <img width="1175" height="583" alt="image" src="https://github.com/user-attachments/assets/de313556-efa0-40eb-9abc-1c243c2c4e6b" />
 
 
+# Strategy
+
+Path: core/src/mindustry/game/Rules.java
+Package: mindustry.game;
+Classes: Rules.java
+Methods: unitCost(), unitDamage(),unitHealth(), blockHealth(), buildSpeed(), isBanned()
+
+The class Rules is responsible for defining all game behaviors(pvp, waves, difficulty, game mode, etc.) encapsulating all game logic, including the sub-class Team Rules that has team-specific algorithms.
+
+Code Snippet:
+
+    public float unitBuildSpeed(Team team){
+        return unitBuildSpeedMultiplier * teams.get(team).unitBuildSpeedMultiplier;
+    }
+
+    public float unitCost(Team team){
+        return unitCostMultiplier * teams.get(team).unitCostMultiplier;
+    }
+
+    public float unitDamage(Team team){
+        return unitDamageMultiplier * teams.get(team).unitDamageMultiplier;
+    }
+
+    
+
+    public float unitHealth(Team team){
+        //a 0 here would be a very bad idea.
+        return Math.max(unitHealthMultiplier * teams.get(team).unitHealthMultiplier, 0.000001f);
+    }
+
+    public float unitCrashDamage(Team team){
+        return unitDamage(team) * unitCrashDamageMultiplier * teams.get(team).unitCrashDamageMultiplier;
+    }
+
+    public float unitMineSpeed(Team team){
+        return unitMineSpeedMultiplier * teams.get(team).unitMineSpeedMultiplier;
+    }
+
+    public float blockHealth(Team team){
+        return blockHealthMultiplier * teams.get(team).blockHealthMultiplier;
+    }
+    public float blockDamage(Team team){
+        return blockDamageMultiplier * teams.get(team).blockDamageMultiplier;
+    }
+
+    public float buildSpeed(Team team){
+        return buildSpeedMultiplier * teams.get(team).buildSpeedMultiplier;
+    }
+
+    public boolean isBanned(Block block){
+        return blockWhitelist != bannedBlocks.contains(block);
+    }
+
+    public boolean isBanned(UnitType unit){
+        return unitWhitelist != bannedUnits.contains(unit);
+    }
+
+Class Diagram:
+
+<img width="573" height="689" alt="Captura de ecrã 2025-11-06 171158" src="https://github.com/user-attachments/assets/7da7b05c-fd9e-4995-9102-a4bafc1c39e9" />
+
+
