@@ -63,6 +63,16 @@ The ClientLauncher class takes on the role of initializing most major components
 Despite this, the design choice is somewhat understandable given the class’s critical role in initializing the game client. Still, this structure increases the complexity helping to create a system that is harder to maintain, test, and extend over time.
 
 
+The second metric value i found interesting is also in a specific class in this case the UnitType class and metric I wanted to take a look at in this class is the CCC metric from G.Ann Metric Set this metric evaluates the how difficult it is for human to understand this class this is roughly calculated by these rules:
+-Adds +1 for each control structure (if, loop, catch, etc.).
+-Adds +1 per nesting level so when using nests of ifs or fors the value quicly rises
+-Penalizes recursion, complex boolean expressions, switch chains, etc.
+-Does not reward flattened or early-return code that’s easier to read
 
+
+Now talking about UnitTYpeclass in specific this class has a value in this metric of 296 whilst the regular value range for this metric is from zero to 32 
+<img width="624" height="68" alt="image" src="https://github.com/user-attachments/assets/ee1cb29e-aea4-425b-ac34-810644d62cef" />
+this means that this claas is too complex and most likely has the presence of code smells like long methods ,god classes , switch , if chains  or feature envy 
+,but whit metrics we can easily check for the presence of these code smeels lets just look at these method metrics for this class to discover what exatly is causing these values 
 
 
