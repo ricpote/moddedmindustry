@@ -5,6 +5,7 @@ This pattern is used here to allow the observers  in this case: ( NetClient, Net
 This way, the Net class does not need to know how to handle every different type of packet, instead, it gives that responsibility to the appropriate observer classes.
 As a result, the Net class becomes less connected to the Mindustry game logic, making the system easier to extend, maintain, and reuse.
 
+<img width="879" height="516" alt="image" src="https://github.com/user-attachments/assets/a1751da6-2b42-44af-b3a7-a63bd41065c9" />
 
 
 
@@ -101,7 +102,7 @@ This class loads all game content(items,blocks,unitc,etc...) offering a simple i
 
 
 
-As shown in this Diagram ContentLoader class initializes all these classes and provides and easy way for others classes of the mindustry application to acess their members whitout having to initialize them or search for specefic instances of them as contentloader classes simplifies this  the following methods:
+As shown in this Diagram ContentLoader class initializes all these classes and provides and easy way for others classes of the mindustry application to acess their members whitout having to initialize them and search for specefic instances of them as contentloader classes simplifies this  the following methods:
 
 The main Facade method here is createBaseContent(), which initializes all base content types by calling their respective load() methods. This makes all content data available within the system, avoiding the need for initialization in multiple places.
 <img width="499" height="541" alt="image" src="https://github.com/user-attachments/assets/87cb9158-ca30-4909-a465-a267368e16c7" />
@@ -133,3 +134,4 @@ Said searches are handle by
 <img width="929" height="102" alt="image" src="https://github.com/user-attachments/assets/f3bc8072-e45d-4400-abe0-ad6da7fe29ba" />
 
 This way centralizing both the initialization of these complex interfaces that is why this class acts as a facade, however it is not a perfect facade implementation as it lets the underlying complexity shine trough even allowing direct access because of that it still requires client to know something about the subsystem under it in this way falling at total abstration of it.
+
