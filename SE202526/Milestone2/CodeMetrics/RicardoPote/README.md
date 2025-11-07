@@ -1,4 +1,12 @@
 
+THe Overall code of mindustry is pretty complex  that can be proved by loking at its score of understandability of -11,274  which means that this code is quite trouble some to understand 
+lets now evaluate the metrics from Chidamber and Kener set first a small disctribtion of what the metric of this set evaluate and how they do it
+
+
+
+
+
+
 
 The Response For a Class (RFC) metric, from Chidamber and Kemerer set, measures how many different methods can be executed when an object of a class receives a message.
 This includes both the class´s own methods and all distinct methods it calls directly.
@@ -8,16 +16,39 @@ However, RFC also has an interesting side effect a class with richer behavior (m
 even though it’s harder to manage. In short, while a high RFC can make a class powerful and have many funcionalities , it also makes it more difficult to reuse safely and maintain effectively 
 normally a high RFC might be sign of a god class or a class whit to many responsabilities.
 
+
+
+
+
+<img width="1061" height="806" alt="image" src="https://github.com/user-attachments/assets/4856def2-fadd-4d7e-8666-548910d1d4a3" />
+
+
+
+
+
   The Weighted Method Count (WMC),from  Chidamber and Kemerer metric set, measures the total complexity of a class by summing the complexity of all its methods this done by  using the number of methods and difficulty of each one summing all the diffciulties.
  So a higher WMC indicates that a class is larger,  and harder to understand, test, and maintain. While a class with many complex methods can offer greater functionality and may appear more attractive for reuse because it provides rich capabilities, 
  this comes at the cost of reduced maintainability, analyzability, and changeability. In short,y the higher WMC gets, the more effort is required to understand and safely evolve that class.
  normally a high RFC might be sign of a god class or a class that is to big or to big or to complex meethods.
+
+
+
+
  
+ <img width="1043" height="802" alt="image" src="https://github.com/user-attachments/assets/d8678b94-282b-4097-b3f3-ad03512de64a" />
+
+
+
+
+
+
+
 The Coupling Between Objects (CBO) metric, from Chidamber and Kemerer set, measures how many other classes a given class is directly connected to through method calls,inheritance ,field accesses and other ways of coupling .
 When CBO values increase maintanability,extendability and understandability decrease exponentially because changes in high CBO classes might ruin the methods of classes it is connect to or vice-versa understandability also goes doewn exponentially as 
 u have to understand more than one system to comprrehend one High CBO class.
  normally a high CBO might be sign of a feature envy code smell .
 
+<img width="1041" height="786" alt="image" src="https://github.com/user-attachments/assets/a92f59a0-da4f-4b7a-9c80-aac8c597233f" />
 
 
 
@@ -114,13 +145,19 @@ this amplifies preocupations that the last metric created since this class seems
 too big of a response set this indicates that we might be in the presence of a god class code smell or of a feature envy code smell.
 
 
+lets see eing what weighted methods class metrics tells us about this class
+<img width="652" height="106" alt="image" src="https://github.com/user-attachments/assets/1acfae62-90d9-4ed3-bafc-5d09ff6029c0" />
 
+
+
+these values for WMC means that this class has lots of complicated methods this means big methods and some possible code smeels are definitively long methods 
 
 
 Before making rash decisions we should first take a look at the class and see what it actually does and then make conclusions
 
 The ClientLauncher class takes on the role of initializing most major components of the game and managing the lifecycle of those systems. This central responsibility explains its unusually high RFC = 96 and CBO = 27 values. However, this also leads to the presence of clear code smells, most notably the God Class smell, as it handles many unrelated concerns. 
 Despite this, the design choice is somewhat understandable given the class’s critical role in initializing the game client. Still, this structure increases the complexity helping to create a system that is harder to maintain, test, and extend over time.
+
 
 
 
