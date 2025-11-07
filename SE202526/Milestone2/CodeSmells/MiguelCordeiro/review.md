@@ -2,6 +2,7 @@
 
 ## Change log
 - 7/11/2025 - André Narquel (Reviewed Long Method)
+- 7/11/2025-Ricardo Pote(Reviewed Duplicated Code)
 
 # Long Method
 - The code smell analysis is accurate. The constructor of the Control class is excessively long (225 lines), combining
@@ -12,7 +13,7 @@
 - individual parts easier to test.
 
 # Duplicated Code
--
+-This code smell analysis is flawless as it was perfectly identified duplicated code smell along whit the problems it comes with and the solution is satisfactory 
 
 # Data Class
 - 
