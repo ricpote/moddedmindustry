@@ -6,7 +6,6 @@ Solution:The solution for this code smell is to refactor this class into many di
 
 
 public abstract class InputHandler implements InputProcessor, GestureListener{
-    //not sure where else to put this - maps unique commands based on position to a list of units that will be turned into a unit group
     static ObjectMap<Vec2, Seq<Unit>> queuedCommands = new ObjectMap<>();
 
     /** Used for dropping items. */
@@ -229,11 +228,12 @@ Spatial data (startX, startY, endX, endY, x1, y1, x2, y2, rectSize)
 Contextual / game state (team, type, initialCost) information
 this is makes code harder to understand .
 Solution:Join some parameters into records like coords record in this case or game state record.
- private static boolean raycastRect(int initialCost, float startX, float startY, float endX, float endY, int team, PathCost type, int x1, int y1, int x2, int y2, float rectSize){
-        int ww = wwidth, wh = wheight;
-        int x = x1, dx = Math.abs(x2 - x), sx = x < x2 ? 1 : -1;
-        int y = y1, dy = Math.abs(y2 - y), sy = y < y2 ? 1 : -1;
-        int e2, err = dx - dy;
+        
+          private static boolean raycastRect(int initialCost, float startX, float startY, float endX, float endY, int team, PathCost type, int x1, int y1, int x2, int y2, float rectSize){
+                int ww = wwidth, wh = wheight;
+                int x = x1, dx = Math.abs(x2 - x), sx = x < x2 ? 1 : -1;
+                int y = y1, dy = Math.abs(y2 - y), sy = y < y2 ? 1 : -1;
+                    int e2, err = dx - dy;
 
         while(x >= 0 && y >= 0 && x < ww && y < wh){
             if(
@@ -261,6 +261,7 @@ Solution:Join some parameters into records like coords record in this case or ga
 
         return true;
     }
+
 
 
 
