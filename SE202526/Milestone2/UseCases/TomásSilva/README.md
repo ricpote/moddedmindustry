@@ -38,4 +38,4 @@ Relationships:
   configure the power connection.
 
 Diagram:
-
+![Use Case Diagram.png](Use%20Case%20Diagram.png)
