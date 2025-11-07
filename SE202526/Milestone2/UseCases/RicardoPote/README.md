@@ -1,4 +1,4 @@
-The  Use case Diagram represents the use cases of the proccess of
+The  Use case Diagram represents the use cases of the proccess of interpreting the player input to activate some event 
 
 
 
@@ -37,4 +37,5 @@ Use Case: Delete Plans
 Description: The player inputs a command to permanently destroy a building blueprint.
 
 Primary Actor: Player Input
+
 
