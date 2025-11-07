@@ -2,7 +2,7 @@
 
 The set that I chose is Lorenz-Kidd Metrics Set and the metrics are NOO,NOOM e NOA. The NOO(Number Of Operations) counts the number of methods implemented in a class, the NOOM(Number Of Overridden Methods) counts the number of methods that a child class rewrites from the superclass and the NOA(Number Of Attributes) counts the number of attributes of a class.
 
-Here are the tables that contain the top 12 classes with the highest values metrics NOO,NOOM e NOA:
+Here are the tables that contain the top 12 classes with the highest values metrics NOO,NOOM e NOA (most problematic):
 
 <img width="501" height="314" alt="image" src="https://github.com/user-attachments/assets/47acacde-6764-4246-8f4c-37abba46a760" />
 
