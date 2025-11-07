@@ -1,7 +1,7 @@
 # Review
 
 ## Change log
-- André Narquel 7/11/2025
+- 7/11/2025 - André Narquel (Reviewed Long Method)
 
 # Long Method
 - The code smell analysis is accurate. The constructor of the Control class is excessively long (225 lines), combining
