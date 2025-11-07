@@ -44,8 +44,8 @@ These methods allow observers to register their interest in specific packet type
 Net does not directly reference any of these classes only cons and cons2 interfaces in this way allow for less dependence .
 
 
-2ºFactory Object Design Pattern:
-The Factory Object Design Pattern is found in the core/src/content/Items class.
+2ºFactory  Design Pattern:
+The Factory  Design Pattern is found in the core/src/content/Items class.
 This class acts as a factory responsible for creating and initializing preconfigured Item objects.
 It centralizes object creation inside the load() method, ensuring consistent setup and easier maintenance of all Item instances used throughout the game.
 
@@ -80,7 +80,7 @@ Concrete prodcuts:ex:new Item("copper") These are the specific Item class instan
 
 
 
-Using the Object Factory pattern here allows centralized control over item creation, ensuring consistency across all game items.
+Using the Factory pattern here allows centralized control over item creation, ensuring consistency across all game items.
 It simplifies extendability as new items can be added or modified within a single method and prevents code duplication throughout the codebase , 
 
 
@@ -134,4 +134,5 @@ Said searches are handle by
 <img width="929" height="102" alt="image" src="https://github.com/user-attachments/assets/f3bc8072-e45d-4400-abe0-ad6da7fe29ba" />
 
 This way centralizing both the initialization of these complex interfaces that is why this class acts as a facade, however it is not a perfect facade implementation as it lets the underlying complexity shine trough even allowing direct access because of that it still requires client to know something about the subsystem under it in this way falling at total abstration of it.
+
 
