@@ -61,6 +61,46 @@
         ...
     }
 
-# 
+# Template Method
+
+  Path: core/src/mindustry/maps/generators/PlanetGenerator.Java
+        core/src/mindustry/maps/planet/ErekirPlanetGenerator.Java
+        core/src/mindutry/maps/planet/SerpuloPlanetGenerator.Java
+        core/src/mindustry/maps/planet/TantrosPlanetGenerator.Java
+
+
+  In this class, we can see the Template Method Design Pattern. It defines the overall structure for generating a planet in the 
+  generate() method, which is the template. This method outlines the sequence of steps involved in planet generation but
+  delegates the specifics to subclasses. For example, the TantrosPlanetGenerator(), ErekirPlanetGenerator() and 
+  SerpuloPlanetGenerator() classes override methods like genTile() and addWeather() to provide the specific implementation
+  for generating terrain and weather. The pattern ensures a consistent algorithm structure while allowing subclasses to 
+  customize certain steps without altering the overall flow of the process.
+
+  //Code snippets
   
+        public abstract class PlanetGenerator extends BasicGenerator implements HexMesher{
+            
+            ...
+            public void generate(Tiles tiles, Sector sec, WorldParams params){
+                this.tiles = tiles;
+                this.seed = params.seedOffset + baseSeed;
+                this.sector = sec;
+                this.width = tiles.width;
+                this.height = tiles.height;
+                this.rand.setSeed(sec.id + params.seedOffset + baseSeed);
+
+                TileGen gen = new TileGen();
+                for(int y = 0; y < height; y++){
+                for(int x = 0; x < width; x++){
+                    gen.reset();
+                    Vec3 position = sector.rect.project(x / (float)tiles.width, y / (float)tiles.height);
+
+                    genTile(position, gen);
+                    tiles.set(x, y, new Tile(x, y, gen.floor, gen.overlay, gen.block));
+                }
+            }
+
+            generate(tiles, params);
+    }
+        }
     
