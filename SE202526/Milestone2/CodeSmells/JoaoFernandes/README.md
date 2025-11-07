@@ -5,6 +5,7 @@
    
 # Large Method
 
+   
    Location: core/src/mindustry/net/BeControl.Java
    
    This class has a method called showUpdateDialog() that clearly is too long. This method performs a lot of different 
@@ -97,6 +98,7 @@
 
 # Feature Envy
    
+  
    Location: core/src/mindustry/maps/SectorDamage.Java
    
    In this class, there's a method called applyCalculatedDamage(), always calling methods from other classes.
@@ -164,6 +166,7 @@
 
 # Data Clumps
 
+   
    Location: core/src/mindustry/editor/MapEditor.Java
    
    In this class, we can see a lot of related data being always used together. For example the size variables like width, 
