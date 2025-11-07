@@ -2,16 +2,16 @@
 
 The Response For a Class (RFC) metric, from Chidamber and Kemerer set, measures how many different methods can be executed when an object of a class receives a message.
 This includes both the class´s own methods and all distinct methods it calls directly.
-A high RFC value ( above 44) suggests that the class has complex interactions and depends on many other methods, which makes it harder to understand, test, and maintain.
-When RFC grows, maintainability, testability, and changeability all tend to decrease, as understanding the class requires following many different paths.
+A high RFC value makes class harder to understand, test, and maintain.
+When RFC grows, maintainability, testability, and changeability all tend to decrease, as doint any of those in said class requires following many different paths.
 However, RFC also has an interesting side effect a class with richer behavior (more RFC) can appear more attractive for reuse, since it provides more functionality,
-even though it’s harder to manage. In short, while a high RFC can make a class powerful and flexible, it also makes it more difficult to reuse safely and maintain effectively 
+even though it’s harder to manage. In short, while a high RFC can make a class powerful and have many funcionalities , it also makes it more difficult to reuse safely and maintain effectively 
 normally a high RFC might be sign of a god class or a class whit to many responsabilities.
 
-  The Weighted Method Count (WMC),from  Chidamber and Kemerer metric set, measures the total complexity of a class by summing the complexity of all its methods this is using the number of methods and difficulty of each one summing all the diffciulties.
+  The Weighted Method Count (WMC),from  Chidamber and Kemerer metric set, measures the total complexity of a class by summing the complexity of all its methods this done by  using the number of methods and difficulty of each one summing all the diffciulties.
  So a higher WMC indicates that a class is larger,  and harder to understand, test, and maintain. While a class with many complex methods can offer greater functionality and may appear more attractive for reuse because it provides rich capabilities, 
- this comes at the cost of reduced maintainability, analyzability, and changeability. In short, WMC reflects the trade-off between a class´s power and complexity—the higher it gets, the more effort is required to understand and safely evolve that class.
- normally a high RFC might be sign of a god class or a cto big of a class or to big or complex meethods.
+ this comes at the cost of reduced maintainability, analyzability, and changeability. In short,y the higher WMC gets, the more effort is required to understand and safely evolve that class.
+ normally a high RFC might be sign of a god class or a class that is to big or to big or to complex meethods.
  
 The Coupling Between Objects (CBO) metric, from Chidamber and Kemerer set, measures how many other classes a given class is directly connected to through method calls,inheritance ,field accesses and other ways of coupling .
 When CBO values increase maintanability,extendability and understandability decrease exponentially because changes in high CBO classes might ruin the methods of classes it is connect to or vice-versa understandability also goes doewn exponentially as 
@@ -121,6 +121,7 @@ Before making rash decisions we should first take a look at the class and see wh
 
 The ClientLauncher class takes on the role of initializing most major components of the game and managing the lifecycle of those systems. This central responsibility explains its unusually high RFC = 96 and CBO = 27 values. However, this also leads to the presence of clear code smells, most notably the God Class smell, as it handles many unrelated concerns. 
 Despite this, the design choice is somewhat understandable given the class’s critical role in initializing the game client. Still, this structure increases the complexity helping to create a system that is harder to maintain, test, and extend over time.
+
 
 
 
