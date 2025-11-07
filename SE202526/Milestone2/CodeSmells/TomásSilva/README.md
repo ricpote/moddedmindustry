@@ -11,22 +11,37 @@
    breaking the encapsulation principle, because other classes can change those variables directly.Resumming this is a 
    Data Class because has no logic methods and the 3 variables are public so that other classes can change them.
 
-   Solution: The solution for this Code Smell is simply make the variables private and implement the methods "get", 
-   "set" (and "is" in the case of "saveInfo") to encapsulate the variables and control the access of other classes:
+   Solution: 
+   The solution for this Code Smell is simply make the variables private and implement the methods "get", 
+   "set" (and "is" in the case of "saveInfo") to encapsulate the variables and control the access of other classes, 
+   and also some logic methods:
 
     public class WorldParams {
-    private int seedOffset;
-    private boolean saveInfo = true;
-    private int corePositionOverride;
+        private int seedOffset;
+        private boolean saveInfo = true;
+        private int corePositionOverride;
 
-    public int getSeedOffset() { return seedOffset; }
-    public void setSeedOffset(int seedOffset) { this.seedOffset = seedOffset; }
+        public int getSeedOffset() { return seedOffset; }
+        public void setSeedOffset(int seedOffset) { this.seedOffset = seedOffset; }
 
-    public boolean isSaveInfo() { return saveInfo; }
-    public void setSaveInfo(boolean saveInfo) { this.saveInfo = saveInfo; }
+        public boolean isSaveInfo() { return saveInfo; }
+        public void setSaveInfo(boolean saveInfo) { this.saveInfo = saveInfo; }
 
-    public int getCorePositionOverride() { return corePositionOverride; }
-    public void setCorePositionOverride(int corePositionOverride) { this.corePositionOverride = corePositionOverride; }
+        public int getCorePositionOverride() { return corePositionOverride; }
+        public void setCorePositionOverride(int corePositionOverride) { this.corePositionOverride = corePositionOverride; }
+         
+        //after review (exemple)
+        /**
+        * Determina se o 'core' do mundo deve ser gerado
+        * com uma posição específica (override) ou com base em saveInfo.
+        * @return true se corePositionOverride tiver um valor válido (diferente de 0),
+        * ou se o mundo estiver configurado para salvar informações (saveInfo).
+        */
+        public boolean shouldGenerateCore() {
+            // Exemplo de lógica que combina múltiplos campos
+            // Assumindo que 0 é o valor padrão que significa "não sobrescrever".
+            return this.corePositionOverride != 0 || this.saveInfo;
+        }
     }
 
 
