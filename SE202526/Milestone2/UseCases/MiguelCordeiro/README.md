@@ -25,3 +25,6 @@ Relationships:
 
 Diagram:
 
+<img width="1103" height="841" alt="Use case" src="https://github.com/user-attachments/assets/46e7a538-1617-4b06-946b-f4b3259d6bcc" />
+
+
