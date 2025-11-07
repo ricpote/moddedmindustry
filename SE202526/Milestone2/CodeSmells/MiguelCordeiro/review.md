@@ -12,7 +12,7 @@
 - individual parts easier to test.
 
 # Duplicated Code
--
+-This code smell analysis is flawless as it was perfectly identified duplicated code smell along whit the problems it comes with and the solution is satisfactory 
 
 # Data Class
 - 
