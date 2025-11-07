@@ -1,6 +1,9 @@
 Large Class
 Location:build/src/mindustry/input/InputHandler.java 
 The InputHandler class is a clear example of a large class code smell that is proven by observing the values of WMC metric being 746 which just means this class does way to much at the same time this classes is responsibale for capturing drag and drops, build placements , camera movements ,etc these are to manyu responsabilities for only one class which causes the size of the class to ballon to the 2286 lines of codes it has.
+
+
+
 Solution:The solution for this code smell is to refactor this class into many diffrent classes dividing by their responsabilities and moving this classes method´s into those new classes maybe something like one that captures input and then others that manage different events based on input. 
 
 
@@ -64,6 +67,11 @@ public abstract class InputHandler implements InputProcessor, GestureListener{
 Feature Envy 
 Location:core/src/core/logic.java
 The logic class is a clear example of a feature envy code smell that is proven by a high value of ATFD metric along whit the presence of many of calls for internals of other classes examples of this are the interactions whit gamestate object where its atributes are repeatdly acces and altered
+
+
+
+
+
 Solution:The solution for this code smell is simply to delegate the calue atribution done by this class upon gamestate class to gamestate class adding a method for these atributions for these classes.
 
 
@@ -227,6 +235,12 @@ raycastRect in ControlPathFinder class located in ControlPathFinder class line 1
 Spatial data (startX, startY, endX, endY, x1, y1, x2, y2, rectSize)
 Contextual / game state (team, type, initialCost) information
 this is makes code harder to understand .
+
+
+
+
+
+
 Solution:Join some parameters into records like coords record in this case or game state record.
         
           private static boolean raycastRect(int initialCost, float startX, float startY, float endX, float endY, int team, PathCost type, int x1, int y1, int x2, int y2, float rectSize){
@@ -261,6 +275,7 @@ Solution:Join some parameters into records like coords record in this case or ga
 
         return true;
     }
+
 
 
 
