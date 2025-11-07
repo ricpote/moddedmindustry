@@ -1,10 +1,10 @@
 Large Class
 Location:build/src/mindustry/input/InputHandler.java 
-The InputHandler class is a clear example of a large class code smell that is proven by observing the values of WMC metric being 746 which just means this class does way to much at the same time this classes is responsibale for capturing drag and drops, build placements , camera movements ,etc these are to manyu responsabilities for only one class which causes the size of the class to ballon to the 2286 lines of codes it has.
+The InputHandler class is a clear example of a large class code smell that is proven by observing the values of WMC metric being 746 which just means this class does way too much at the same time this classes is responsible for capturing drag and drops, build placements , camera movements ,etc these are to many responsibilities for only one class which causes the size of the class to ballon to the 2286 lines of codes it has.
 
 
 
-Solution:The solution for this code smell is to refactor this class into many diffrent classes dividing by their responsabilities and moving this classes method´s into those new classes maybe something like one that captures input and then others that manage different events based on input. 
+Solution:The solution for this code smell is to refactor this class into many different classes dividing by their responsibilities and moving this classes method´s into those new classes maybe something like one that captures input and then others that manage different events based on input. 
 
 
 
