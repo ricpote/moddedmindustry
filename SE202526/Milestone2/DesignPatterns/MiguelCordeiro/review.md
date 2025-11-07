@@ -3,6 +3,7 @@
 # Change Log
 -7/11/2025 Joao Rodrigues(Factory Method)
 -07/11/2025 19:34 Ricardo Pote(Facade)
+- 7/11/2025 André Narquel (Strategy)
 
 # Factory Method
 -This section correctly identifies a Factory Method pattern in the Waves class. The get() and generate() methods 
@@ -14,3 +15,6 @@ This improves encapsulation and makes it easier to modify wave creation without 
 
 PS:(class name is ClientLauncher not ClienteLaucher)
 # Strategy
+- This is a good example of the Strategy Pattern. It allows different behaviors, like unit stats or block health, to 
+change depending on the team or game mode. Each behavior is kept separate, so you can adjust or swap them easily 
+without changing the main code, making the system flexible and easy to maintain.
