@@ -1,7 +1,7 @@
 ## Review
 
 # Change Log
--
+- 7/11/2025 André Narquel
 
 # Depth Of Inheritance - DIT
 - This explanation defines Depth of Inheritance Tree (DIT), its ranges, and its impact on class complexity.
