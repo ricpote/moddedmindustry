@@ -35,6 +35,7 @@
         }
         ...
       }
+![img.png](img.png)
 
 # Observer
 
@@ -60,6 +61,7 @@
         }
         ...
     }
+![img_1.png](img_1.png)
 
 # Template Method
 
@@ -103,4 +105,6 @@
             generate(tiles, params);
     }
         }
+
+![img_2.png](img_2.png)
     

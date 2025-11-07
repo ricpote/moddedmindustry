@@ -3,8 +3,9 @@
 ## Change log
 - 7/11/25 - Miguel Cordeiro (Facade)
 - 7/11/25 - André Narquel (Factory Object)
+- 7/11/2025 - Joao Fernandes(Observer)
 # Observer Design
--
+- This is a good identification of a Observer pattern.
 
 # Factory Object
 - This is a good representation of the Factory Method. The load() method centralizes item creation, ensuring consistency
