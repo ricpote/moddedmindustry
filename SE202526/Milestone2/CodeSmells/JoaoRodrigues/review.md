@@ -1,7 +1,7 @@
 ## Review
 
 ## Change log
-7/11/25 - Miguel Cordeiro
+- 7/11/25 - Miguel Cordeiro (Reviewed Duplicated Code)
 
 # Large Class
 -
