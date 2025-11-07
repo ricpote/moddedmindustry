@@ -2,6 +2,7 @@
 
 ## Change log
 - 7/11/25 - Miguel Cordeiro (Singleton)
+- 7/11/25 - André Narquel (Template Method)
 
 # Template Method
 - The Ability class uses the Template Method pattern, providing a base workflow with update(), addStats(), and draw().
