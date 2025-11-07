@@ -17,7 +17,7 @@ High range: (5<)
 
 A DIT extremely high increases complexity, making it hard to foresee the behaver of the class due to the fact that ths 
 classes in cause inherits lots of code from different "mother" classes. Which can also lead to many methods/attributes 
-not needed/used in the class, a clear sinal of bad Inheritance Hierarchy.
+not needed/used in the class (Code Smell Refused Bequest), a clear sinal of bad Inheritance Hierarchy.
 
 Top 10 worst classes in terms of DIT:
 ![DIT.png](DIT.png)
