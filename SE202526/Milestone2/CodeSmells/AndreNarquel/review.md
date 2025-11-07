@@ -1,7 +1,7 @@
 # Review
 
 ## Change log
-7/11/2025 - Miguel Cordeiro
+- 7/11/2025 - Miguel Cordeiro (Reviewed Message Chain)
 
 # Long Method
 - 
