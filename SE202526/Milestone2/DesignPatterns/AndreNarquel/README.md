@@ -19,7 +19,9 @@ instances that can be modified or placed on the map without affecting the base b
 Benefits:
 
 Avoids code duplication: there is no need to recreate all properties and logic for each new battery.
+
 Flexible for variants: new batteries can be created with minor modifications from the original model.
+
 Easier maintenance: changes to the base battery can be reflected in all clones created from it, ensuring consistency 
 throughout the game.
 
@@ -83,7 +85,9 @@ that the game state can be restored without exposing internal structures of the 
 Benefits:
 
 Encapsulation: game state is saved without exposing internal representation of objects.
+
 Restore capability: allows restoring the game to a previous state reliably.
+
 Consistency: saves and restores include all necessary data (time played, map state, units, rules).
 
 ![img_2.png](img_2.png)
@@ -122,7 +126,137 @@ Consistency: saves and restores include all necessary data (time played, map sta
     }
     (...)
 
+    ---------------------//-------------------
+    public class Saves{
+    (...)
+    public Saves(){
+        Core.assets.setLoader(Texture.class, ".spreview", new SavePreviewLoader());
 
-# 
+        Events.on(StateChangeEvent.class, event -> {
+            if(event.to == State.menu){
+                totalPlaytime = 0;
+                lastTimestamp = 0;
+                current = null;
+            }
+        });
+    }
+
+    public void load(){
+        (...)
+        }
+
+    public void update(){
+        if(current != null && state.isGame()
+        && !(state.isPaused() && Core.scene.hasDialog())){
+            if(lastTimestamp != 0){
+                totalPlaytime += Time.timeSinceMillis(lastTimestamp);
+            }
+            lastTimestamp = Time.millis();
+        }
+
+        if(state.isGame() && !state.gameOver && current != null && current.isAutosave()){
+            time += Time.delta;
+            if(time > Core.settings.getInt("saveinterval") * 60 && !Vars.disableSave){
+                saving = true;
+
+                try{
+                    current.save();
+                }catch(Throwable t){
+                    Log.err(t);
+                }
+
+                Time.runTask(3f, () -> saving = false);
+
+                time = 0;
+            }
+        }else{
+            time = 0;
+        }
+    }
+
+# Observer
+
+Path: core/src/mindustry/audio/SoundControl.java
+Path: core/src/mindustry/game/EventType.java
+Path: arc/Events.java 
+
+The program uses the Observer Pattern to allow the SoundControl class to react to game events without tightly coupling 
+it to the game logic. In this setup, EventType acts as the Subject, managing a list of subscribers and triggering 
+notifications when events occur. SoundControl acts as the Observer, subscribing to specific events such as WaveEvent 
+or ResetEvent to control audio playback dynamically.
+
+When an event occurs in the game, the corresponding EventType instance calls all registered observers’ callbacks. 
+For example, when a WaveEvent is triggered, SoundControl receives the notification and may play ambient, dark, or boss 
+music based on the game state. This ensures that SoundControl can react to changes without needing direct knowledge of 
+the game’s internal logic or state management.
+
+Benefits:
+
+SoundControl doesn’t need to know the internal details of the game or manually poll for changes.
+Music and sound effects respond automatically to game events such as waves or boss spawns.
+
+Scalability: New observers or event types can be added without modifying existing code, making the audio system 
+flexible and maintainable.
+
+In the snippet below we can see one example - the music runs 10 seconds after a wave spawns, reacting to the action,
+right as an Observer
+
+![img.png](img.png)
+
+In the snippet below we can see one example - the music runs 10 seconds after a wave spawns, reacting to the action,
+right as an Observer
 
 //Code snippet
+        
+     public SoundControl(){
+        Events.on(ClientLoadEvent.class, e -> reload());
+
+        //only run music 10 seconds after a wave spawns
+        Events.on(WaveEvent.class, e -> Time.run(Mathf.random(8f, 15f) * 60f, () -> {
+            boolean boss = state.rules.spawns.contains(group -> group.getSpawned(state.wave - 2) > 0 && group.effect == StatusEffects.boss);
+
+            if(boss){
+                playOnce(bossMusic.random(lastRandomPlayed));
+            }else if(Mathf.chance(musicWaveChance)){
+                playRandom();
+            }
+        }));
+
+        setupFilters();
+
+        Events.on(ResetEvent.class, e -> {
+            lastPlayed = Time.millis();
+        });
+    }
+
+    ----------------//-----------------------
+    public class Events{
+    private static final ObjectMap<Object, Seq<Cons<?>>> events = new ObjectMap<>();
+
+    /** Handle an event by class. */
+    public static <T> void on(Class<T> type, Cons<T> listener){
+        events.get(type, () -> new Seq<>(Cons.class)).add(listener);
+    }
+
+    /** Handle an event by enum trigger. */
+    public static void run(Object type, Runnable listener){
+        events.get(type, () -> new Seq<>(Cons.class)).add(e -> listener.run());
+    }
+
+    /** Only use this method if you have the reference to the exact listener object that was used. */
+    public static <T> boolean remove(Class<T> type, Cons<T> listener){
+        return events.get(type, () -> new Seq<>(Cons.class)).remove(listener);
+    }
+
+    /** Fires an enum trigger. */
+    public static <T extends Enum<T>> void fire(Enum<T> type){
+        Seq<Cons<?>> listeners = events.get(type);
+
+        if(listeners != null){
+            int len = listeners.size;
+            Cons[] items = listeners.items;
+            for(int i = 0; i < len; i++){
+                items[i].get(type);
+            }
+        }
+    }
