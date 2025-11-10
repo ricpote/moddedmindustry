@@ -775,4 +775,19 @@ public class EventType{
             this.action = action;
         }
     }
+
+    public static class MeteorEvent{
+        public final float x;
+        public final float y;
+        public final float rad;
+        public final float damage;
+
+        public MeteorEvent(float x, float y, float rad, float damage){
+            this.x = x;
+            this.y = y;
+            this.rad = rad;
+            this.damage = damage;
+        }
+
+    }
 }
