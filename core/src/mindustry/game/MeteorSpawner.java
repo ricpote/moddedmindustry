@@ -2,12 +2,21 @@ package mindustry.game;
 
 
 import arc.Events;
+import arc.util.Time;
 import mindustry.*;
 import arc.math.*;
 import mindustry.game.EventType.*;
-import mindustry.content.*;
 
 public class MeteorSpawner {
+    private float timer = 0f;
+
+    public void update(){
+        timer += Time.delta;
+        if(timer > Mathf.random(3000f, 9000f)){
+            spawnMeteor();
+            timer = 0;
+        }
+    }
 
 
     private static void spawnMeteor(){
