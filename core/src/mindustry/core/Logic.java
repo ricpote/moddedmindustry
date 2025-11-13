@@ -451,6 +451,7 @@ public class Logic implements ApplicationListener{
                 state.teams.updateTeamStats();
                 MapPreviewLoader.checkPreviews();
                 meteorSpawner.update();
+                earthquakeSpawner.update();
 
                 if(state.rules.fog){
                     fogControl.update();

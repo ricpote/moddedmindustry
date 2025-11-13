@@ -44,8 +44,8 @@ public class EarthquakeSpawner {
         float rad = Mathf.random(20f, 60f);
         float damage = rad;   //still up to changes
 
-        Vars.renderer.shake(damage * 10f, 3f);
-        Fx.explosion.at(x, y); //still up to changes
+        Vars.renderer.shake(damage, 2f);
+        Fx.flakExplosion.at(x, y); //still up to changes
         Damage.damage(x,y,rad,damage);
 
         //todo implementation of the earthquake logic (shuffle)
