@@ -790,4 +790,18 @@ public class EventType{
         }
 
     }
+
+    public static class EarthquakeEvent{
+        public final float x;
+        public final float y;
+        public final float rad;
+        public final float damage;
+
+        public EarthquakeEvent(float x, float y, float rad, float damage){
+            this.x = x;
+            this.y = y;
+            this.rad = rad;
+            this.damage = damage;
+        }
+    }
 }
