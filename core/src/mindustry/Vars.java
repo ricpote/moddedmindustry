@@ -274,6 +274,7 @@ public class Vars implements Loadable{
     public static World world;
     public static Maps maps;
     public static WaveSpawner spawner;
+    public static MeteorSpawner meteorSpawner;
     public static BlockIndexer indexer;
     public static Pathfinder pathfinder;
     public static ControlPathfinder controlPath;
@@ -347,6 +348,7 @@ public class Vars implements Loadable{
 
         maps = new Maps();
         spawner = new WaveSpawner();
+        meteorSpawner = new MeteorSpawner();
         indexer = new BlockIndexer();
         pathfinder = new Pathfinder();
         controlPath = new ControlPathfinder();

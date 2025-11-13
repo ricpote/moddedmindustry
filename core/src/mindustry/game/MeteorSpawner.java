@@ -3,19 +3,36 @@ package mindustry.game;
 
 import arc.Events;
 import arc.util.Time;
-import mindustry.*;
 import arc.math.*;
+import mindustry.content.Fx;
 import mindustry.game.EventType.*;
+import mindustry.Vars;
+import mindustry.entities.*;
 
 public class MeteorSpawner {
+
     private float timer = 0f;
+    private float nextMeteor = 0f;
+
+    public MeteorSpawner(){
+        Events.on(WorldLoadEvent.class, e -> {
+            timer = 0f;
+            scheduleNext();
+        });
+    }
 
     public void update(){
+        if(!Vars.state.isPlaying()) return;
+
         timer += Time.delta;
-        if(timer > Mathf.random(3000f, 9000f)){
+        if(timer >= nextMeteor){
             spawnMeteor();
-            timer = 0;
+            timer = 0f;
         }
+    }
+
+    private void scheduleNext(){
+        nextMeteor = Mathf.random(3000f, 9000f);
     }
 
 
@@ -27,6 +44,9 @@ public class MeteorSpawner {
 
         float rad = Mathf.random(20f, 60f);
         float damage = rad * 10f;   //Dano proporcional ao raio
+
+        Fx.explosion.at(x, y);
+        Damage.damage(x,y,rad,damage);
 
         Events.fire(new MeteorEvent(x, y, rad, damage));
     }
