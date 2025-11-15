@@ -42,7 +42,7 @@ public class EarthquakeSpawner {
     }
 
     private void scheduleNext(){
-        nextEarthquake = Mathf.random(30f, 90f);
+        nextEarthquake = Mathf.random(3000f, 9000f);
     }
 
 
