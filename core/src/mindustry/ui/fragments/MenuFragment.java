@@ -191,6 +191,7 @@ public class MenuFragment{
     private void buildDesktop(){
         container.clear();
         container.setSize(Core.graphics.getWidth(), Core.graphics.getHeight());
+        
 
         float width = 230f;
         Drawable background = Styles.black6;
@@ -200,6 +201,7 @@ public class MenuFragment{
         container.table(background, t -> {
             t.defaults().width(width).height(70f);
             t.name = "buttons";
+            TextureRegionDrawable challenge = new TextureRegionDrawable(Core.atlas.find("challenge"));
 
             if(desktopButtons == null){
                 desktopButtons = Seq.with(
@@ -208,6 +210,8 @@ public class MenuFragment{
                         new MenuButton("@joingame", Icon.add, () -> checkPlay(ui.join::show)),
                         new MenuButton("@customgame", Icon.terrain, () -> checkPlay(ui.custom::show)),
                         new MenuButton("@loadgame", Icon.download, () -> checkPlay(ui.load::show))
+                    ),
+                    new MenuButton("@weekly.challenge", challenge, () -> checkPlay(ui.planet::show)
                     ),
                     new MenuButton("@database.button", Icon.menu,
                         new MenuButton("@schematics", Icon.paste, ui.schematics::show),
