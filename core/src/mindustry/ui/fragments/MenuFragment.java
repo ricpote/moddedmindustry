@@ -211,7 +211,9 @@ public class MenuFragment{
                         new MenuButton("@customgame", Icon.terrain, () -> checkPlay(ui.custom::show)),
                         new MenuButton("@loadgame", Icon.download, () -> checkPlay(ui.load::show))
                     ),
-                    new MenuButton("@weekly.challenge", challenge, () -> checkPlay(ui.planet::show)
+                    new MenuButton("@weekly.challenge", challenge,
+                            new MenuButton("@play",Icon.play, ()-> checkPlay(ui.planet::show)),
+                            new MenuButton("@rankings", Icon.book, () -> checkPlay(ui.planet::show))
                     ),
                     new MenuButton("@database.button", Icon.menu,
                         new MenuButton("@schematics", Icon.paste, ui.schematics::show),
