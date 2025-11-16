@@ -1,6 +1,5 @@
 package mindustry.game;
 
-import arc.Core;
 import arc.Events;
 import arc.math.Mathf;
 import arc.util.Time;
