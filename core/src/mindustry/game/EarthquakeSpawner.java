@@ -1,5 +1,6 @@
 package mindustry.game;
 
+import arc.Core;
 import arc.Events;
 import arc.math.Mathf;
 import arc.util.Time;
@@ -48,12 +49,19 @@ public class EarthquakeSpawner {
         if(!Vars.state.isPlaying()){return;}
 
         float x, y;
+        int centerTileX,centerTileY;
+        int attempt = 0;
+        do{
+            x = Mathf.random(Vars.world.unitWidth());
+            y = Mathf.random(Vars.world.unitHeight());
 
-        x = Mathf.random(Vars.world.unitWidth());
-        y = Mathf.random(Vars.world.unitHeight());
+            centerTileX = (int)(x / Vars.tilesize);
+            centerTileY = (int)(y / Vars.tilesize);
 
-        int centerTileX = (int)(x / Vars.tilesize);
-        int centerTileY = (int)(y / Vars.tilesize);
+            attempt++;
+        //tries a max of 100 times to find a not Darkened place on the map for the earthquake
+        }while(Vars.world.tile(centerTileX, centerTileY).isDarkened() && attempt < 100);
+
 
         float rad = Mathf.random(60f, 120f);
         float damage = 0;  //still up to changes
