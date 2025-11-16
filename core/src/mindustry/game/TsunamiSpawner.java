@@ -40,7 +40,7 @@ public class TsunamiSpawner {
         nextTsunami = Mathf.random(3000f, 9000f);
     }
 
-    private static void spawnEarthquake() {
+    private static void spawnTsunami() {
         if (!Vars.state.isPlaying()) {
             return;
         }
