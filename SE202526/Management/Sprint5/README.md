@@ -41,4 +41,4 @@ ainda assim todos progrediram de forma satisfatória nas suas tarefas.
 
 ### Gantt Chart
 
-Please add the Gantt chart here.
+[GanttSprint5.xlsx](GanttSprint5.xlsx)
