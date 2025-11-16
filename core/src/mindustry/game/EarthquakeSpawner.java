@@ -3,18 +3,16 @@ package mindustry.game;
 import arc.Events;
 import arc.math.Mathf;
 import arc.util.Time;
-import arc.util.Structs;
 import arc.struct.Seq;
 import arc.math.geom.Point2;
 import mindustry.Vars;
 import mindustry.content.Fx;
 import mindustry.entities.Damage;
-import mindustry.game.EventType.WorldLoadEvent;
 import mindustry.gen.Building;
 import mindustry.world.Tile;
 import mindustry.world.Build;
-import mindustry.type.Item;
-import mindustry.game.Team;
+import mindustry.content.Blocks;
+
 
 
 
@@ -58,14 +56,16 @@ public class EarthquakeSpawner {
         int centerTileY = (int)(y / Vars.tilesize);
 
         float rad = Mathf.random(60f, 120f);
-        float damage = 0;   //still up to changes
+        float damage = 0;  //still up to changes
 
         Vars.renderer.shake(rad*10, 60f);
-        Fx.flakExplosion.at(x, y);
+        Fx.shockwave.at(x, y, 0, rad / 150f); //still up to changes
         Damage.damage(x,y,rad,damage);
+
 
         Seq<Building> affectedBuildings = new Seq<>();
         Seq<Point2> allPotentialPositions = new Seq<>();
+        Seq<Tile> originalPrimaryTiles = new Seq<>();
 
         int tileRad = (int)(rad / Vars.tilesize);
 
@@ -75,9 +75,11 @@ public class EarthquakeSpawner {
 
                 if (tile != null && Mathf.dst2(tx, ty, centerTileX, centerTileY) <= tileRad * tileRad) {
                     Building build = tile.build;
-                    if (build != null && build.team.active() ) {
-                        if (tile.x == build.tileX() && tile.y == build.tileY()) {
+                    if (build != null && build.team.active()) {
+
+                        if (tile.x == build.tileX() && tile.y == build.tileY() && !affectedBuildings.contains(build)) {
                             affectedBuildings.add(build);
+                            originalPrimaryTiles.add(tile);
                         }
                     }
                     allPotentialPositions.add(new Point2(tx, ty));
@@ -85,47 +87,54 @@ public class EarthquakeSpawner {
             }
         }
 
-            allPotentialPositions.shuffle();
+        allPotentialPositions.shuffle();
 
-            for (Building build: affectedBuildings) {
+        for(Tile originalTile : originalPrimaryTiles){
+            Building build = originalTile.build;
+            if(build != null){
                 build.remove();
+                originalTile.setBlock(Blocks.air, build.team, 0);
+                originalTile.build = null;
+            }
+        }
 
-                boolean placed = false;
+        for (Building build: affectedBuildings) {
+            boolean placed = false;
 
-                for (int j = 0; j < allPotentialPositions.size; j++) {
-                    Point2 newPos = allPotentialPositions.get(j);
-                    Tile newTile = Vars.world.tile(newPos.x, newPos.y);
+            for (int j = 0; j < allPotentialPositions.size; j++) {
+                Point2 newPos = allPotentialPositions.get(j);
+                Tile newTile = Vars.world.tile(newPos.x, newPos.y);
 
-                    boolean valid = newTile != null && Build.validPlace(
-                            build.block,
-                            build.team,
-                            newPos.x, newPos.y,
-                            build.rotation,
-                            false,
-                            false
-                    );
+                boolean valid = newTile != null && Build.validPlace(
+                        build.block,
+                        build.team,
+                        newPos.x, newPos.y,
+                        build.rotation,
+                        false,
+                        false
+                );
 
-                    if (valid) {
-                        newTile.setBlock(build.block, build.team, build.rotation, () -> build);
-                        Building newlyPlacedBuild = newTile.build;
-                        if(newlyPlacedBuild != null) {
-                            newlyPlacedBuild.dropped();
-                            Vars.renderer.blocks.updateShadow(newlyPlacedBuild);
-                        }
-                        placed = true;
-                        break;
+                if (valid) {
+                    newTile.setBlock(build.block, build.team, build.rotation);
+                    if (newTile.build != null && newTile.build != build) {
+                        newTile.build.remove();
                     }
-                }
 
-                if (!placed) {
-                    build.kill();
+                    newTile.build = build;
+                    build.tile = newTile;
+                    build.set(newTile.worldx() + build.block.offset, newTile.worldy() + build.block.offset);
+                    build.placed();
+                    Vars.renderer.blocks.updateShadow(build);
+                    allPotentialPositions.remove(j);
+                    placed = true;
+                    break;
                 }
             }
 
-            for (Point2 pos : allPotentialPositions) {
-                Tile tile = Vars.world.tile(pos.x, pos.y);
-                Vars.renderer.blocks.updateShadowTile(tile);
+            if (!placed) {
+                build.kill();
             }
+        }
 
         Events.fire(new EventType.EarthquakeEvent(x, y, rad, damage));
     }
