@@ -276,6 +276,7 @@ public class Vars implements Loadable{
     public static WaveSpawner spawner;
     public static MeteorSpawner meteorSpawner;
     public static EarthquakeSpawner earthquakeSpawner;
+    public static TsunamiSpawner tsunamiSpawner;
     public static BlockIndexer indexer;
     public static Pathfinder pathfinder;
     public static ControlPathfinder controlPath;
@@ -351,6 +352,7 @@ public class Vars implements Loadable{
         spawner = new WaveSpawner();
         meteorSpawner = new MeteorSpawner();
         earthquakeSpawner = new EarthquakeSpawner();
+        tsunamiSpawner = new TsunamiSpawner();
         indexer = new BlockIndexer();
         pathfinder = new Pathfinder();
         controlPath = new ControlPathfinder();

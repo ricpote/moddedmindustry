@@ -804,4 +804,18 @@ public class EventType{
             this.damage = damage;
         }
     }
+
+    public static class TsunamiEvent{
+        public final float x;
+        public final float y;
+        public final float angle;
+        public final float length;
+
+        public TsunamiEvent(float x, float y, float angle, float length){
+            this.x = x;
+            this.y = y;
+            this.angle = angle;
+            this.length = length;
+        }
+    }
 }

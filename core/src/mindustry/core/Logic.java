@@ -452,6 +452,7 @@ public class Logic implements ApplicationListener{
                 MapPreviewLoader.checkPreviews();
                 meteorSpawner.update();
                 earthquakeSpawner.update();
+                tsunamiSpawner.update();
 
                 if(state.rules.fog){
                     fogControl.update();
