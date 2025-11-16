@@ -7,6 +7,7 @@ import arc.math.*;
 import arc.math.geom.*;
 import arc.struct.*;
 import arc.util.*;
+import mindustry.Vars;
 import mindustry.entities.*;
 import mindustry.entities.abilities.*;
 import mindustry.gen.*;
@@ -39,6 +40,20 @@ public class Fx{
         color(Color.white);
         rect(block.fullIcon, e.x + offset, e.y + offset * 5f, (float)block.size * 8f, (float)block.size * 8f);
     }),
+
+    meteorFall = new Effect(90f, e -> {
+        float progress = e.fin();
+
+        float startX = e.x;
+        float startY = Vars.world.unitHeight() + 200f;
+
+        float x = Mathf.lerp(startX, e.x, progress);
+        float y = Mathf.lerp(startY, e.y, progress);
+
+        Draw.color(Color.white);
+        Draw.rect(Core.atlas.find("effects-meteor"), x, y, 48f, 48f);
+    }),
+
 
     trailFade = new Effect(400f, e -> {
         if(!(e.data instanceof Trail trail)) return;

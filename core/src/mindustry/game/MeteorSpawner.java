@@ -32,7 +32,7 @@ public class MeteorSpawner {
     }
 
     private void scheduleNext(){
-        nextMeteor = Mathf.random(3000f, 9000f);
+        nextMeteor = Mathf.random(3f, 9f);
     }
 
 
@@ -45,9 +45,13 @@ public class MeteorSpawner {
         float rad = Mathf.random(20f, 60f);
         float damage = rad * 10f;   //Dano proporcional ao raio
 
-        Fx.explosion.at(x, y);
-        Damage.damage(x,y,rad,damage);
+        Fx.meteorFall.at(x,y);
 
-        Events.fire(new MeteorEvent(x, y, rad, damage));
+        Time.run(90f, () -> {
+            Fx.explosion.at(x, y);
+            Damage.damage(x, y, rad, damage);
+
+            Events.fire(new MeteorEvent(x, y, rad, damage));
+        });
     }
 }
