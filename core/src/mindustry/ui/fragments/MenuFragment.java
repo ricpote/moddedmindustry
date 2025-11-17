@@ -14,6 +14,7 @@ import arc.scene.ui.TextButton.*;
 import arc.scene.ui.layout.*;
 import arc.struct.*;
 import arc.util.*;
+import mindustry.Vars;
 import mindustry.core.*;
 import mindustry.game.EventType.*;
 import mindustry.gen.*;
@@ -212,7 +213,7 @@ public class MenuFragment{
                         new MenuButton("@loadgame", Icon.download, () -> checkPlay(ui.load::show))
                     ),
                     new MenuButton("@weekly.challenge", challenge,
-                            new MenuButton("@play",Icon.play, ()-> checkPlay(ui.planet::show)),
+                            new MenuButton("@play",Icon.play, ()-> checkPlay(custService::startWeeklyChalGame)),
                             new MenuButton("@rankings", Icon.book, () -> checkPlay(ui.planet::show))
                     ),
                     new MenuButton("@database.button", Icon.menu,

@@ -20,6 +20,8 @@ import mindustry.world.blocks.*;
  * Does not store game state, just configuration.
  */
 public class Rules{
+    public long seed;
+    public transient mindustry.maps.generators.WorldGenerator mapGenerator;
     /** Allows editing the rules in-game. Essentially a cheat mode toggle. */
     public boolean allowEditRules = false;
     /** Sandbox mode: Enables infinite resources, build range and build speed. */
@@ -223,7 +225,9 @@ public class Rules{
 
     /** Copies this ruleset exactly. Not efficient at all, do not use often. */
     public Rules copy(){
-        return JsonIO.copy(this);
+        Rules newCopy = JsonIO.copy(this);
+        newCopy.mapGenerator = this.mapGenerator;
+        return newCopy;
     }
 
     /** Returns the gamemode that best fits these rules. */

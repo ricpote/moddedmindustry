@@ -5,6 +5,7 @@ import arc.assets.*;
 import arc.files.*;
 import arc.graphics.*;
 import arc.input.*;
+import arc.math.Rand;
 import arc.scene.ui.layout.*;
 import arc.struct.*;
 import arc.util.*;
@@ -24,6 +25,8 @@ import mindustry.io.*;
 import mindustry.logic.*;
 import mindustry.maps.Map;
 import mindustry.maps.*;
+import mindustry.maps.generators.WeeklyGenerator;
+import mindustry.maps.generators.WorldGenerator;
 import mindustry.mod.*;
 import mindustry.net.*;
 import mindustry.service.*;
@@ -33,6 +36,8 @@ import mindustry.world.meta.*;
 
 import java.io.*;
 import java.nio.charset.*;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.concurrent.*;
 
@@ -269,7 +274,7 @@ public class Vars implements Loadable{
     public static MapEditor editor;
     public static AvoidanceProcess avoidance;
     public static GameService service = new GameService();
-
+    public static WeeklyChalServ custService = new  WeeklyChalServ();
     public static Universe universe;
     public static World world;
     public static Maps maps;
@@ -285,7 +290,7 @@ public class Vars implements Loadable{
     public static UI ui;
     public static NetServer netServer;
     public static NetClient netClient;
-
+    public static WorldGenerator myGen;
     public static @Nullable Player player;
 
     @Override
@@ -295,6 +300,7 @@ public class Vars implements Loadable{
     }
 
     public static void init(){
+
         Groups.init();
 
         if(loadLocales){
@@ -345,6 +351,7 @@ public class Vars implements Loadable{
         asyncCore = new AsyncCore();
         if(!headless) editor = new MapEditor();
 
+        myGen=new WeeklyGenerator();
         maps = new Maps();
         spawner = new WaveSpawner();
         indexer = new BlockIndexer();
@@ -534,5 +541,11 @@ public class Vars implements Loadable{
                 }
             }
         }
+    }
+
+    public static long getWeeklySeed() {
+        LocalDate start = LocalDate.of(2001, 1, 1);
+        LocalDate now = LocalDate.now();
+        return ChronoUnit.WEEKS.between(start, now);
     }
 }
