@@ -51,7 +51,7 @@ public class Fx{
         float y = Mathf.lerp(startY, e.y, progress);
 
         Draw.color(Color.white);
-        Draw.rect(Core.atlas.find("effects-meteor"), x, y, 48f, 48f);
+        Draw.rect(Core.atlas.find("meteor"), x, y, 48f, 48f);
     }),
 
 

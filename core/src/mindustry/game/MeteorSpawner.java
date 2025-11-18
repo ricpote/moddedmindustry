@@ -32,7 +32,7 @@ public class MeteorSpawner {
     }
 
     private void scheduleNext(){
-        nextMeteor = Mathf.random(3f, 9f);
+        nextMeteor = Mathf.random(3000f, 9000f);
     }
 
 
