@@ -54,6 +54,16 @@ public class Fx{
         Draw.rect(Core.atlas.find("meteor"), x, y, 48f, 48f);
     }),
 
+    earthquake = new Effect(900f, e -> {
+        Draw.color(Color.white);
+        Draw.rect(Core.atlas.find("earthquake"), e.x, e.y, tilesize, tilesize);
+    }),
+
+    earthquake2 = new Effect(1200f, e -> {
+        Draw.color(Color.white);
+        Draw.rect(Core.atlas.find("earthquake2"), e.x, e.y, tilesize, tilesize);
+    }),
+
 
     trailFade = new Effect(400f, e -> {
         if(!(e.data instanceof Trail trail)) return;

@@ -61,12 +61,12 @@ public class EarthquakeSpawner {
         //tries a max of 100 times to find a not Darkened place on the map for the earthquake
         }while(Vars.world.tile(centerTileX, centerTileY).isDarkened() && attempt < 100);
 
+        if(attempt == 100){return;}
 
         float rad = Mathf.random(60f, 120f);
         float damage = 0;  //still up to changes
 
-        Vars.renderer.shake(rad*10, 60f);
-        Fx.shockwave.at(x, y, 0, rad / 150f); //still up to changes
+        Vars.renderer.shake(rad*5, 60f);
         Damage.damage(x,y,rad,damage);
 
 
@@ -76,6 +76,7 @@ public class EarthquakeSpawner {
 
         int tileRad = (int)(rad / Vars.tilesize);
 
+        int animation = 0;
         for (int tx = centerTileX - tileRad; tx <= centerTileX + tileRad; tx++) {
             for (int ty = centerTileY - tileRad; ty <= centerTileY + tileRad; ty++) {
                 Tile tile = Vars.world.tile(tx, ty);
@@ -90,6 +91,12 @@ public class EarthquakeSpawner {
                         }
                     }
                     allPotentialPositions.add(new Point2(tx, ty));
+                    if(animation%2 == 0){
+                        Fx.earthquake.at(tile.worldx(),tile.worldy());
+                    }else{
+                        Fx.earthquake2.at(tile.worldx(),tile.worldy());
+                    }
+                    animation++;
                 }
             }
         }
