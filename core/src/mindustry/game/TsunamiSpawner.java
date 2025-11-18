@@ -97,7 +97,6 @@ public class TsunamiSpawner {
         for (int i = 0; i < tsunamiFactor*10; i++) {
             waveX += dx;
             waveY += dy;
-
             Tile currentTile = Vars.world.tile(waveX, waveY);
 
             if (currentTile == null) {
