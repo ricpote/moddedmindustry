@@ -21,10 +21,10 @@ public class WeeklyChalServ {
     private long mapSeed;
     private int width;
     private int height;
-    private Rand rand ;
+    private Rand randSize ;
 
     public WeeklyChalServ(){
-        rand = new Rand();
+
 
     }
     public void startWeeklyChalGame(){
@@ -35,7 +35,7 @@ public class WeeklyChalServ {
             try {
                 mapSeed = Vars.getWeeklySeed();
 
-                Rand randSize = new Rand(mapSeed);
+                randSize = new Rand(mapSeed);
                 this.width = randSize.random(150, 250);
                 this.height = randSize.random(150, 250);
 
