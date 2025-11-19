@@ -25,12 +25,13 @@ public enum Gamemode{
         rules.waves = true;
         rules.pvp = false;
         rules.winWave=-1;
-        rules.waveSpacing=Time.toMinutes;
+        rules.waveSpacing=Time.toMinutes/2;
         rules.infiniteResources = false;
-        rules.waitEnemies=true;
+        rules.waitEnemies=false;
+        rules.canGameOver=false;
         rules.showSpawns=true;
         rules.allowEnvironmentDeconstruct = false;
-        rules.spawns=Vars.waves.get();
+        rules.spawns=Vars.InfSpawner.buildSpawnGroups(0,1000);
 
     }),
     attack(rules -> {

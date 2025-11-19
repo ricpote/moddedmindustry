@@ -360,4 +360,9 @@ public class WeeklyGenerator extends BasicGenerator {
         coreSpawnPos = corePositions.get(shotCaller);
         spawnPos = spawnPositions.get(shotCaller);
     }
+    public class Room {
+        public int x, y;
+        public int w, h;
+    }
+
 }

@@ -48,6 +48,7 @@ public class Vars implements Loadable{
     public static boolean failedToLaunch = false;
     /** Whether to load locales.*/
     public static boolean loadLocales = true;
+    public static InfiniteWaveClass InfSpawner;
     /** Whether the logger is loaded. */
     public static boolean loadedLogger = false, loadedFileLogger = false;
     /** Name of current Steam player. */
@@ -350,7 +351,7 @@ public class Vars implements Loadable{
         becontrol = new BeControl();
         asyncCore = new AsyncCore();
         if(!headless) editor = new MapEditor();
-
+        InfSpawner=new InfiniteWaveClass();
         myGen=new WeeklyGenerator();
         maps = new Maps();
         spawner = new WaveSpawner();
