@@ -30,6 +30,7 @@ public enum Gamemode{
         rules.waitEnemies=true;
         rules.showSpawns=true;
         rules.allowEnvironmentDeconstruct = false;
+        rules.spawns=Vars.waves.get();
 
     }),
     attack(rules -> {

@@ -1,11 +1,8 @@
 package mindustry.maps.generators;
 
-
-import arc.util.noise.Ridged;
 import arc.util.noise.Simplex;
 import mindustry.ai.Astar;
-import mindustry.ai.BaseRegistry;
-import mindustry.core.World;
+
 import mindustry.world.Tiles;
 import arc.func.*;
 import arc.math.*;
@@ -17,10 +14,10 @@ import mindustry.ai.Astar.*;
 import mindustry.content.*;
 import mindustry.game.*;
 import mindustry.world.*;
+
 import mindustry.world.blocks.environment.*;
 import arc.util.*;
 
-import java.util.Arrays;
 
 
 public class WeeklyGenerator extends BasicGenerator {
@@ -35,18 +32,26 @@ public class WeeklyGenerator extends BasicGenerator {
         }
     }
 
+
     private Seq<OreData> oresToSpawn;
-
-
-    private Seq<Block> floors = new Seq<>();
-    private Seq<Block> walls = new Seq<>();
-    private Seq<Block> allBlocks = new Seq<>();
-    private Seq<Block> ores = new Seq<>();
+    private Point2 coreSpawnPos;
+    private Point2  spawnPos;
+    private Seq<Point2> corePositions;
+    private Seq<Point2> spawnPositions;
+    private Seq<Block> floors;
+    private Seq<Block> walls;
+    private Seq<Block> allBlocks ;
+    private Seq<Block> ores ;
     public WeeklyGenerator(){
         super();
         allBlocks = Vars.content.blocks();
         oresToSpawn = new Seq<>();
+        corePositions = new Seq<>();
+        spawnPositions = new Seq<>();
 
+        floors = new Seq<>();
+        walls = new Seq<>();
+        ores=new Seq<>();
     }
     @Override
     public void generate(Tiles tiles, WorldParams params) {
@@ -66,6 +71,23 @@ public class WeeklyGenerator extends BasicGenerator {
                 new OreData(Blocks.oreTungsten, 0.5f),
                 new OreData(Blocks.oreCrystalThorium, 0.3f)
         );
+        corePositions.add(new Point2(50, (int)(height * 0.75f)));
+        corePositions.add(new Point2(50, (int)(height * 0.50f)));
+        corePositions.add(new Point2(50, (int)(height * 0.25f)));
+        corePositions.add(new Point2(width - 50, (int)(height * 0.75f)));
+        corePositions.add(new Point2(width - 50, (int)(height * 0.50f)));
+        corePositions.add(new Point2(width - 50, (int)(height * 0.25f)));
+
+        spawnPositions.add(new Point2(width -10, (int)(height * 0.10f)));
+        spawnPositions.add(new Point2(width - 10, (int)(height * 0.50f)));
+        spawnPositions.add(new Point2(width - 10, (int)(height * 0.90f)));
+        spawnPositions.add(new Point2(10, (int)(height * 0.10f)));
+        spawnPositions.add(new Point2(10, (int)(height * 0.50f)));
+        spawnPositions.add(new Point2(10, (int)(height * 0.90f)));
+
+
+        defineCoreAndSpawnPositions();
+
         ores = initializeOres();
         initializeFloorWalls();
 
@@ -78,10 +100,19 @@ public class WeeklyGenerator extends BasicGenerator {
         generateWallsTiles(walls);
 
         ores(ores);
+        generateWater();
+        applyScatter(0.10f,0.008f,0.10f,0.01f);
+
         trimDark();
         decoration(0.56f);
+
         median(2);
-        Schematics.placeLaunchLoadout(width/2, height/2);
+
+        prepareCoreArea();
+        Schematics.placeLaunchLoadout(coreSpawnPos.x,coreSpawnPos.y);
+        spawnEnemiesAreaGen(spawnPos);
+        ensureOreConnectivity();
+        ensureEnemiesConnectivity();
     }
 
     @Override
@@ -89,10 +120,22 @@ public class WeeklyGenerator extends BasicGenerator {
         float safeZone = (width/2f) * 0.85f;
         for(Tile tile : tiles) {
             float distance = Mathf.dst(tile.x, tile.y, width/2f, height/2f);
-            if(distance > safeZone + noise(tile.x , tile.y , 3, 0.5f, 60f) * 30f){
+            if((distance > safeZone + noise(tile.x , tile.y , 3, 0.5f, 60f) * 30f)  ){
                 tile.setBlock(tile.floor().wall);
             }
         }
+    }
+    private void prepareCoreArea(){
+        int cx = coreSpawnPos.x;
+        int cy = coreSpawnPos.y;
+
+        Geometry.circle(cx, cy, width, height, 7, (x, y) -> {
+            Tile t = tiles.get(x, y);
+            if(t == null) return;
+            t.setFloor(Blocks.stone.asFloor());
+            t.setBlock(Blocks.air);
+            t.setOverlay(Blocks.air);
+        });
     }
 
 
@@ -103,16 +146,17 @@ public class WeeklyGenerator extends BasicGenerator {
     }
 
 
-
     private void initializeFloorWalls(){
         int counterFloor=0;
         int counterWall=0;
-        while(counterFloor < 3 || counterWall < 3){
-           Block b = allBlocks.random(rand);
-            if(b instanceof Floor && counterFloor<3){
-                floors.add(b);
-                counterFloor++;
-            }else if(b instanceof StaticWall && counterWall<3){
+        while(counterFloor < 4 || counterWall < 4){
+            Block b = allBlocks.random(rand);
+            if(b instanceof Floor f && counterFloor < 4){
+                if(!f.isLiquid && !f.isDeep() && b != Blocks.space) {
+                    floors.add(b);
+                    counterFloor++;
+                }
+            }else if(b instanceof StaticWall && counterWall < 4){
                 walls.add(b);
                 counterWall++;
             }
@@ -142,11 +186,35 @@ public class WeeklyGenerator extends BasicGenerator {
     private void generateWallsTiles(Seq<Block> blocksToDraw) {
         generateLayer(blocksToDraw,false, 0, 3, 0.5f);
     }
+    private void generateWater(){
+        int randomWater = rand.random(2,4);
+        int i = 0;
+
+        while(i <= randomWater) {
+            int posX = rand.random(0, width);
+            int posY = rand.random(0, height);
+            int waterDim = rand.random(3, 5);
+            if (Mathf.dst(posX, posY, width / 2f, height / 2f) < width / 3f){
+                Geometry.circle(posX, posY, width, height, 7, (int x, int y) -> {
+                    Tile tile = tiles.get(x, y);
+                    float dst = Mathf.dst(posX, posY, x, y);
+                    if (dst < waterDim) {
+                        tile.setFloor(Blocks.water.asFloor());
+                    } else {
+                        tile.setFloor(Blocks.darksand.asFloor());
+                    }
+                    tile.setBlock(Blocks.air);
+                });
+                i++;
+            }
+        }
+    }
 
     private Seq<Block> initializeOres() {
         Seq<Block> result = new Seq<>();
         int oresToAdd = rand.random(5, 7);
-        Seq<OreData> myOres = oresToSpawn.copy().shuffle();
+        Seq<OreData> myOres = oresToSpawn.copy();
+        shuffleSeq(myOres,rand);
         for (OreData ore : myOres) {
             if (result.size >= oresToAdd) {
                 break;
@@ -158,6 +226,50 @@ public class WeeklyGenerator extends BasicGenerator {
         return result;
     }
 
+    private void ensureOreConnectivity(){
+        Tile core = tiles.getn(width / 2, height / 2);
+        Seq<Tile> oryTiles=new Seq<>();
+        for(Tile tile : tiles){
+            if(tile.overlay() != Blocks.air){
+                oryTiles.add(tile);
+            }
+        }
+        shuffleSeq(oryTiles,rand);
+
+        for (Tile t : oryTiles) {
+            if(!rand.chance(0.05)) continue;
+            Seq<Tile> path = getPathToCore(t);
+            brush(path, rand.random(1,3));
+        }
+    }
+    private void ensureEnemiesConnectivity(){
+        Seq<Tile> path = getPathToCore(tiles.get(spawnPos.x, spawnPos.y));
+        brush(path,rand.random(2,5));
+
+    }
+
+    private Seq<Tile> getPathToCore(Tile startTile) {
+        Tile closestCoreBarrier=getClosestBoundaryTile(startTile);
+        return pathfind(
+                startTile.x, startTile.y,
+                closestCoreBarrier.x, closestCoreBarrier.y ,
+                tile -> {
+                    float cost;
+                    if(tile.solid()){
+                        cost = 100f;
+                    }else  cost  = 1f;
+
+                    float dstCore = Mathf.dst(tile.x, tile.y, coreSpawnPos.x, coreSpawnPos.y);
+                    if(dstCore < 15f) {
+                        cost += 1000000f;
+                    }
+                    return cost;
+                },
+                Astar.manhattan
+        );
+    }
+
+
     /**
      * Do not modify tiles here. This is only for specialized configuration.
      *
@@ -167,5 +279,85 @@ public class WeeklyGenerator extends BasicGenerator {
     public void postGenerate(Tiles tiles) {
         super.postGenerate(tiles);
     }
+    private void spawnEnemiesAreaGen(Point2 position){
+        int radious = 10;
 
+        Geometry.circle(position.x,position.y, width, height, radious, (int x, int y) -> {
+            Tile t = tiles.get(x,y);
+            if(t!=null){
+                t.setBlock(Blocks.air);
+                t.setOverlay(Blocks.air);
+                if(position.x == x && position.y == y ){
+                    t.setOverlay(Blocks.spawn);
+                }
+            }
+
+        });
+    }
+
+
+    private <T> void shuffleSeq(Seq<T> seq, Rand rand){
+        for(int i = seq.size - 1; i > 0; i--){
+            int j = rand.random(i);
+            T tmp = seq.items[i];
+            seq.items[i] = seq.items[j];
+            seq.items[j] = tmp;
+        }
+    }
+
+    private void applyScatter(float chanceFloor1, float chanceFloor2, float chanceWall1, float chanceWall2) {
+
+        scatter(floors.get(0), floors.get(1), chanceFloor1);
+        scatter(floors.get(1), floors.get(2), chanceFloor2);
+
+        scatter(walls.get(0), walls.get(1), chanceWall1);
+        scatter(walls.get(1), walls.get(2), chanceWall2);
+    }
+
+
+
+
+    private void terrainGen(){
+        float terrainScale     = rand.random(30f, 80f);
+        float terrainMagnitude = rand.random(0.5f, 1.5f);
+        float centerMagnitude  = rand.random(0.0f, 0.8f);
+
+
+    }
+    private Seq<Tile> getCoreBoundaryTiles() {
+        Seq<Tile> tilesOut = new Seq<>();
+        int cx = coreSpawnPos.x;
+        int cy = coreSpawnPos.y;
+        int radius = 7;
+
+        Geometry.circle(cx, cy, width, height, radius, ( x, y) -> {
+            Tile t = tiles.get(x, y);
+            if(Mathf.dst(cx,cy,t.x,t.y) > radius - 1){
+                tilesOut.add(t);
+            }
+
+        });
+
+        return tilesOut;
+    }
+    private Tile getClosestBoundaryTile(Tile tile) {
+        Seq<Tile> boundary = getCoreBoundaryTiles();
+        Tile closestTile = null;
+        float bestDst = Float.MAX_VALUE;
+        for (Tile t : boundary) {
+            float dst = Mathf.dst(tile.x,tile.y, t.x, t.y);
+            if (dst < bestDst) {
+                closestTile = t;
+                bestDst = dst;
+            }
+        }
+
+        return closestTile;
+    }
+
+    private void defineCoreAndSpawnPositions(){
+        int shotCaller = rand.random(0,5);
+        coreSpawnPos = corePositions.get(shotCaller);
+        spawnPos = spawnPositions.get(shotCaller);
+    }
 }
