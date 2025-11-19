@@ -416,6 +416,8 @@ public class Renderer implements ApplicationListener{
 
         Groups.draw.draw(Drawc::draw);
 
+        Draw.draw(Layer.overlayUI, HealthBarRenderer::drawHealthBars);
+
         if(drawDebugHitboxes){
             DebugCollisionRenderer.draw();
         }
