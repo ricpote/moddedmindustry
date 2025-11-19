@@ -344,6 +344,7 @@ public class WeeklyGenerator extends BasicGenerator {
         Seq<Tile> boundary = getCoreBoundaryTiles();
         Tile closestTile = null;
         float bestDst = Float.MAX_VALUE;
+
         for (Tile t : boundary) {
             float dst = Mathf.dst(tile.x,tile.y, t.x, t.y);
             if (dst < bestDst) {
@@ -360,9 +361,6 @@ public class WeeklyGenerator extends BasicGenerator {
         coreSpawnPos = corePositions.get(shotCaller);
         spawnPos = spawnPositions.get(shotCaller);
     }
-    public class Room {
-        public int x, y;
-        public int w, h;
-    }
+
 
 }

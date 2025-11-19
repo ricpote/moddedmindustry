@@ -27,8 +27,7 @@ public enum Gamemode{
         rules.winWave=-1;
         rules.waveSpacing=Time.toMinutes/2;
         rules.infiniteResources = false;
-        rules.waitEnemies=false;
-        rules.canGameOver=false;
+        rules.waitEnemies=true;
         rules.showSpawns=true;
         rules.allowEnvironmentDeconstruct = false;
         rules.spawns=Vars.InfSpawner.buildSpawnGroups(0,1000);

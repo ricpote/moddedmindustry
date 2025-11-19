@@ -59,16 +59,16 @@ public class InfiniteWaveClass {
         this.baseDifficulty = 1;
         this.weeklyModifier = WeeklyModifier.NORMAL;
         species=new UnitType[][] {
-                {dagger, flare, risso,pulsar, crawler},
+                {dagger, flare,pulsar, crawler},
                 {nova, atrax, mace, vela, minke},
                 {bryde, scepter, spiroct, arkyid, toxopid},
                 {quasar, corvus, reign, sei, omura},
-                {risso, oxynoe, cyerce, aegires, navanax}, //retusa intentionally left out as it cannot damage the core properly
+                {oxynoe, cyerce, aegires, navanax}, //reusa intentionally left out as it cannot damage the core properly
                 {fortress, horizon, zenith, quad , antumbra, quad , eclipse}
         };
     }
     private double waveDifficulty(int wave){
-        return  (baseDifficulty +wave/120f+Math.pow(wave,0.30)*0.1);
+        return  (baseDifficulty + wave/120f+Math.pow(wave,0.30)*0.1);
 
     }
     public Seq<SpawnGroup> generate(int wave){
@@ -92,8 +92,6 @@ public class InfiniteWaveClass {
             }
             speciesCount++;
         }
-
-
 
         for(int i = 0; i < speciesCount; i++){
             int index = rand.random(999999);
@@ -151,11 +149,13 @@ public class InfiniteWaveClass {
         return out ;
 
     }
-  public   Seq<SpawnGroup> buildSpawnGroups(int startWave, int count){
+  public Seq<SpawnGroup> buildSpawnGroups(int startWave, int count){
+        rand.setSeed(Vars.getWeeklySeed());
         Seq<SpawnGroup> all = new Seq<>();
         for(int wave = startWave; wave < startWave + count; wave++){
             all.addAll(generate(wave));
         }
+
         return all;
     }
     private UnitType[] selectSpeciesDefault( float difficulty, int wave){
@@ -167,7 +167,7 @@ public class InfiniteWaveClass {
                     UnitTypes.crawler,
                     UnitTypes.nova,
                     UnitTypes.flare,
-                    UnitTypes.risso
+
             };
         }
 
