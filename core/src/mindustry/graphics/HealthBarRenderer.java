@@ -71,7 +71,7 @@ public class HealthBarRenderer {
 
             //filling
             Draw.color(HealthColor);
-            Fill.rect(startX, startY, healthFrac, BAR_HEIGHT);
+            Fill.rect(startX, startY, fillWidth, BAR_HEIGHT);
         });
     }
 }
