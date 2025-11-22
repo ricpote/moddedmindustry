@@ -26,7 +26,7 @@ Neste Sprint o objetivo vai ser terminar as novas funcionalidades implementadas 
 
 ### Scrum Board in the middle of the sprint
 
-Please add the scrumboard picture here.
+![img_1.png](img_1.png)
 
 ### Scrum Board at the end of the sprint
 
