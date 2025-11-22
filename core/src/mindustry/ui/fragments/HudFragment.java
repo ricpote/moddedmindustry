@@ -564,6 +564,12 @@ public class HudFragment{
             });
 
         blockfrag.build(parent);
+
+        parent.fill(t -> {
+            t.name = "coreHealth";
+            t.bottom().left(); // fixa no canto inferior esquerdo
+            t.add(new CoreHealthBar()).size(200f, 20f).pad(10f); // define tamanho e padding
+        });
     }
 
     @Remote(targets = Loc.both, forward = true, called = Loc.both)
