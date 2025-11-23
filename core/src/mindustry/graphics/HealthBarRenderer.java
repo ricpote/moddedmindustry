@@ -2,22 +2,11 @@ package mindustry.graphics;
 
 import arc.*;
 import arc.graphics.*;
-import arc.graphics.Texture.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
-import arc.math.geom.*;
-import arc.scene.ui.layout.*;
-import arc.struct.*;
 import arc.util.*;
-import arc.util.pooling.*;
 import mindustry.Vars;
-import mindustry.content.*;
-import mindustry.entities.*;
-import mindustry.game.EventType.*;
 import mindustry.gen.*;
-import mindustry.io.*;
-import mindustry.ui.*;
-import mindustry.world.*;
 
 public class HealthBarRenderer {
     public static final float BAR_WIDTH = 30f;
@@ -30,9 +19,11 @@ public class HealthBarRenderer {
     private static final Color COLOR_ENEMY_MID = Color.yellow;
     private static final Color COLOR_ENEMY_LOW = Color.red;
 
+    private static final float LINE_THICKNESS = 1f;
+
     public static void drawHealthBars(){
         Lines.beginLine();
-        Lines.stroke(1f);
+        Lines.stroke(LINE_THICKNESS);
 
         drawUnitHealthBar();
 
@@ -52,17 +43,20 @@ public class HealthBarRenderer {
             float fillWidth = BAR_WIDTH * healthFrac;
 
             //sets the color of the bar (cyan - teammate; red, yellow, green - enemies)
-            Color HealthColor = null;
+            Color HealthColor;
             if(unit.team().id == Vars.player.team().id){
                 HealthColor = COLOR_ALLY;
             } else {
                 if(healthFrac < 0.33f){ HealthColor = COLOR_ENEMY_LOW;}
                 else if(healthFrac < 0.66f){ HealthColor = COLOR_ENEMY_MID;}
-                else if(healthFrac < 1f){ HealthColor = COLOR_ENEMY_HIGH;}
+                else { HealthColor = COLOR_ENEMY_HIGH;}
             }
 
             float startX = worldX - BAR_WIDTH / 2f;
             float startY = worldY - BAR_HEIGHT/ 2f;
+
+            //dynamic center of the bar, calculated so the center changes as the hp change to keep the filling inside the bar
+            float fillX = startX + fillWidth / 2f;
 
             //background
             Draw.color(COLOR_BACKGROUND);
@@ -71,7 +65,7 @@ public class HealthBarRenderer {
 
             //filling
             Draw.color(HealthColor);
-            Fill.rect(startX, startY, fillWidth, BAR_HEIGHT);
+            Fill.rect(fillX, worldY, fillWidth - 2 * LINE_THICKNESS, BAR_HEIGHT - 2 * LINE_THICKNESS);
         });
     }
 }
