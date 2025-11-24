@@ -44,7 +44,7 @@ public class Fx{
     meteorFall = new Effect(90f, e -> {
         float progress = e.fin();
 
-        float startX = e.x;
+        float startX = Vars.world.unitHeight() + 200f;
         float startY = Vars.world.unitHeight() + 200f;
 
         float x = Mathf.lerp(startX, e.x, progress);
