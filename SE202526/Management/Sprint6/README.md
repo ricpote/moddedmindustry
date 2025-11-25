@@ -13,10 +13,11 @@ Joao Fernandes 68180
 Neste Sprint o objetivo vai ser terminar as novas funcionalidades implementadas no jogo e dar review às mesmas.  
 
 ### Sprint Review Meeting: 
-*(Held at the end of the sprint, this meeting is attended by all stakeholders to demo the completed work and validate if the sprint goal has been met.)*
+Apesar de nem todos os objetivos desta semana terem sido alcançados, foi feito um grande progresso em cada um, estando para breve a conclusão dos mesmos.  
 
 ### Sprint Retrospective Meeting: 
-*(This meeting happens after the sprint review and before the next sprint planning meeting. The team reflects on what went well, what needs improvement, and how to enhance their processes for future sprints.)*
+O desempenho do grupo neste Sprint foi positivo, com bom progresso na maioria das tarefas, apesar de alguns objetivos não terem sido totalmente concluídos. 
+No próximo sprint, será importante melhorar a gestão do tempo de forma a conseguir alcaçar os objetivos delineados.
 
 ## Relevant resources
 
@@ -30,12 +31,12 @@ Neste Sprint o objetivo vai ser terminar as novas funcionalidades implementadas 
 
 ### Scrum Board at the end of the sprint
 
-Please add the scrumboard picture here.
+![img_2.png](img_2.png)
 
 ### Burndown Chart for the sprint
 
-Please add the burndown chart here.
+[BurndownSprint6.xlsx](BurndownSprint6.xlsx)
 
 ### Gantt Chart
 
-Please add the Gantt chart here.
+[GanttSprint6.xlsx](GanttSprint6.xlsx)
