@@ -56,12 +56,28 @@ public class Fx{
 
     earthquake = new Effect(900f, e -> {
         Draw.color(Color.white);
+        Draw.alpha(e.fout(Interp.pow3Out) * 0.4f);
         Draw.rect(Core.atlas.find("earthquake"), e.x, e.y, tilesize, tilesize);
     }),
 
     earthquake2 = new Effect(1200f, e -> {
         Draw.color(Color.white);
+        Draw.alpha(e.fout(Interp.pow3Out) * 0.4f);
         Draw.rect(Core.atlas.find("earthquake2"), e.x, e.y, tilesize, tilesize);
+    }),
+
+
+    tsunamiWaveFront = new Effect(20f, e -> {
+        TextureRegion frontRegion = Core.atlas.find("tsunami");
+        Draw.color(Color.white, e.fout());
+        Draw.rect(frontRegion, e.x, e.y, tilesize, tilesize, e.rotation);
+    }),
+
+
+    tsunamiWaveBack = new Effect(500f, e -> {
+        TextureRegion backRegion = Core.atlas.find("tsunami2");
+        Draw.color(Color.white);
+        Draw.rect(backRegion, e.x, e.y, 12f, 12f, e.rotation);
     }),
 
 

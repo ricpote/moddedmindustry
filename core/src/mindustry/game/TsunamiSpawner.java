@@ -1,6 +1,7 @@
 package mindustry.game;
 
 import arc.Events;
+import arc.math.Angles;
 import arc.math.Mathf;
 import arc.util.Time;
 import arc.struct.Seq;
@@ -20,21 +21,29 @@ public class TsunamiSpawner {
     private float nextTsunami = 0f;
 
     private static final Point2[] directions = {
-            new Point2(1, 0),    // 0º (Right)
-            new Point2(1, 1),    // 45º (Upper Right Diagonal)
-            new Point2(0, 1),    // 90º (Up)
-            new Point2(-1, 1),   // 135º (Upper Left Diagonal)
-            new Point2(-1, 0),   // 180º (Left)
-            new Point2(-1, -1),  // 225º (Lower Left Diagonal)
-            new Point2(0, -1),   // 270º (Down)
-            new Point2(1, -1)    // 315º (Lower Right Diagonal)
+            new Point2(0, 1),   // 0º (Up)
+            new Point2(-1, 1),  // 45º (Upper Left Diagonal)
+            new Point2(-1, 0),   // 90º (Left)
+            new Point2(-1, -1),   // 135º (Lower Left Diagonal)
+            new Point2(0, -1),    // 180º (Down)
+            new Point2(1, -1),   // 225º (Lower Right Diagonal)
+            new Point2(1, 0),    // 270º (Right)
+            new Point2(1, 1)     // 315º (Upper Right Diagonal)
     };
+
+
+    private static ObjectMap<Building, Point2> moves;
+    private static Seq<Building> affectedBuildings ;
+
 
     public TsunamiSpawner() {
         Events.on(EventType.WorldLoadEvent.class, e -> {
             timer = 0f;
             scheduleNext();
         });
+
+        moves = new ObjectMap<>();
+        affectedBuildings = new Seq<>();
     }
 
     public void update() {
@@ -48,7 +57,7 @@ public class TsunamiSpawner {
     }
 
     private void scheduleNext() {
-        nextTsunami = Mathf.random(3000f, 9000f);
+        nextTsunami = Mathf.random(300f, 900f);
     }
 
     private static void spawnTsunami() {
@@ -60,10 +69,10 @@ public class TsunamiSpawner {
         int startTileX, startTileY;
         Tile startTile;
 
-        int tsunamiFactor = Mathf.random(3, 7);
+        int tsunamiFactor = Mathf.random(4, 6);
         int directionIndex = Mathf.random(0, 7);
         Point2 direction = directions[directionIndex];
-        float angle = directionIndex * 45f;
+        float angle = directionIndex*45;
         int dx = direction.x;
         int dy = direction.y;
 
@@ -88,47 +97,140 @@ public class TsunamiSpawner {
             return;
         }
 
-        ObjectMap<Building, Point2> moves = new ObjectMap<>();
-        Seq<Building> affectedBuildings = new Seq<>();
+        moves.clear();
+        affectedBuildings.clear();
 
-        int waveX = startTileX;
-        int waveY = startTileY;
+        calculateAffectedBuildings(startTileX, startTileY, angle, tsunamiFactor, dx, dy);
+        animation(startTileX, startTileY, angle, tsunamiFactor);
+        removeAffectedBuildings();
+        replaceAffectedBuildings();
 
-        for (int i = 0; i < tsunamiFactor*10; i++) {
-            waveX += dx;
-            waveY += dy;
-            Tile currentTile = Vars.world.tile(waveX, waveY);
+        Events.fire(new EventType.TsunamiEvent(startTile.worldx(), startTile.worldy(), angle, tsunamiFactor*10 * Vars.tilesize));
+    }
 
-            if (currentTile == null) {
-                break;
+
+    private static void calculateAffectedBuildings(int waveX, int waveY, float angle, int tsunamiFactor, int dx, int dy) {
+        int angleFactor = 0;
+        if (angle == 225 || angle == 270 || angle == 315) {
+            for (int tx = waveX; tx <= waveX + tsunamiFactor * 5; tx++) {
+                if (angle == 315) angleFactor += 1;
+                else if (angle == 225) angleFactor -= 1;
+                for (int ty = waveY - tsunamiFactor + angleFactor; ty <= waveY + tsunamiFactor + angleFactor; ty++) {
+                    selectAffectedBuildsAndMoves(Vars.world.tile(tx, ty), tx, ty, dx, dy, tsunamiFactor);
+                }
             }
-
-            //Calculates where the buildings will be placed
+        } else if (angle == 45 || angle == 90 || angle == 135) { // Onda indo para a Esquerda (X diminui)
+            for (int tx = waveX; tx >= waveX - tsunamiFactor * 5; tx--) {
+                if (angle == 45) angleFactor += 1;
+                else if (angle == 135) angleFactor -= 1;
+                for (int ty = waveY - tsunamiFactor + angleFactor; ty <= waveY + tsunamiFactor + angleFactor; ty++) {
+                    selectAffectedBuildsAndMoves(Vars.world.tile(tx, ty), tx, ty, dx, dy, tsunamiFactor);
+                }
+            }
+        } else if (angle == 0) {
             for (int tx = waveX - tsunamiFactor; tx <= waveX + tsunamiFactor; tx++) {
-                for (int ty = waveY - tsunamiFactor; ty <= waveY + tsunamiFactor; ty++) {
-                    Tile targetTile = Vars.world.tile(tx, ty);
-
-                    if (targetTile != null && targetTile.build != null) {
-                        Building build = targetTile.build;
-
-                        if (targetTile.x == build.tileX() && targetTile.y == build.tileY() && !moves.containsKey(build)) {
-
-                            int newTileX = tx + dx * tsunamiFactor;
-                            int newTileY = ty + dy * tsunamiFactor;
-
-                            Tile newTile = Vars.world.tile(newTileX, newTileY);
-
-                            if (newTile != null) {
-                                moves.put(build, new Point2(newTileX, newTileY));
-                                affectedBuildings.add(build);
-                            }
-                        }
-                    }
+                for (int ty = waveY; ty <= waveY + tsunamiFactor * 5; ty++) {
+                    selectAffectedBuildsAndMoves(Vars.world.tile(tx, ty), tx, ty, dx, dy, tsunamiFactor);
+                }
+            }
+        } else if (angle == 180) {
+            for (int tx = waveX - tsunamiFactor; tx <= waveX + tsunamiFactor; tx++) {
+                for (int ty = waveY; ty >= waveY - tsunamiFactor * 5; ty--) {
+                    selectAffectedBuildsAndMoves(Vars.world.tile(tx, ty), tx, ty, dx, dy, tsunamiFactor);
                 }
             }
         }
+    }
 
+    private static void selectAffectedBuildsAndMoves(Tile targetTile, int tx, int ty, int dx, int dy, int tsunamiFactor) {
+        if (targetTile != null && targetTile.build != null) {
+            Building build = targetTile.build;
+            if (targetTile.x == build.tileX() && targetTile.y == build.tileY() && !moves.containsKey(build)) {
+                int newTileX = tx + dx * tsunamiFactor;
+                int newTileY = ty + dy * tsunamiFactor;
+                Tile newTile = Vars.world.tile(newTileX, newTileY);
+                if (newTile != null) {
+                    moves.put(build, new Point2(newTileX, newTileY));
+                    affectedBuildings.add(build);
+                }
+            }
+        }
+    }
+
+    private static void animation(int waveX, int waveY, float angle, int tsunamiFactor){
+        int angleFactor = 0;
+        if (angle == 225 || angle == 270 || angle == 315) {
+            for (int tx = waveX; tx <= waveX + tsunamiFactor * 5; tx++) {
+                if (angle == 315) angleFactor += 1;
+                else if (angle == 225) angleFactor -= 1;
+
+                int finalTx = tx;
+                int finalAngleFactor = angleFactor;
+                float delayFrames = (finalTx - waveX) * 0.05f * 60f;
+                Time.run(delayFrames, () -> {
+                    for (int ty = waveY - tsunamiFactor + finalAngleFactor; ty <= waveY + tsunamiFactor + finalAngleFactor; ty++) {
+                        Tile targetTile = Vars.world.tile(finalTx, ty);
+                        if (targetTile != null && finalAngleFactor == 0)
+                            Fx.tsunamiWaveFront.at(targetTile.worldx(), targetTile.worldy(), angle);
+                        else if (targetTile != null && finalAngleFactor > 0)
+                            Fx.tsunamiWaveFront.at(targetTile.worldx(), targetTile.worldy(), angle * 10);
+                        else if (targetTile != null) //&&finalAngleFactor < 0
+                            Fx.tsunamiWaveFront.at(targetTile.worldx(), targetTile.worldy(), angle * 30);
+                    }
+                });
+            }
+        } else if (angle == 45 || angle == 90 || angle == 135) {
+            for (int tx = waveX; tx >= waveX - tsunamiFactor * 5; tx--) {
+                if (angle == 45) angleFactor += 1;
+                else if (angle == 135) angleFactor -= 1;
+
+                int finalTx = tx;
+                int finalAngleFactor = angleFactor;
+                float delayFrames = (waveX - finalTx) * 0.05f * 60f;
+                Time.run(delayFrames, () -> {
+                    for (int ty = waveY - tsunamiFactor + finalAngleFactor; ty <= waveY + tsunamiFactor + finalAngleFactor; ty++) {
+                        Tile targetTile = Vars.world.tile(finalTx, ty);
+                        if (targetTile != null && finalAngleFactor == 0)
+                            Fx.tsunamiWaveFront.at(targetTile.worldx(), targetTile.worldy(), angle);
+                        else if (targetTile != null && finalAngleFactor > 0)
+                            Fx.tsunamiWaveFront.at(targetTile.worldx(), targetTile.worldy(), angle * 10);
+                        else if (targetTile != null) //&&finalAngleFactor < 0
+                            Fx.tsunamiWaveFront.at(targetTile.worldx(), targetTile.worldy(), angle * 30);
+                    }
+                });
+            }
+        } else if (angle == 0) {
+            for (int ty = waveY; ty <= waveY + tsunamiFactor * 5; ty++) {
+                int finalTy = ty;
+                float delayFrames = (finalTy - waveY) * 0.05f * 60f;
+                Time.run(delayFrames, () -> {
+                    for (int tx = waveX - tsunamiFactor; tx <= waveX + tsunamiFactor; tx++) {
+                        Tile targetTile = Vars.world.tile(tx, finalTy);
+                        if (targetTile != null)
+                            Fx.tsunamiWaveFront.at(targetTile.worldx(), targetTile.worldy(), angle);
+                    }
+                });
+            }
+        } else if (angle == 180) {
+            for (int ty = waveY; ty >= waveY - tsunamiFactor * 5; ty--) {
+                int finalTy = ty;
+                float delayFrames = (waveY - finalTy) * 0.05f * 60f;
+                Time.run(delayFrames, () -> {
+                    for (int tx = waveX - tsunamiFactor; tx <= waveX + tsunamiFactor; tx++) {
+                        Tile targetTile = Vars.world.tile(tx, finalTy);
+                        if (targetTile != null)
+                            Fx.tsunamiWaveFront.at(targetTile.worldx(), targetTile.worldy(), angle);
+                    }
+                });
+            }
+        }
+
+    }
+
+
+    private static void removeAffectedBuildings(){
         //removes all the affectedBuildings
+        removeCoreFromAffectedBuildings();
         for(Building build : affectedBuildings){
             Tile originalTile = build.tile;
             if(originalTile != null){
@@ -137,7 +239,21 @@ public class TsunamiSpawner {
                 originalTile.build = null;
             }
         }
+    }
 
+    private static void removeCoreFromAffectedBuildings(){
+        affectedBuildings.removeAll(build -> build.block instanceof mindustry.world.blocks.storage.CoreBlock);
+        var iterator = moves.iterator();
+        while(iterator.hasNext()){
+            var entry = iterator.next();
+            // A chave (key) do mapa é o Building.
+            if(entry.key.block instanceof mindustry.world.blocks.storage.CoreBlock){
+                iterator.remove();
+            }
+        }
+    }
+
+    private static void replaceAffectedBuildings(){
         //makes the reposition of the buildings if "valid"
         for (Building build : affectedBuildings) {
             Point2 newPos = moves.get(build);
@@ -162,9 +278,9 @@ public class TsunamiSpawner {
                 build.kill();
             }
         }
-
-        Events.fire(new EventType.TsunamiEvent(startTile.worldx(), startTile.worldy(), angle, tsunamiFactor*10 * Vars.tilesize));
     }
+
+
 }
 
 
