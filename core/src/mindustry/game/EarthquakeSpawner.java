@@ -12,8 +12,7 @@ import mindustry.gen.Building;
 import mindustry.world.Tile;
 import mindustry.world.Build;
 import mindustry.content.Blocks;
-
-
+import mindustry.world.blocks.storage.CoreBlock;
 
 
 public class EarthquakeSpawner {
@@ -21,11 +20,19 @@ public class EarthquakeSpawner {
     private float timer = 0f;
     private float nextEarthquake = 0f;
 
+    static Seq<Building> affectedBuildings;
+    static Seq<Point2> allPotentialPositions;
+    static Seq<Tile> originalPrimaryTiles;
+
     public EarthquakeSpawner(){
         Events.on(EventType.WorldLoadEvent.class, e -> {
             timer = 0f;
             scheduleNext();
         });
+
+        affectedBuildings = new Seq<>();
+        allPotentialPositions = new Seq<>();
+        originalPrimaryTiles = new Seq<>();
     }
 
 
@@ -42,7 +49,6 @@ public class EarthquakeSpawner {
     private void scheduleNext(){
         nextEarthquake = Mathf.random(3000f, 9000f);
     }
-
 
     private static void spawnEarthquake(){
         if(!Vars.state.isPlaying()){return;}
@@ -61,21 +67,25 @@ public class EarthquakeSpawner {
         //tries a max of 100 times to find a not Darkened place on the map for the earthquake
         }while(Vars.world.tile(centerTileX, centerTileY).isDarkened() && attempt < 100);
 
-        if(attempt == 100){return;}
+        if(attempt == 100) return;
 
         float rad = Mathf.random(60f, 120f);
-        float damage = 0;  //still up to changes
-
         Vars.renderer.shake(rad*5, 60f);
-        Damage.damage(x,y,rad,damage);
 
+        affectedBuildings.clear();
+        allPotentialPositions.clear();
+        originalPrimaryTiles.clear();
 
-        Seq<Building> affectedBuildings = new Seq<>();
-        Seq<Point2> allPotentialPositions = new Seq<>();
-        Seq<Tile> originalPrimaryTiles = new Seq<>();
+        replaceCalculationAndAnimation(rad, centerTileX, centerTileY);
+        allPotentialPositions.shuffle();
+        removeAffectedBuildings();
+        replaceAffectedBuildings();
 
+        Events.fire(new EventType.EarthquakeEvent(x, y, rad));
+    }
+
+    private static void replaceCalculationAndAnimation(float rad, int centerTileX, int centerTileY){
         int tileRad = (int)(rad / Vars.tilesize);
-
         int animation = 0;
         for (int tx = centerTileX - tileRad; tx <= centerTileX + tileRad; tx++) {
             for (int ty = centerTileY - tileRad; ty <= centerTileY + tileRad; ty++) {
@@ -93,16 +103,21 @@ public class EarthquakeSpawner {
                     allPotentialPositions.add(new Point2(tx, ty));
                     if(animation%2 == 0){
                         Fx.earthquake.at(tile.worldx(),tile.worldy());
-                    }else{
+                        Fx.earthquake.at(tile.worldx(),tile.worldy());
+                        Fx.earthquake.at(tile.worldx(),tile.worldy());
+                        Fx.earthquake.at(tile.worldx(),tile.worldy());
+                    }else
                         Fx.earthquake2.at(tile.worldx(),tile.worldy());
-                    }
+
                     animation++;
                 }
             }
         }
+    }
 
-        allPotentialPositions.shuffle();
-
+    private static void removeAffectedBuildings(){
+        affectedBuildings.removeAll(build -> build.block instanceof CoreBlock);
+        originalPrimaryTiles.removeAll(build -> build.block() instanceof CoreBlock);
         for(Tile originalTile : originalPrimaryTiles){
             Building build = originalTile.build;
             if(build != null){
@@ -111,7 +126,11 @@ public class EarthquakeSpawner {
                 originalTile.build = null;
             }
         }
+    }
 
+
+
+    private static void replaceAffectedBuildings(){
         for (Building build: affectedBuildings) {
             boolean placed = false;
 
@@ -149,7 +168,8 @@ public class EarthquakeSpawner {
                 build.kill();
             }
         }
-
-        Events.fire(new EventType.EarthquakeEvent(x, y, rad, damage));
     }
+
+
+
 }
