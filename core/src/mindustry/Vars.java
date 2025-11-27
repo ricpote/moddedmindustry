@@ -275,7 +275,7 @@ public class Vars implements Loadable{
     public static MapEditor editor;
     public static AvoidanceProcess avoidance;
     public static GameService service = new GameService();
-    public static WeeklyChalServ custService = new  WeeklyChalServ();
+    public static WeeklyChalServ custService;
     public static Universe universe;
     public static World world;
     public static Maps maps;
@@ -352,6 +352,7 @@ public class Vars implements Loadable{
         asyncCore = new AsyncCore();
         if(!headless) editor = new MapEditor();
         InfSpawner=new InfiniteWaveClass();
+        custService= new  WeeklyChalServ();
         myGen=new WeeklyGenerator();
         maps = new Maps();
         spawner = new WaveSpawner();

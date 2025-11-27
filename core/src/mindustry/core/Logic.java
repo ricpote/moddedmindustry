@@ -14,6 +14,7 @@ import mindustry.game.EventType.*;
 import mindustry.game.*;
 import mindustry.game.Teams.*;
 import mindustry.gen.*;
+import mindustry.io.SaveIO;
 import mindustry.maps.*;
 import mindustry.type.*;
 import mindustry.type.Weather.*;
@@ -259,6 +260,23 @@ public class Logic implements ApplicationListener{
     }
 
     public void reset(){
+        if (state.map != null && "Weekly Challenge".equals(state.map.tags.get("weekly"))) {
+            if (Vars.custService != null) {
+                Vars.custService.info.wave = state.wave;
+                if (state.gameOver && !state.won) {
+                    Vars.custService.info.isGameActive = false;
+                }
+                Vars.custService.saveInfo();
+            }
+            if (!state.gameOver) {
+                try {
+                    if (state.rules != null) state.rules.mapGenerator = null;
+                    SaveIO.save(Vars.saveDirectory.child("weeklyFile.msav"));
+                } catch (Throwable e) {
+                    Log.err(e);
+                }
+            }
+        }
         State prev = state.getState();
         //recreate gamestate - sets state to menu
         state = new GameState();
