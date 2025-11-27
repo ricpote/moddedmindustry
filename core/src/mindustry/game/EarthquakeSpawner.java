@@ -55,7 +55,8 @@ public class EarthquakeSpawner {
 
         float x, y;
         int centerTileX,centerTileY;
-        int attempt = 0;
+        int attempts = 0;
+        Tile centerTile;
         do{
             x = Mathf.random(Vars.world.unitWidth());
             y = Mathf.random(Vars.world.unitHeight());
@@ -63,11 +64,12 @@ public class EarthquakeSpawner {
             centerTileX = (int)(x / Vars.tilesize);
             centerTileY = (int)(y / Vars.tilesize);
 
-            attempt++;
-        //tries a max of 100 times to find a not Darkened place on the map for the earthquake
-        }while(Vars.world.tile(centerTileX, centerTileY).isDarkened() && attempt < 100);
+            centerTile = Vars.world.tile(centerTileX, centerTileY);
 
-        if(attempt == 100) return;
+            attempts++;
+            //tries a max of 1000 times to find a not Darkened place on the map for the earthquake
+            if(attempts == 1000) return;
+        }while(centerTile.isDarkened());
 
         float rad = Mathf.random(60f, 120f);
         Vars.renderer.shake(rad*5, 60f);

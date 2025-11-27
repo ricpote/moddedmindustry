@@ -23,14 +23,13 @@ public class TsunamiSpawner {
     private static final Point2[] directions = {
             new Point2(0, 1),   // 0º (Up)
             new Point2(-1, 1),  // 45º (Upper Left Diagonal)
-            new Point2(-1, 0),   // 90º (Left)
-            new Point2(-1, -1),   // 135º (Lower Left Diagonal)
-            new Point2(0, -1),    // 180º (Down)
-            new Point2(1, -1),   // 225º (Lower Right Diagonal)
-            new Point2(1, 0),    // 270º (Right)
-            new Point2(1, 1)     // 315º (Upper Right Diagonal)
+            new Point2(-1, 0),  // 90º (Left)
+            new Point2(-1, -1), // 135º (Lower Left Diagonal)
+            new Point2(0, -1),  // 180º (Down)
+            new Point2(1, -1),  // 225º (Lower Right Diagonal)
+            new Point2(1, 0),   // 270º (Right)
+            new Point2(1, 1)    // 315º (Upper Right Diagonal)
     };
-
 
     private static ObjectMap<Building, Point2> moves;
     private static Seq<Building> affectedBuildings ;
@@ -91,11 +90,8 @@ public class TsunamiSpawner {
             }
 
             attempts++;
-        } while (attempts < 100);
-
-        if (startTile == null || !startTile.floor().isLiquid) {
-            return;
-        }
+            if(attempts == 1000) return;
+        } while (startTile == null || startTile.isDarkened() ||  !startTile.floor().isLiquid);
 
         moves.clear();
         affectedBuildings.clear();
@@ -108,11 +104,10 @@ public class TsunamiSpawner {
         Events.fire(new EventType.TsunamiEvent(startTile.worldx(), startTile.worldy(), angle, tsunamiFactor*10 * Vars.tilesize));
     }
 
-
     private static void calculateAffectedBuildings(int waveX, int waveY, float angle, int tsunamiFactor, int dx, int dy) {
         int angleFactor = 0;
         if (angle == 225 || angle == 270 || angle == 315) {
-            for (int tx = waveX; tx <= waveX + tsunamiFactor * 5; tx++) {
+            for (int tx = waveX; tx <= waveX + tsunamiFactor * 3; tx++) {
                 if (angle == 315) angleFactor += 1;
                 else if (angle == 225) angleFactor -= 1;
                 for (int ty = waveY - tsunamiFactor + angleFactor; ty <= waveY + tsunamiFactor + angleFactor; ty++) {
@@ -120,7 +115,7 @@ public class TsunamiSpawner {
                 }
             }
         } else if (angle == 45 || angle == 90 || angle == 135) { // Onda indo para a Esquerda (X diminui)
-            for (int tx = waveX; tx >= waveX - tsunamiFactor * 5; tx--) {
+            for (int tx = waveX; tx >= waveX - tsunamiFactor * 3; tx--) {
                 if (angle == 45) angleFactor += 1;
                 else if (angle == 135) angleFactor -= 1;
                 for (int ty = waveY - tsunamiFactor + angleFactor; ty <= waveY + tsunamiFactor + angleFactor; ty++) {
@@ -129,13 +124,13 @@ public class TsunamiSpawner {
             }
         } else if (angle == 0) {
             for (int tx = waveX - tsunamiFactor; tx <= waveX + tsunamiFactor; tx++) {
-                for (int ty = waveY; ty <= waveY + tsunamiFactor * 5; ty++) {
+                for (int ty = waveY; ty <= waveY + tsunamiFactor * 3; ty++) {
                     selectAffectedBuildsAndMoves(Vars.world.tile(tx, ty), tx, ty, dx, dy, tsunamiFactor);
                 }
             }
         } else if (angle == 180) {
             for (int tx = waveX - tsunamiFactor; tx <= waveX + tsunamiFactor; tx++) {
-                for (int ty = waveY; ty >= waveY - tsunamiFactor * 5; ty--) {
+                for (int ty = waveY; ty >= waveY - tsunamiFactor * 3; ty--) {
                     selectAffectedBuildsAndMoves(Vars.world.tile(tx, ty), tx, ty, dx, dy, tsunamiFactor);
                 }
             }
@@ -160,13 +155,13 @@ public class TsunamiSpawner {
     private static void animation(int waveX, int waveY, float angle, int tsunamiFactor){
         int angleFactor = 0;
         if (angle == 225 || angle == 270 || angle == 315) {
-            for (int tx = waveX; tx <= waveX + tsunamiFactor * 5; tx++) {
+            for (int tx = waveX; tx <= waveX + tsunamiFactor * 3; tx++) {
                 if (angle == 315) angleFactor += 1;
                 else if (angle == 225) angleFactor -= 1;
 
                 int finalTx = tx;
                 int finalAngleFactor = angleFactor;
-                float delayFrames = (finalTx - waveX) * 0.05f * 60f;
+                float delayFrames = (finalTx - waveX) * 0.04f * 60f;
                 Time.run(delayFrames, () -> {
                     for (int ty = waveY - tsunamiFactor + finalAngleFactor; ty <= waveY + tsunamiFactor + finalAngleFactor; ty++) {
                         Tile targetTile = Vars.world.tile(finalTx, ty);
@@ -180,13 +175,13 @@ public class TsunamiSpawner {
                 });
             }
         } else if (angle == 45 || angle == 90 || angle == 135) {
-            for (int tx = waveX; tx >= waveX - tsunamiFactor * 5; tx--) {
+            for (int tx = waveX; tx >= waveX - tsunamiFactor * 3; tx--) {
                 if (angle == 45) angleFactor += 1;
                 else if (angle == 135) angleFactor -= 1;
 
                 int finalTx = tx;
                 int finalAngleFactor = angleFactor;
-                float delayFrames = (waveX - finalTx) * 0.05f * 60f;
+                float delayFrames = (waveX - finalTx) * 0.04f * 60f;
                 Time.run(delayFrames, () -> {
                     for (int ty = waveY - tsunamiFactor + finalAngleFactor; ty <= waveY + tsunamiFactor + finalAngleFactor; ty++) {
                         Tile targetTile = Vars.world.tile(finalTx, ty);
@@ -200,9 +195,9 @@ public class TsunamiSpawner {
                 });
             }
         } else if (angle == 0) {
-            for (int ty = waveY; ty <= waveY + tsunamiFactor * 5; ty++) {
+            for (int ty = waveY; ty <= waveY + tsunamiFactor * 3; ty++) {
                 int finalTy = ty;
-                float delayFrames = (finalTy - waveY) * 0.05f * 60f;
+                float delayFrames = (finalTy - waveY) * 0.04f * 60f;
                 Time.run(delayFrames, () -> {
                     for (int tx = waveX - tsunamiFactor; tx <= waveX + tsunamiFactor; tx++) {
                         Tile targetTile = Vars.world.tile(tx, finalTy);
@@ -212,9 +207,9 @@ public class TsunamiSpawner {
                 });
             }
         } else if (angle == 180) {
-            for (int ty = waveY; ty >= waveY - tsunamiFactor * 5; ty--) {
+            for (int ty = waveY; ty >= waveY - tsunamiFactor * 3; ty--) {
                 int finalTy = ty;
-                float delayFrames = (waveY - finalTy) * 0.05f * 60f;
+                float delayFrames = (waveY - finalTy) * 0.04f * 60f;
                 Time.run(delayFrames, () -> {
                     for (int tx = waveX - tsunamiFactor; tx <= waveX + tsunamiFactor; tx++) {
                         Tile targetTile = Vars.world.tile(tx, finalTy);

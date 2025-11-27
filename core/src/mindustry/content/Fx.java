@@ -74,13 +74,6 @@ public class Fx{
     }),
 
 
-    tsunamiWaveBack = new Effect(500f, e -> {
-        TextureRegion backRegion = Core.atlas.find("tsunami2");
-        Draw.color(Color.white);
-        Draw.rect(backRegion, e.x, e.y, 12f, 12f, e.rotation);
-    }),
-
-
     trailFade = new Effect(400f, e -> {
         if(!(e.data instanceof Trail trail)) return;
         //lifetime is how many frames it takes to fade out the trail
