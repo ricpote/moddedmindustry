@@ -30,7 +30,7 @@ public enum Gamemode{
         rules.waitEnemies=true;
         rules.showSpawns=true;
         rules.allowEnvironmentDeconstruct = false;
-        //rules.spawns=Vars.InfSpawner.buildSpawnGroups(0,1000);
+        rules.spawns=Vars.InfSpawner.buildSpawnGroups(0,1000);
 
     }),
     attack(rules -> {

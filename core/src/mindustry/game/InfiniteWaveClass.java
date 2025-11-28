@@ -73,6 +73,9 @@ public class InfiniteWaveClass {
         return  (baseDifficulty + wave/60f+Math.pow(wave,0.30)*0.1);
 
     }
+    public   void setSpeciesCount(int speciesCount){
+        this.speciesCount=speciesCount;
+    }
     public Seq<SpawnGroup> generate(int wave){
 
         Seq<SpawnGroup> spawns = new Seq<>();
