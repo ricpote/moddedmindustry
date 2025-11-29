@@ -29,7 +29,7 @@ um bot com o qual os jogadores poderão fazer trocas de recursos durante o jogo.
 
 ### Scrum Board in the middle of the sprint
 
-Please add the scrumboard picture here.
+![img2.png](img2.png)
 
 ### Scrum Board at the end of the sprint
 
