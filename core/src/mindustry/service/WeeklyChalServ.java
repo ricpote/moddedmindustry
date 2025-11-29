@@ -21,7 +21,7 @@ public class WeeklyChalServ {
     private int width;
     private int height;
     private Rand randSize;
-
+//REVERT
     private static final String NAME_FILE_INFO = "weekly-challenge-info";
     private static final String SAVE_FILE_NAME = "weeklyFile";
 
