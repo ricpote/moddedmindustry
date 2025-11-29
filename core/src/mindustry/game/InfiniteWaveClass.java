@@ -79,61 +79,50 @@ public class InfiniteWaveClass {
          this.speciesCount = result;
     }
     public Seq<SpawnGroup> generate(int wave){
-        this.rand.setSeed(Vars.getWeeklySeed());
+        Rand rs = new Rand(Vars.getWeeklySeed() + wave);
+
         Seq<SpawnGroup> spawns = new Seq<>();
 
         float difficulty = (float)waveDifficulty(wave);
-
-        int amount = 1 + (int)(difficulty * 2f);
-
-        if(weeklyModifier == WeeklyModifier.SWARM){
-            amount *= 2;
-        }
-        float shield = Math.max((wave - 5) * (2f + difficulty * 1.5f), 0f);
+        int speciesCount = computeSpeciesCount(wave);
         UnitType[] selected = getSpeciesForWave(wave, difficulty);
 
 
-        float spawnChance = (wave *2) + (difficulty *5);
+        int amount = computeAmount(wave, difficulty, speciesCount);
 
-        if (rand.random(0, 100) < spawnChance) {
-            speciesCount++;
-        }
-        amount = Mathf.ceil(amount / Mathf.sqrt(speciesCount));
 
+        float shield = Math.max((wave - 5) * (2f + difficulty * 1.5f), 0f);
         if(wave % 40 == 0){
-            speciesCount=1;
-
-
-            int index = rand.random(999999);
-            index %= selected.length;
-            UnitType boss    = selected[index];
+            int idx = (int)((Vars.getWeeklySeed() * 31L + wave * 17L) % selected.length);
+            UnitType boss = selected[idx];
 
             spawns.add(new SpawnGroup(boss){{
                 unitAmount = 1;
-                begin = wave -1 ;
-                end = wave - 1;
+                begin = wave - 1;
+                end   = wave - 1;
                 spacing = 30;
                 shields = 500 + difficulty * 100f;
                 effect = mindustry.content.StatusEffects.boss;
             }});
         }
-        for(int i = 0; i < speciesCount; i++){
-            int index = rand.random(999999);
-            index %= selected.length;
+
+
+        for(int i=0; i<speciesCount; i++){
+            int index = (rs.random(0, selected.length-1));
             UnitType type = selected[index];
 
-
-            int finalAmount = amount;
             spawns.add(new SpawnGroup(type){{
-                unitAmount = finalAmount;
+                unitAmount = amount;
                 begin = wave - 1;
-                end = wave - 1 ;
+                end = wave - 1;
                 shields = shield;
                 max = 30;
             }});
         }
+
         return spawns;
     }
+
 
     private UnitType[] getSpeciesForWave(int wave,float difficulty){
         UnitType[] out=new UnitType[species.length];
@@ -155,6 +144,32 @@ public class InfiniteWaveClass {
         return out ;
 
     }
+    private int computeSpeciesCount(int wave){
+        Rand rs = new Rand(Vars.getWeeklySeed() + wave * 99991);
+        int base = 1 + wave / 5;
+        base = Mathf.clamp(base, 1, 3);
+        if(rs.chance(0.15)) base = Math.min(base + 1, 3);
+        return base;
+    }
+    private int computeAmount(int wave, float difficulty, int speciesCount){
+
+        float base;
+
+        if(wave < 10){
+
+            base = Mathf.lerp(3f, 10f, wave / 10f);
+        }else{
+            base = Mathf.lerp(10f, 30f, Mathf.clamp((wave - 10f) / 30f, 0f, 1f));
+        }
+        base += difficulty * 0.7f;
+        if(wave > 40){
+            base += (float)Math.pow(wave - 40, 0.30f);
+        }
+        return Math.max(1, Mathf.ceil(base / Mathf.sqrt(speciesCount)));
+    }
+
+
+
     public Seq<SpawnGroup> buildSpawnGroups(int startWave, int count){
         rand.setSeed(Vars.getWeeklySeed());
         speciesCount=1;

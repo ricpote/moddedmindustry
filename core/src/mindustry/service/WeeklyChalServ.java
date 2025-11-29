@@ -1,15 +1,20 @@
 package mindustry.service;
-
+import arc.struct.Seq;
+import mindustry.content.*;
 import arc.Core;
 import arc.math.Rand;
 import arc.files.Fi;
 import arc.struct.StringMap;
 import mindustry.Vars;
+import mindustry.ctype.UnlockableContent;
 import mindustry.game.*;
 import mindustry.maps.*;
 import mindustry.maps.generators.WeeklyGenerator;
 import mindustry.io.SaveIO;
+import mindustry.type.Item;
+import mindustry.type.ItemStack;
 import mindustry.world.*;
+import mindustry.world.blocks.production.GenericCrafter;
 
 import java.util.Random;
 
@@ -23,11 +28,14 @@ public class WeeklyChalServ {
 
     private static final String NAME_FILE_INFO = "weekly-challenge-info";
     private static final String SAVE_FILE_NAME = "weeklyFile";
+    private static final String NAME_FILE_RANKING = "weeklyRanking";
 
     public WeeklyGameInfo info = new WeeklyGameInfo();
+    public WeeklyRankingInfo rankingInfo = new WeeklyRankingInfo();
 
     public WeeklyChalServ(){
         loadInfo();
+        loadRanking();
     }
     public void saveInfo() {
         Core.settings.putJson(NAME_FILE_INFO, info);
@@ -52,6 +60,20 @@ public class WeeklyChalServ {
             Vars.state.rules.spawns.addAll(waveGen.generate(currentWave + i));
         }
     }
+    public void saveRanking() {
+        Core.settings.putJson(NAME_FILE_RANKING, rankingInfo);
+        Core.settings.forceSave();
+    }
+
+    public void loadRanking() {
+        rankingInfo = Core.settings.getJson(NAME_FILE_RANKING, WeeklyRankingInfo.class, WeeklyRankingInfo::new);
+    }
+
+    public void clearRanking() {
+        rankingInfo = new WeeklyRankingInfo();
+        Core.settings.remove(NAME_FILE_RANKING);
+        Core.settings.forceSave();
+    }
     public void startWeeklyChalGame() {
         mapSeed = Vars.getWeeklySeed();
         Fi file = Vars.saveDirectory.child(SAVE_FILE_NAME + "." + Vars.saveExtension);
@@ -73,6 +95,7 @@ public class WeeklyChalServ {
             }
         } else {
             clearInfo();
+            clearRanking();
             startNewGame();
         }
     }
@@ -112,4 +135,6 @@ public class WeeklyChalServ {
             }
         });
     }
+
+
 }

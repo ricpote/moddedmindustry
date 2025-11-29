@@ -272,6 +272,7 @@ public class Logic implements ApplicationListener{
                 }
                 Vars.custService.info.speciesCount = InfSpawner.getSpeciesCount();
                 Vars.custService.saveInfo();
+                Vars.custService.saveRanking();
             }
             if (!state.gameOver) {
                 try {
@@ -423,8 +424,23 @@ public class Logic implements ApplicationListener{
 
     @Remote(called = Loc.both)
     public static void gameOver(Team winner){
+
+
         state.stats.wavesLasted = state.wave;
         state.won = player.team() == winner;
+        if(state.map != null && "Weekly Challenge".equals(state.map.tags.get("weekly"))){
+            if(Vars.custService != null){
+                if (!state.won) {
+                    String playerName = Vars.player.name;
+                    custService.rankingInfo.submitScore(playerName, state.wave);
+
+
+                }
+                custService.info.isGameActive = false;
+                custService.saveInfo();
+                custService.saveRanking();
+            }
+        }
         Time.run(60f * 3f, () -> ui.restart.show(winner));
         netClient.setQuiet();
     }

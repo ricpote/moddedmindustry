@@ -17,9 +17,16 @@ import arc.util.*;
 import mindustry.Vars;
 import mindustry.core.*;
 import mindustry.game.EventType.*;
+import mindustry.game.WeeklyRankingInfo;
 import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.ui.*;
+
+import mindustry.ui.dialogs.BaseDialog;
+import arc.scene.ui.layout.Table;
+import arc.util.Align;
+import mindustry.graphics.Pal;
+import arc.graphics.Color;
 
 import static mindustry.Vars.*;
 import static mindustry.gen.Tex.*;
@@ -214,8 +221,7 @@ public class MenuFragment{
                     ),
                     new MenuButton("@weekly.challenge", challenge,
                             new MenuButton("@play",Icon.play, ()-> checkPlay(custService::startWeeklyChalGame)),
-                            new MenuButton("@rankings", Icon.book, () -> checkPlay(ui.planet::show))
-                    ),
+                            new MenuButton("@rankings", Icon.book, () -> checkPlay(this::showRankings))                    ),
                     new MenuButton("@database.button", Icon.menu,
                         new MenuButton("@schematics", Icon.paste, ui.schematics::show),
                         new MenuButton("@database", Icon.book, ui.database::show),
@@ -346,5 +352,30 @@ public class MenuFragment{
             this.runnable = () -> {};
             this.submenu = submenu != null ? Seq.with(submenu) : null;
         }
+    }
+    private void showRankings() {
+        BaseDialog dialog = new BaseDialog("@rankings");
+        dialog.addCloseButton();
+        if (custService == null) {
+            dialog.show();
+            return;
+        }
+        WeeklyRankingInfo info = custService.rankingInfo;
+        dialog.cont.add("Top 10 - Semana Atual").color(Pal.accent).fontScale(1.25f).row();
+        dialog.cont.image().color(Pal.accent).height(3f).width(400f).pad(10f).row();
+        if (info.rankings == null || info.rankings.isEmpty()) {
+            dialog.cont.add("@empty").color(Color.gray);
+        } else {
+            Table table = new Table();
+            for (int i = 0; i < info.rankings.size; i++) {
+                WeeklyRankingInfo.ScoreEntry entry = info.rankings.get(i);
+                table.add((i + 1) + ".").color(Pal.accent).padRight(15f);
+                table.add(entry.playerName).labelAlign(Align.left).width(200f).padRight(10f);
+                table.add("Wave " + entry.wave).color(Color.lightGray).labelAlign(Align.right);
+                table.row();
+            }
+            dialog.cont.add(table);
+        }
+        dialog.show();
     }
 }

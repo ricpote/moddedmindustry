@@ -4,6 +4,7 @@ import arc.*;
 import arc.func.*;
 import arc.util.*;
 import mindustry.Vars;
+import mindustry.content.Planets;
 import mindustry.maps.*;
 
 /** Defines preset rule sets. */
@@ -30,6 +31,7 @@ public enum Gamemode{
         rules.waitEnemies=true;
         rules.showSpawns=true;
         rules.allowEnvironmentDeconstruct = false;
+        rules.planet = Planets.sun;
 
 
 

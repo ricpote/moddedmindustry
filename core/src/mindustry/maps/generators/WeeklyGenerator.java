@@ -3,6 +3,7 @@ package mindustry.maps.generators;
 import arc.util.noise.Simplex;
 import mindustry.ai.Astar;
 
+import mindustry.type.Item;
 import mindustry.world.Tiles;
 import arc.func.*;
 import arc.math.*;
@@ -18,8 +19,6 @@ import mindustry.world.*;
 import mindustry.world.blocks.environment.*;
 import arc.util.*;
 
-
-
 public class WeeklyGenerator extends BasicGenerator {
     private long seed;
     public static class OreData {
@@ -31,7 +30,6 @@ public class WeeklyGenerator extends BasicGenerator {
             this.probability = probability;
         }
     }
-
 
     private Seq<OreData> oresToSpawn;
     private Point2 coreSpawnPos;
@@ -53,6 +51,7 @@ public class WeeklyGenerator extends BasicGenerator {
         walls = new Seq<>();
         ores=new Seq<>();
     }
+
     @Override
     public void generate(Tiles tiles, WorldParams params) {
         this.tiles = tiles;
@@ -155,7 +154,7 @@ public class WeeklyGenerator extends BasicGenerator {
         while(counterFloor < 4 || counterWall < 4){
             Block b = allBlocks.random(rand);
             if(b instanceof Floor f && counterFloor < 4){
-                if(!f.isLiquid && !f.isDeep() && b != Blocks.space) {
+                if(!f.isLiquid && !f.isDeep() && b != Blocks.space && !b.isOverlay()) {
                     floors.add(b);
                     counterFloor++;
                 }
@@ -317,16 +316,6 @@ public class WeeklyGenerator extends BasicGenerator {
         scatter(walls.get(1), walls.get(2), chanceWall2);
     }
 
-
-
-
-    private void terrainGen(){
-        float terrainScale     = rand.random(30f, 80f);
-        float terrainMagnitude = rand.random(0.5f, 1.5f);
-        float centerMagnitude  = rand.random(0.0f, 0.8f);
-
-
-    }
     private Seq<Tile> getCoreBoundaryTiles() {
         Seq<Tile> tilesOut = new Seq<>();
         int cx = coreSpawnPos.x;
