@@ -111,6 +111,9 @@ public class WeeklyGenerator extends BasicGenerator {
         prepareCoreArea();
         Schematics.placeLaunchLoadout(coreSpawnPos.x,coreSpawnPos.y);
         spawnEnemiesAreaGen(spawnPos);
+        if(Vars.custService != null){
+            Vars.custService.updateWaves();
+        }
         ensureOreConnectivity();
         ensureEnemiesConnectivity();
     }

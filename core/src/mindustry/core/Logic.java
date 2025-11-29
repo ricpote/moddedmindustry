@@ -187,6 +187,10 @@ public class Logic implements ApplicationListener{
             }
         }));
 
+        Events.on(GameOverEvent.class, e -> {
+            Vars.custService.clearInfo();
+        });
+
         Events.on(BlockBuildEndEvent.class, e -> {
             if(e.team == state.rules.defaultTeam){
                 if(e.breaking){
@@ -266,6 +270,7 @@ public class Logic implements ApplicationListener{
                 if (state.gameOver && !state.won) {
                     Vars.custService.info.isGameActive = false;
                 }
+                Vars.custService.info.speciesCount = InfSpawner.getSpeciesCount();
                 Vars.custService.saveInfo();
             }
             if (!state.gameOver) {
@@ -297,6 +302,12 @@ public class Logic implements ApplicationListener{
     }
 
     public void runWave(){
+        if(state.map != null && "Weekly Challenge".equals(state.map.tags.get("weekly"))){
+            if(Vars.custService != null) {
+                Vars.custService.updateWaves();
+            }
+        }
+
         spawner.spawnEnemies();
         state.wave++;
         state.wavetime = state.rules.waveSpacing * (state.isCampaign() ? state.getPlanet().campaignRules.difficulty.waveTimeMultiplier : 1f);
@@ -321,7 +332,7 @@ public class Logic implements ApplicationListener{
 
             //if there's a "win" wave and no enemies are present, win automatically
             if(state.rules.waves && (state.enemies == 0 && state.rules.winWave > 0 && state.wave >= state.rules.winWave && !spawner.isSpawning()) ||
-                (state.rules.attackMode && !state.rules.waveTeam.isAlive())){
+                    (state.rules.attackMode && !state.rules.waveTeam.isAlive())){
 
                 if(state.rules.sector.preset != null && state.rules.sector.preset.attackAfterWaves && !state.rules.attackMode){
                     //activate attack mode to destroy cores after waves are done.

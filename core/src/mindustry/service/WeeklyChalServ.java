@@ -5,12 +5,9 @@ import arc.math.Rand;
 import arc.files.Fi;
 import arc.struct.StringMap;
 import mindustry.Vars;
-import mindustry.game.Gamemode;
-import mindustry.game.Rules;
-import mindustry.game.Team;
+import mindustry.game.*;
 import mindustry.maps.*;
 import mindustry.maps.generators.WeeklyGenerator;
-import mindustry.game.WeeklyGameInfo;
 import mindustry.io.SaveIO;
 import mindustry.world.*;
 
@@ -21,7 +18,9 @@ public class WeeklyChalServ {
     private int width;
     private int height;
     private Rand randSize;
-//REVERT
+
+    private InfiniteWaveClass waveGen = new InfiniteWaveClass();
+
     private static final String NAME_FILE_INFO = "weekly-challenge-info";
     private static final String SAVE_FILE_NAME = "weeklyFile";
 
@@ -41,8 +40,17 @@ public class WeeklyChalServ {
 
     public void clearInfo() {
         info = new WeeklyGameInfo();
+        Vars.state.rules.spawns.clear();
         Core.settings.remove(NAME_FILE_INFO);
         Core.settings.forceSave();
+    }
+    public void updateWaves(){
+        if(Vars.state.rules.spawns == null) return;
+        Vars.state.rules.spawns.clear();
+        int currentWave = Vars.state.wave;
+        for(int i = 0; i < 5; i++){
+            Vars.state.rules.spawns.addAll(waveGen.generate(currentWave + i));
+        }
     }
     public void startWeeklyChalGame() {
         mapSeed = Vars.getWeeklySeed();
@@ -51,7 +59,10 @@ public class WeeklyChalServ {
             try {
                 Vars.ui.loadfrag.show("@loading");
                 SaveIO.load(file);
-                Vars.state.map.tags.put("name", "Weekly Challenge");
+                Vars.state.wave = info.wave;
+                Vars.InfSpawner.setSpeciesCount(info.speciesCount);
+                Vars.state.map.tags.put("weekly", "Weekly Challenge");
+                updateWaves();
                 Vars.state.set(mindustry.core.GameState.State.playing);
                 Vars.ui.loadfrag.hide();
             } catch (Throwable e) {
@@ -61,6 +72,7 @@ public class WeeklyChalServ {
                 Vars.ui.loadfrag.hide();
             }
         } else {
+            clearInfo();
             startNewGame();
         }
     }
@@ -90,7 +102,7 @@ public class WeeklyChalServ {
                     rulesChallenge.mapGenerator.generate(tiles, params);
                 });
                 Vars.state.map = new Map(StringMap.of("weekly", "Weekly Challenge"));
-
+                updateWaves();
                 Vars.logic.play();
 
                 Vars.ui.loadfrag.hide();

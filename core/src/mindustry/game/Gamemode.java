@@ -30,7 +30,8 @@ public enum Gamemode{
         rules.waitEnemies=true;
         rules.showSpawns=true;
         rules.allowEnvironmentDeconstruct = false;
-        //rules.spawns=Vars.InfSpawner.buildSpawnGroups(0,1000);
+
+
 
     }),
     attack(rules -> {
@@ -69,7 +70,7 @@ public enum Gamemode{
     }
 
     Gamemode(boolean hidden, Cons<Rules> rules){
-         this(hidden, rules, m -> true);
+        this(hidden, rules, m -> true);
     }
 
     Gamemode(Cons<Rules> rules, Boolf<Map> validator){

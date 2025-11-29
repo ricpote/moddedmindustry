@@ -51,7 +51,6 @@ public class InfiniteWaveClass {
         AIR_ONLY,//only air enemies
         HIGH_SHIELDS,//all enemies have shields
         SWARM,//double the enemies per wave
-        ELITE_WAVE,//only bosses
         CHAOS      // random species per wave
     }
 
@@ -73,8 +72,14 @@ public class InfiniteWaveClass {
         return  (baseDifficulty + wave/60f+Math.pow(wave,0.30)*0.1);
 
     }
+    public int getSpeciesCount(){
+        return speciesCount;
+    }
+    public void setSpeciesCount(int result){
+         this.speciesCount = result;
+    }
     public Seq<SpawnGroup> generate(int wave){
-
+        this.rand.setSeed(Vars.getWeeklySeed());
         Seq<SpawnGroup> spawns = new Seq<>();
 
         float difficulty = (float)waveDifficulty(wave);
@@ -105,8 +110,8 @@ public class InfiniteWaveClass {
 
             spawns.add(new SpawnGroup(boss){{
                 unitAmount = 1;
-                begin = wave;
-                end = wave;
+                begin = wave -1 ;
+                end = wave - 1;
                 spacing = 30;
                 shields = 500 + difficulty * 100f;
                 effect = mindustry.content.StatusEffects.boss;
@@ -121,8 +126,8 @@ public class InfiniteWaveClass {
             int finalAmount = amount;
             spawns.add(new SpawnGroup(type){{
                 unitAmount = finalAmount;
-                begin = wave;
-                end = wave;
+                begin = wave - 1;
+                end = wave - 1 ;
                 shields = shield;
                 max = 30;
             }});
@@ -134,15 +139,14 @@ public class InfiniteWaveClass {
         UnitType[] out=new UnitType[species.length];
         switch(weeklyModifier){
             case NORMAL:
-             out=   selectSpeciesDefault(difficulty,wave);
+                out=   selectSpeciesDefault(difficulty,wave);
                 break;
-                case AIR_ONLY:
+            case AIR_ONLY:
                 out=  Structs.filter(UnitType.class, selectSpeciesDefault(difficulty,wave), u -> u.flying);
                 break;
-                case CHAOS:
-                  out= species[rand.random(species.length - 1)];
-                    break;
-                    case ELITE_WAVE:
+            case CHAOS:
+                out= species[rand.random(species.length - 1)];
+                break;
 
             default:
                 out= null;
@@ -151,7 +155,7 @@ public class InfiniteWaveClass {
         return out ;
 
     }
-  public Seq<SpawnGroup> buildSpawnGroups(int startWave, int count){
+    public Seq<SpawnGroup> buildSpawnGroups(int startWave, int count){
         rand.setSeed(Vars.getWeeklySeed());
         speciesCount=1;
         Seq<SpawnGroup> all = new Seq<>();
