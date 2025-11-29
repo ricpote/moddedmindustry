@@ -5,13 +5,15 @@ import arc.math.Rand;
 import arc.files.Fi;
 import arc.struct.StringMap;
 import mindustry.Vars;
-import mindustry.game.*;
+import mindustry.game.Gamemode;
+import mindustry.game.Rules;
+import mindustry.game.Team;
 import mindustry.maps.*;
 import mindustry.maps.generators.WeeklyGenerator;
+import mindustry.game.WeeklyGameInfo;
 import mindustry.io.SaveIO;
 import mindustry.world.*;
 
-import java.util.Collections;
 import java.util.Random;
 
 public class WeeklyChalServ {
@@ -48,23 +50,12 @@ public class WeeklyChalServ {
         if (info.seed == mapSeed && info.isGameActive && file.exists()) {
             try {
                 Vars.ui.loadfrag.show("@loading");
-                Vars.state.rules.spawns.clear();
                 SaveIO.load(file);
-                Vars.InfSpawner.setSpeciesCount( info.speciesCount);
-
-
-                Vars.state.wave = info.wave;
-
-
-
-                Vars.state.rules.spawns.clear();
-                Vars.state.rules.spawns=Vars.InfSpawner.buildSpawnGroups(info.wave,  + 1000);
                 Vars.state.map.tags.put("name", "Weekly Challenge");
                 Vars.state.set(mindustry.core.GameState.State.playing);
                 Vars.ui.loadfrag.hide();
             } catch (Throwable e) {
                 info.isGameActive = false;
-
                 saveInfo();
                 file.delete();
                 Vars.ui.loadfrag.hide();
