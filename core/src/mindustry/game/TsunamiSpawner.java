@@ -74,7 +74,7 @@ public class TsunamiSpawner {
     }
 
     private void scheduleNext() {
-        nextTsunami = Mathf.random(3f, 9f);
+        nextTsunami = Mathf.random(900f, 2700f);
     }
 
     private void spawnTsunami() {
