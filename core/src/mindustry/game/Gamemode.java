@@ -27,7 +27,7 @@ public enum Gamemode{
         rules.pvp = false;
         rules.winWave=-1;
         rules.waveSpacing=Time.toMinutes/2;
-        rules.infiniteResources = true;
+        rules.infiniteResources = false;
         rules.waitEnemies=true;
         rules.showSpawns=true;
         rules.allowEnvironmentDeconstruct = false;
