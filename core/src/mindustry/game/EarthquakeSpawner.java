@@ -60,7 +60,7 @@ public class EarthquakeSpawner {
         nextEarthquake = Mathf.random(3000f, 9000f);
     }
 
-    private static void spawnEarthquake(){
+    private void spawnEarthquake(){
         if(!Vars.state.isPlaying()){return;}
 
         float x, y;
@@ -105,7 +105,7 @@ public class EarthquakeSpawner {
      * @param centerTileY: y coordinate of the center of the earthquake.
      * @pre: rad != null && rad >= 0 && centerTileX != null && centerTileY != null
      */
-    private static void replaceCalculationAndAnimation(float rad, int centerTileX, int centerTileY){
+    private void replaceCalculationAndAnimation(float rad, int centerTileX, int centerTileY){
         int tileRad = (int)(rad / Vars.tilesize);
         int animation = 0;
         for (int tx = centerTileX - tileRad; tx <= centerTileX + tileRad; tx++) {
@@ -137,7 +137,7 @@ public class EarthquakeSpawner {
     /**
      * This method removes the affected buildings from where they are on the map to be replaced somewhere else
      */
-    private static void removeAffectedBuildings(){
+    private void removeAffectedBuildings(){
         //removes all the core blocks ensuring that they are not affected (if not would lead to game over)
         affectedBuildings.removeAll(build -> build.block instanceof CoreBlock);
         originalPrimaryTiles.removeAll(build -> build.block() instanceof CoreBlock);
@@ -156,7 +156,7 @@ public class EarthquakeSpawner {
      * This method reallocates the buildings removed (affectedBuildings) to the new assign position on the map
      * (specifically in the range of the earthquake)
      */
-    private static void replaceAffectedBuildings(){
+    private void replaceAffectedBuildings(){
         for (Building build: affectedBuildings) {
             boolean placed = false;
 
@@ -194,5 +194,6 @@ public class EarthquakeSpawner {
             }
         }
     }
+
 
 }
