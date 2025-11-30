@@ -54,10 +54,10 @@ public class Fx{
         Draw.rect(Core.atlas.find("meteor"), x, y, 48f, 48f);
     }),
 
-    earthquake = new Effect(900f, e -> {
+    earthquake1 = new Effect(900f, e -> {
         Draw.color(Color.white);
         Draw.alpha(e.fout(Interp.pow3Out) * 0.4f);
-        Draw.rect(Core.atlas.find("earthquake"), e.x, e.y, tilesize, tilesize);
+        Draw.rect(Core.atlas.find("earthquake1"), e.x, e.y, tilesize, tilesize);
     }),
 
     earthquake2 = new Effect(1200f, e -> {
@@ -67,8 +67,14 @@ public class Fx{
     }),
 
 
-    tsunamiWaveFront = new Effect(20f, e -> {
-        TextureRegion frontRegion = Core.atlas.find("tsunami");
+    waterTsunami = new Effect(20f, e -> {
+        TextureRegion frontRegion = Core.atlas.find("tsunami_water");
+        Draw.color(Color.white, e.fout());
+        Draw.rect(frontRegion, e.x, e.y, tilesize, tilesize, e.rotation);
+    }),
+
+    lavaTsunami = new Effect(20f, e -> {
+        TextureRegion frontRegion = Core.atlas.find("tsunami_lava");
         Draw.color(Color.white, e.fout());
         Draw.rect(frontRegion, e.x, e.y, tilesize, tilesize, e.rotation);
     }),

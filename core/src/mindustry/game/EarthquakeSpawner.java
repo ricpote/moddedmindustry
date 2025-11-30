@@ -124,7 +124,7 @@ public class EarthquakeSpawner {
                     allPotentialPositions.add(new Point2(tx, ty));
                     if(animation%2 == 0){
                         for(int i = 0; i < 4; i++) //more intensity on the image
-                            Fx.earthquake.at(tile.worldx(), tile.worldy());
+                            Fx.earthquake1.at(tile.worldx(), tile.worldy());
                     }else
                         Fx.earthquake2.at(tile.worldx(),tile.worldy());
 

@@ -7,6 +7,7 @@ import arc.struct.Seq;
 import arc.math.geom.Point2;
 import mindustry.Vars;
 import mindustry.content.Fx;
+import mindustry.content.Liquids;
 import mindustry.gen.Building;
 import mindustry.world.Tile;
 import mindustry.world.Build;
@@ -22,6 +23,11 @@ public class TsunamiSpawner {
       Variable to valid the starting tile of the tsunami (used in "validStartTile(Tile tile, int radius)")
     */
     private boolean validStart = true;
+
+    /*
+      Variable that decides if it's a water or lava tsunami
+    */
+    private boolean isWater = true;
 
     /*
       Contains all the possible directions which the tsunami can go
@@ -68,7 +74,7 @@ public class TsunamiSpawner {
     }
 
     private void scheduleNext() {
-        nextTsunami = Mathf.random(300f, 900f);
+        nextTsunami = Mathf.random(3f, 9f);
     }
 
     private void spawnTsunami() {
@@ -122,12 +128,16 @@ public class TsunamiSpawner {
      */
     private boolean validStartTile(Tile tile, int radius) {
         validStart = true;
-        if(tile == null || tile.isDarkened() ||  !tile.floor().isLiquid)
+        if(tile == null || tile.isDarkened() || !tile.floor().isLiquid)
             return false;
         tile.circle(radius, neighborTile ->{
             if (neighborTile == null || neighborTile.isDarkened() || !neighborTile.floor().isLiquid)
                 validStart = false;
         });
+
+        //verifies if it's a lava or water tsunami
+        isWater = tile.floor().liquidDrop != Liquids.slag;
+
         return validStart;
     }
 
@@ -221,12 +231,17 @@ public class TsunamiSpawner {
                 Time.run(delayFrames, () -> {
                     for (int ty = waveY - tsunamiFactor + finalAngleFactor; ty <= waveY + tsunamiFactor + finalAngleFactor; ty++) {
                         Tile targetTile = Vars.world.tile(finalTx, ty);
-                        if (targetTile != null && finalAngleFactor == 0)
-                            Fx.tsunamiWaveFront.at(targetTile.worldx(), targetTile.worldy(), angle);
-                        else if (targetTile != null && finalAngleFactor > 0)
-                            Fx.tsunamiWaveFront.at(targetTile.worldx(), targetTile.worldy(), angle * 10);
-                        else if (targetTile != null) //&&finalAngleFactor < 0
-                            Fx.tsunamiWaveFront.at(targetTile.worldx(), targetTile.worldy(), angle * 30);
+                        if (targetTile != null && finalAngleFactor == 0){
+                            if(isWater) Fx.waterTsunami.at(targetTile.worldx(), targetTile.worldy(), angle);
+                            else Fx.lavaTsunami.at(targetTile.worldx(), targetTile.worldy(), angle);
+                        }else if (targetTile != null && finalAngleFactor > 0) {
+                            if (isWater) Fx.waterTsunami.at(targetTile.worldx(), targetTile.worldy(), angle * 10);
+                            else Fx.lavaTsunami.at(targetTile.worldx(), targetTile.worldy(), angle * 10);
+                        } else if (targetTile != null){//&&finalAngleFactor < 0
+                            if(isWater) Fx.waterTsunami.at(targetTile.worldx(), targetTile.worldy(), angle * 30);
+                            else Fx.lavaTsunami.at(targetTile.worldx(), targetTile.worldy(), angle * 30);
+                        }
+
                     }
                 });
             }
@@ -241,12 +256,16 @@ public class TsunamiSpawner {
                 Time.run(delayFrames, () -> {
                     for (int ty = waveY - tsunamiFactor + finalAngleFactor; ty <= waveY + tsunamiFactor + finalAngleFactor; ty++) {
                         Tile targetTile = Vars.world.tile(finalTx, ty);
-                        if (targetTile != null && finalAngleFactor == 0)
-                            Fx.tsunamiWaveFront.at(targetTile.worldx(), targetTile.worldy(), angle);
-                        else if (targetTile != null && finalAngleFactor > 0)
-                            Fx.tsunamiWaveFront.at(targetTile.worldx(), targetTile.worldy(), angle * 10);
-                        else if (targetTile != null) //&&finalAngleFactor < 0
-                            Fx.tsunamiWaveFront.at(targetTile.worldx(), targetTile.worldy(), angle * 30);
+                        if (targetTile != null && finalAngleFactor == 0){
+                            if(isWater) Fx.waterTsunami.at(targetTile.worldx(), targetTile.worldy(), angle);
+                            else Fx.lavaTsunami.at(targetTile.worldx(), targetTile.worldy(), angle);
+                        }else if (targetTile != null && finalAngleFactor > 0) {
+                            if (isWater) Fx.waterTsunami.at(targetTile.worldx(), targetTile.worldy(), angle * 10);
+                            else Fx.lavaTsunami.at(targetTile.worldx(), targetTile.worldy(), angle * 10);
+                        } else if (targetTile != null){//&&finalAngleFactor < 0
+                            if(isWater) Fx.waterTsunami.at(targetTile.worldx(), targetTile.worldy(), angle * 30);
+                            else Fx.lavaTsunami.at(targetTile.worldx(), targetTile.worldy(), angle * 30);
+                        }
                     }
                 });
             }
@@ -257,8 +276,10 @@ public class TsunamiSpawner {
                 Time.run(delayFrames, () -> {
                     for (int tx = waveX - tsunamiFactor; tx <= waveX + tsunamiFactor; tx++) {
                         Tile targetTile = Vars.world.tile(tx, finalTy);
-                        if (targetTile != null)
-                            Fx.tsunamiWaveFront.at(targetTile.worldx(), targetTile.worldy(), angle);
+                        if (targetTile != null){
+                            if(isWater) Fx.waterTsunami.at(targetTile.worldx(), targetTile.worldy(), angle);
+                            else Fx.lavaTsunami.at(targetTile.worldx(), targetTile.worldy(), angle);
+                        }
                     }
                 });
             }
@@ -269,8 +290,10 @@ public class TsunamiSpawner {
                 Time.run(delayFrames, () -> {
                     for (int tx = waveX - tsunamiFactor; tx <= waveX + tsunamiFactor; tx++) {
                         Tile targetTile = Vars.world.tile(tx, finalTy);
-                        if (targetTile != null)
-                            Fx.tsunamiWaveFront.at(targetTile.worldx(), targetTile.worldy(), angle);
+                        if (targetTile != null){
+                            if(isWater) Fx.waterTsunami.at(targetTile.worldx(), targetTile.worldy(), angle);
+                            else Fx.lavaTsunami.at(targetTile.worldx(), targetTile.worldy(), angle);
+                        }
                     }
                 });
             }
