@@ -7,7 +7,6 @@ import arc.struct.Seq;
 import arc.math.geom.Point2;
 import mindustry.Vars;
 import mindustry.content.Fx;
-import mindustry.entities.Damage;
 import mindustry.gen.Building;
 import mindustry.world.Tile;
 import mindustry.world.Build;
@@ -20,8 +19,19 @@ public class EarthquakeSpawner {
     private float timer = 0f;
     private float nextEarthquake = 0f;
 
+    /*
+     Saves the buildings affected by the earthquake
+    */
     static Seq<Building> affectedBuildings;
+
+    /*
+     Saves the positions affected by the earthquake (where builds might go)
+    */
     static Seq<Point2> allPotentialPositions;
+
+    /*
+     Saves the tiles in the affected by the earthquake before the earthquake
+    */
     static Seq<Tile> originalPrimaryTiles;
 
     public EarthquakeSpawner(){
@@ -86,6 +96,15 @@ public class EarthquakeSpawner {
         Events.fire(new EventType.EarthquakeEvent(x, y, rad));
     }
 
+    /**
+     * This method is responsible to collect all the buildings and tiles, and determines all the new potential
+     * positions for the buildings, in the range affected by the earthquake. Also calls the FX class to draw the
+     * animation on the affected tiles.
+     * @param rad: the radius of the earthquake.
+     * @param centerTileX: x coordinate of the center of the earthquake.
+     * @param centerTileY: y coordinate of the center of the earthquake.
+     * @pre: rad != null && rad >= 0 && centerTileX != null && centerTileY != null
+     */
     private static void replaceCalculationAndAnimation(float rad, int centerTileX, int centerTileY){
         int tileRad = (int)(rad / Vars.tilesize);
         int animation = 0;
@@ -104,10 +123,8 @@ public class EarthquakeSpawner {
                     }
                     allPotentialPositions.add(new Point2(tx, ty));
                     if(animation%2 == 0){
-                        Fx.earthquake.at(tile.worldx(),tile.worldy());
-                        Fx.earthquake.at(tile.worldx(),tile.worldy());
-                        Fx.earthquake.at(tile.worldx(),tile.worldy());
-                        Fx.earthquake.at(tile.worldx(),tile.worldy());
+                        for(int i = 0; i < 4; i++) //more intensity on the image
+                            Fx.earthquake.at(tile.worldx(), tile.worldy());
                     }else
                         Fx.earthquake2.at(tile.worldx(),tile.worldy());
 
@@ -117,7 +134,11 @@ public class EarthquakeSpawner {
         }
     }
 
+    /**
+     * This method removes the affected buildings from where they are on the map to be replaced somewhere else
+     */
     private static void removeAffectedBuildings(){
+        //removes all the core blocks ensuring that they are not affected (if not would lead to game over)
         affectedBuildings.removeAll(build -> build.block instanceof CoreBlock);
         originalPrimaryTiles.removeAll(build -> build.block() instanceof CoreBlock);
         for(Tile originalTile : originalPrimaryTiles){
@@ -131,7 +152,10 @@ public class EarthquakeSpawner {
     }
 
 
-
+    /**
+     * This method reallocates the buildings removed (affectedBuildings) to the new assign position on the map
+     * (specifically in the range of the earthquake)
+     */
     private static void replaceAffectedBuildings(){
         for (Building build: affectedBuildings) {
             boolean placed = false;
@@ -148,7 +172,7 @@ public class EarthquakeSpawner {
                         false,
                         false
                 );
-
+                //makes the reposition of the buildings if "valid", if not destroys the building.
                 if (valid) {
                     newTile.setBlock(build.block, build.team, build.rotation);
                     if (newTile.build != null && newTile.build != build) {
@@ -165,13 +189,10 @@ public class EarthquakeSpawner {
                     break;
                 }
             }
-
             if (!placed) {
                 build.kill();
             }
         }
     }
-
-
 
 }
