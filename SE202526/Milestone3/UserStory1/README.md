@@ -1,11 +1,12 @@
 # User story 1
-(*Please add a user story short title here*)
+Weekly Challenge
 ## Author(s)
-(*Please add the user story author(s) here, one in each line, providing the authors' name and surname, along with their student number*)
+- Ricardo Pote (68245)
+- Miguel Cordeiro (68338)
 ## Reviewer(s)
 (*Please add the user story reviewer(s) here, one in each line, providing the authors' name and surname, along with their student number. In the reviews presented in this document, add the corresponding reviewers.*)
 ## User Story:
-(*Please add your User Story here.*)
+Como jogador frequente de Mindustry, quero ter acesso a um modo de "Desafio Semanal" com um mapa gerado proceduralmente que muda a cada semana, para poder enfrentar situações novas regularmente e ter um motivo recorrente para jogar e tentar superar as pontuações dos meus amigos.
 ### Review
 *(Please add your user story review here)*
 ## Use case diagram
