@@ -14,11 +14,7 @@ import mindustry.world.Build;
 import mindustry.content.Blocks;
 import arc.struct.ObjectMap;
 
-public class TsunamiSpawner {
-
-    private float timer = 0f;
-    private float nextTsunami = 0f;
-
+public class TsunamiSpawner extends NaturalDisasterSpawner{
     /*
       Variable to valid the starting tile of the tsunami (used in "validStartTile(Tile tile, int radius)")
     */
@@ -54,27 +50,18 @@ public class TsunamiSpawner {
     private ObjectMap<Building, Point2> moves;
 
     public TsunamiSpawner() {
-        Events.on(EventType.WorldLoadEvent.class, e -> {
-            timer = 0f;
-            scheduleNext();
-        });
+      super();
 
-        moves = new ObjectMap<>();
-        affectedBuildings = new Seq<>();
+      moves = new ObjectMap<>();
+      affectedBuildings = new Seq<>();
     }
 
-    public void update() {
-        if (!Vars.state.isPlaying()) return;
-
-        timer += Time.delta;
-        if (timer >= nextTsunami) {
-            spawnTsunami();
-            timer = 0f;
-        }
+    protected void triggerEvent(){
+        spawnTsunami();
     }
 
-    private void scheduleNext() {
-        nextTsunami = Mathf.random(900f, 2700f);
+    protected void scheduleNext() {
+        nextEvent = Mathf.random(900f, 2700f);
     }
 
     private void spawnTsunami() {

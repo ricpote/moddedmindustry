@@ -11,32 +11,18 @@ import mindustry.game.EventType.*;
 import mindustry.Vars;
 import mindustry.entities.*;
 
-public class MeteorSpawner {
-
-    private float timer = 0f;
-    private float nextMeteor = 0f;
+public class MeteorSpawner extends NaturalDisasterSpawner{
 
     public MeteorSpawner(){
-        Events.on(WorldLoadEvent.class, e -> {
-            timer = 0f;
-            scheduleNext();
-        });
+        super();
+    }
+    protected void scheduleNext(){
+        nextEvent = Mathf.random(3000f, 9000f);
     }
 
-    public void update(){
-        if(!Vars.state.isPlaying()) return;
-
-        timer += Time.delta;
-        if(timer >= nextMeteor){
-            spawnMeteor();
-            timer = 0f;
-        }
+    protected void triggerEvent(){
+        spawnMeteor();
     }
-
-    private void scheduleNext(){
-        nextMeteor = Mathf.random(3000f, 9000f);
-    }
-
 
     private static void spawnMeteor(){
         if(!Vars.state.isPlaying()){return;}

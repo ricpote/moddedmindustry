@@ -14,11 +14,7 @@ import mindustry.content.Blocks;
 import mindustry.world.blocks.storage.CoreBlock;
 
 
-public class EarthquakeSpawner {
-
-    private float timer = 0f;
-    private float nextEarthquake = 0f;
-
+public class EarthquakeSpawner extends NaturalDisasterSpawner {
     /*
      Saves the buildings affected by the earthquake
     */
@@ -35,29 +31,19 @@ public class EarthquakeSpawner {
     static Seq<Tile> originalPrimaryTiles;
 
     public EarthquakeSpawner(){
-        Events.on(EventType.WorldLoadEvent.class, e -> {
-            timer = 0f;
-            scheduleNext();
-        });
+        super();
 
         affectedBuildings = new Seq<>();
         allPotentialPositions = new Seq<>();
         originalPrimaryTiles = new Seq<>();
     }
 
-
-    public void update(){
-        if(!Vars.state.isPlaying()) return;
-
-        timer += Time.delta;
-        if(timer >= nextEarthquake){
-            spawnEarthquake();
-            timer = 0f;
-        }
+    protected void triggerEvent(){
+        spawnEarthquake();
     }
 
-    private void scheduleNext(){
-        nextEarthquake = Mathf.random(3000f, 9000f);
+    protected void scheduleNext(){
+        nextEvent = Mathf.random(3000f, 9000f);
     }
 
     private void spawnEarthquake(){
