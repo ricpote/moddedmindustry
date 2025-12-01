@@ -1,5 +1,6 @@
 package mindustry.game;
 
+import arc.math.Mathf;
 import mindustry.Vars;
 import mindustry.type.Item;
 public class TradeOffer {
@@ -22,14 +23,17 @@ public class TradeOffer {
         ItemRarity giveItemRarity = ItemRarity.getItemRarity(give);
         ItemRarity receiveItemRarity = ItemRarity.getItemRarity(receive);
 
-        while (receive == give || !giveItemRarity.tradePossible(receiveItemRarity)) {
+        while (receive == give || receiveItemRarity == null || giveItemRarity == null || !giveItemRarity.tradePossible(receiveItemRarity)) {
             receive = Vars.content.items().random();
             receiveItemRarity = ItemRarity.getItemRarity(receive);
         }
 
-        int giveAmount = 10;
-        int receiveAmount = 10;
+        float giveAmount = 100f + Mathf.random(0f, 100f);
 
-        return new TradeOffer(give, giveAmount, receive, receiveAmount);
+        float rarityRatio = (float)giveItemRarity.getRarity() / (float)receiveItemRarity.getRarity();
+
+        int receiveAmount = (int)(rarityRatio * giveAmount + Mathf.random(-10f, 10f));
+
+        return new TradeOffer(give, (int)giveAmount, receive, receiveAmount);
     }
 }

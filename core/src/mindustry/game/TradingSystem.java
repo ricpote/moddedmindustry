@@ -7,7 +7,7 @@ public class TradingSystem {
 
     public static final int MAX_OFFERS = 3;
     public static final int MAX_TRADES_DONE = 5;
-    public static final float REFRESH_INTERVAL = 108000f;
+    public static final float REFRESH_INTERVAL = 900f;
 
     private TradeOffer[] offers = new TradeOffer[MAX_OFFERS];
     private int used_times = 0;
@@ -34,6 +34,10 @@ public class TradingSystem {
 
     public float getTimeRemaining(){
         return timer;
+    }
+
+    public int getUsedTimes() {
+        return used_times;
     }
 
     public TradeOffer[] getOffers(){
