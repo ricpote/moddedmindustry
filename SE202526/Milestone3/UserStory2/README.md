@@ -1,13 +1,17 @@
 # User story 2
-(*Please add a user story short title here*)
+Health Bar
 ## Author(s)
-(*Please add the user story author(s) here, one in each line, providing the authors' name and surname, along with their student number*)
+Andre Narquel (67870)
+Joao Fernandes (68180)
 ## Reviewer(s)
-(*Please add the user story reviewer(s) here, one in each line, providing the authors' name and surname, along with their student number. In the reviews presented in this document, add the corresponding reviewers.*)
+João Rodrigues (67912)
+Tomás Silva (68725)
 ## User Story:
-(*Please add your User Story here.*)
+Como jogadores sentimos dificuldade em perceber o HP (Health Points) de cada Wave de inimigos, e como esse valor é alterado 
+pela ação das nossas defesas.
 ### Review
-*(Please add your user story review here)*
+Parece uma ideia muito boa, para solucionar um problema real, que sentimos durante a "gameplay". Posto isto, queriamos só 
+propor adicionar também uma barra de HP para o jogador e outra para a base
 ## Use case diagram
 (*Please add the use case diagram here.*)
 ## Use case textual description
