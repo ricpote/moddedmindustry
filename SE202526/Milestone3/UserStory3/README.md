@@ -1,11 +1,12 @@
 # User story 3
-(*Please add a user story short title here*)
+Natural Disasters
 ## Author(s)
-(*Please add the user story author(s) here, one in each line, providing the authors' name and surname, along with their student number*)
+- João Rodrigues (67912)
+- Tomás Silva (68725)
 ## Reviewer(s)
 (*Please add the user story reviewer(s) here, one in each line, providing the authors' name and surname, along with their student number. In the reviews presented in this document, add the corresponding reviewers.*)
 ## User Story:
-(*Please add your User Story here.*)
+Como jogadores achamos que as condições climáticas e eventos naturais deviam ter mais impacto no jogo, poderiam haver catástrofes naturais que interferiam diretamente com as construções dos jogadores de um modo que estes não podessem simplesmente selecionar e clicar B para corrigir (como tsunamis, terramotos ou meteoritos).
 ### Review
 *(Please add your user story review here)*
 ## Use case diagram
