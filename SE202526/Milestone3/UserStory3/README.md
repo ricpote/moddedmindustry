@@ -8,7 +8,7 @@ Natural Disasters
 ## User Story:
 Como jogadores achamos que as condições climáticas e eventos naturais deviam ter mais impacto no jogo, poderiam haver catástrofes naturais que interferiam diretamente com as construções dos jogadores de um modo que estes não podessem simplesmente selecionar e clicar B para corrigir (como tsunamis, terramotos ou meteoritos).
 ### Review
-*(Please add your user story review here)*
+*(Please add your user story review here)* 
 ## Use case diagram
 (*Please add the use case diagram here.*)
 ## Use case textual description
