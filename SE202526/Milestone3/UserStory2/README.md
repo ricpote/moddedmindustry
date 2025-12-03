@@ -40,13 +40,33 @@ A Health Bar do Core aparece automaticamente no início de cada Wave e desaparec
 ### Review
 *(Please add your use case review here)*
 ## Implementation documentation
-(*Please add the class diagram(s) illustrating your code evolution, along with a technical description of the changes made by your team. The description may include code snippets if adequate.*)
 ### Implementation summary
-(*Summary description of the implementation.*)
+Nesta implementação criámos 2 classes novas, a classe HealthBarRenderer() e a classe CoreHealthBar().
+A classe HealthBarRenderer() é responsável por desenhar todas as barras de vida dos units presentes no jogo, percorrendo as
+Units presentes no EntityGroup<Unit>.
+<meter imagem>
+
+Cada Unit possui uma referência a uma Team, que determina a cor da barra, caso seja da mesma equipa ou um inimigo.
+<meter imagem>
+
+Ao percorrer cada Unit vai também procurar informações sobre a sua vida e o seu tamanho.
+<meter imagem>
+
+No fim, a classe é chamada na classe Renderer() para se desenhar assim a sua Health Bar.
+<meter imagem>
+
+A classe CoreHealthBar() é tratada como uma extensão de Elements. Nesta classe desejamos saber informações do Core no jogo, indo buscar
+informações ao Core da Team().
+<meter imagem>
+
+Esta classe acaba por ser instanciada na classe HudFragments(), permitindo assim que a barra seja exibida constantemente 
+no ecrã durante as Enemy Waves, independentemente do dano recebido, desaparecendo assim que a Wave acaba.
+<meter imagem>
+
 #### Review
 *(Please add your implementation summary review here)*
 ### Class diagrams
-(*Class diagrams and their discussion in natural language.*)
+![Class Diagram.png](Class Diagram.png)
 ### Review
 *(Please add your class diagram review here)*
 ### Sequence diagrams
