@@ -244,7 +244,7 @@ eventos, o que conduzia a duplicação de código e a um elevado acoplamento ent
  - clarificou a arquitetura dos desastres naturais;
  - tornou a manutenção mais fácil;
  - criou uma hierarquia limpa e consistente;
- - melhorou a legibilidade do diagrama UML final.
+ - melhorou a legibilidade do diagrama UML final. 
 
 ![ClassDiagram3.png](pngs/ClassDiagram3.png)
 ### Review
