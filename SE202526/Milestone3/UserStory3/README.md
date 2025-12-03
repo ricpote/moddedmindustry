@@ -15,7 +15,7 @@ Como jogadores achamos que as condições climáticas e eventos naturais deviam 
 Este Use Case Diagram representa o funcionamento do sistema de Desastres Naturais implementado para o jogo Mindustry.
 Os eventos — Meteor, Earthquake e Tsunami — são gerados autonomamente pelo Game System, em locais e momentos aleatórios.
 As construções são afetadas de várias maneiras diferentes consoante a catástrofe em causa.
-
+ 
 #### Atores:
 ###### Game System (Primary Actor):
 - Gera automaticamente desastres naturais baseado em regras internas, ciclos temporais e probabilidades.
