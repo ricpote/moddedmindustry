@@ -274,9 +274,9 @@ public class Vars implements Loadable{
     public static World world;
     public static Maps maps;
     public static WaveSpawner spawner;
-    public static MeteorSpawner meteorSpawner;
-    public static EarthquakeSpawner earthquakeSpawner;
-    public static TsunamiSpawner tsunamiSpawner;
+    public static NaturalDisasterSpawner meteorSpawner;
+    public static NaturalDisasterSpawner earthquakeSpawner;
+    public static NaturalDisasterSpawner tsunamiSpawner;
     public static BlockIndexer indexer;
     public static Pathfinder pathfinder;
     public static ControlPathfinder controlPath;
