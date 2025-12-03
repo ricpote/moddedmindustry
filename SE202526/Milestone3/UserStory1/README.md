@@ -77,7 +77,50 @@ Como jogador frequente de Mindustry, quero ter acesso a um modo de "Desafio Sema
 ## Implementation documentation
 (*Please add the class diagram(s) illustrating your code evolution, along with a technical description of the changes made by your team. The description may include code snippets if adequate.*)
 ### Implementation summary
-(*Summary description of the implementation.*)
+
+#### 1. Core Management (WeeklyChalServ.java)
+
+- Acts as the central controller for the mode. It manages the session lifecycle, distinguishing between starting a new week's challenge and resuming an existing run.
+- It manages lightweight metadata (current wave, active status, rankings) that is serialized to JSON and stored in Core.settings via WeeklyGameInfo and WeeklyRankingInfo. The heavy game state (blocks, units) is managed via the engine's SaveIO system, saving to a dedicated WeeklyChallenge.msav file.
+<img width="886" height="372" alt="image" src="https://github.com/user-attachments/assets/c4494457-5edd-488a-a39e-50a08247ae8e" />
+- Ensures synchronization between the service and the game logic using specific map tags ("weekly": "Weekly Challenge") to trigger auto-saves correctly.
+<img width="692" height="34" alt="image" src="https://github.com/user-attachments/assets/a1340d39-8ee9-4861-8d4a-69e77e5d47f9" />
+- Automatically handles save corruption by validating the file upon load and regenerating the map if necessary.
+#### 2. Procedural Map Generation (WeeklyGenerator.java)
+
+- It generates the map by painting biomes using offset Simplex noise (to ensure variety), and then "carves" the island shape using a custom trimDark method.
+- Includes a ensureOreConnectivity method that uses Raycasting to carve tunnels from ore deposits to the core, ensuring the player is never wall-locked from the ores.
+<img width="886" height="874" alt="image" src="https://github.com/user-attachments/assets/707f2318-2399-49fa-8a2f-43636380c93f" />
+#### 3. Infinite Wave Progression (InfiniteWaveClass.java)
+
+- Replaced the static list approach (created by a cycle with 1000 iterations, that crashed saves) with a deterministic procedural generation. Waves are calculated in small windows of 5 waves based on the seed and wave number.
+<img width="884" height="230" alt="image" src="https://github.com/user-attachments/assets/89cabc85-e137-44c1-bfb1-f45fb75f5f82" />
+- Implements a difficulty curve that scales enemy count and tier (Unit Types) based on a mathematical formula, ensuring infinite progression without memory issues.
+<img width="880" height="127" alt="image" src="https://github.com/user-attachments/assets/d8d08c0b-b37f-4529-bfd7-befc076baf3a" />
+#### 4. Engine Integration (Logic.java)
+
+- Modified the core game loop to intercept reset() (exit to menu) and gameOver() events.
+- Hooks into the Game Over event to capture the final wave and submit it to the ranking system only if the player is defeated.
+- Modifed wave spawning logic of only the weekly gamemode to properly accommodate the Infinite wave logic, we implemented.
+#### 5. User Interface (MenuFragment.java)
+
+- Added a dedicated "Weekly Challenge" button group to the main menu.
+<img width="1125" height="89" alt="image" src="https://github.com/user-attachments/assets/ec7500a7-eb9a-4e9a-8d57-d309bba60bfc" />
+- Implemented a custom BaseDialog to visualize the WeeklyRankingInfo data, displaying the top 10 runs for the current week.
+<img width="1152" height="784" alt="image" src="https://github.com/user-attachments/assets/2de2b0ea-34d1-4524-a980-5cd87176510c" />
+#### 6. Gamemode (Gamemode.java)
+
+- Added a special mode called infinite. This separates the Weekly Challenge rules (infinite waves, no win condition) from the standard Survival mode, preventing logic conflicts.
+<img width="736" height="459" alt="image" src="https://github.com/user-attachments/assets/eb0ce219-48a5-44b7-bac3-08e9b7b54bd0" />
+#### 7. Global Hub (Vars.java)
+
+- It's where we save our variables like InfSpawner, custService and others. They are initialized strictly within the init() lifecycle method. This ensures that all game assets (Settings, Content) are fully loaded before the service starts, preventing NullPointerException crashes on startup.
+<img width="488" height="64" alt="image" src="https://github.com/user-attachments/assets/8d4ff471-a95d-4f1a-bb9b-f5b6c11f9044" />
+- Here we calculate the seed of our week, based on the difference in weeks between the current system week and the first week of january 2001, using ChronoUnit methods.
+<img width="886" height="158" alt="image" src="https://github.com/user-attachments/assets/b465d6d0-011b-46d0-a805-d4a97bcc17b5" />
+
+
+
 #### Review
 *(Please add your implementation summary review here)*
 ### Class diagrams
