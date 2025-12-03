@@ -14,10 +14,18 @@ public class WeeklyRankingInfo {
         }
     }
     public Seq<ScoreEntry> rankings = new Seq<>();
+    private int seedOfCurrentMap;
     public WeeklyRankingInfo() {
         rankings.add(new ScoreEntry("Player 1", 15));
         rankings.add(new ScoreEntry("Player 2", 10));
         rankings.add(new ScoreEntry("Player 3", 7));
+        seedOfCurrentMap = 0;
+    }
+    public int getSeedOfCurrentMap() {
+        return seedOfCurrentMap;
+    }
+    public void setSeedOfCurrentMap(int seed) {
+        seedOfCurrentMap = seed;
     }
     public void addScore(String playerName, int waveReached) {
         rankings.add(new ScoreEntry(playerName, waveReached));

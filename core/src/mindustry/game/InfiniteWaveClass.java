@@ -159,6 +159,15 @@ public class InfiniteWaveClass {
         }
         return Math.max(1, Mathf.ceil(base / Mathf.sqrt(speciesCount)));
     }
+    public int computeAmountForTests(int wave, float difficulty, int speciesCount){
+        return computeAmount(wave, difficulty, speciesCount);
+    }
+    public int computeSpeciesCountForTests(int wave){
+        return computeSpeciesCount(wave);
+    }
+    public double computeDifficulty(int wave){
+        return waveDifficulty(wave);
+    }
 
     private UnitType[] selectSpeciesDefault( float difficulty, int wave){
 

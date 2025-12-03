@@ -71,6 +71,7 @@ public class WeeklyChalServ {
 
     public void clearRanking() {
         rankingInfo = new WeeklyRankingInfo();
+        rankingInfo.setSeedOfCurrentMap((int) Vars.getWeeklySeed());
         Core.settings.remove(NAME_FILE_RANKING);
         Core.settings.forceSave();
     }
@@ -94,8 +95,14 @@ public class WeeklyChalServ {
                 Vars.ui.loadfrag.hide();
             }
         } else {
+
+            if(rankingInfo.getSeedOfCurrentMap() != mapSeed){
+
+                clearRanking();
+            }
             clearInfo();
-            clearRanking();
+
+
             startNewGame();
         }
     }
