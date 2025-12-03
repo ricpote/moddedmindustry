@@ -95,6 +95,7 @@ Como jogador frequente de Mindustry, quero ter acesso a um modo de "Desafio Sema
 - Includes a ensureOreConnectivity method that uses Raycasting to carve tunnels from ore deposits to the core, ensuring the player is never wall-locked from the ores.
 
 <img width="886" height="874" alt="image" src="https://github.com/user-attachments/assets/707f2318-2399-49fa-8a2f-43636380c93f" />
+
 #### 3. Infinite Wave Progression (InfiniteWaveClass.java)
 
 - Replaced the static list approach (created by a cycle with 1000 iterations, that crashed saves) with a deterministic procedural generation. Waves are calculated in small windows of 5 waves based on the seed and wave number.
@@ -103,6 +104,7 @@ Como jogador frequente de Mindustry, quero ter acesso a um modo de "Desafio Sema
 - Implements a difficulty curve that scales enemy count and tier (Unit Types) based on a mathematical formula, ensuring infinite progression without memory issues.
 
 <img width="880" height="127" alt="image" src="https://github.com/user-attachments/assets/d8d08c0b-b37f-4529-bfd7-befc076baf3a" />
+
 #### 4. Engine Integration (Logic.java)
 
 - Modified the core game loop to intercept reset() (exit to menu) and gameOver() events.
@@ -116,11 +118,13 @@ Como jogador frequente de Mindustry, quero ter acesso a um modo de "Desafio Sema
 - Implemented a custom BaseDialog to visualize the WeeklyRankingInfo data, displaying the top 10 runs for the current week.
 
 <img width="1152" height="784" alt="image" src="https://github.com/user-attachments/assets/2de2b0ea-34d1-4524-a980-5cd87176510c" />
+
 #### 6. Gamemode (Gamemode.java)
 
 - Added a special mode called infinite. This separates the Weekly Challenge rules (infinite waves, no win condition) from the standard Survival mode, preventing logic conflicts.
 
 <img width="736" height="459" alt="image" src="https://github.com/user-attachments/assets/eb0ce219-48a5-44b7-bac3-08e9b7b54bd0" />
+
 #### 7. Global Hub (Vars.java)
 
 - It's where we save our variables like InfSpawner, custService and others. They are initialized strictly within the init() lifecycle method. This ensures that all game assets (Settings, Content) are fully loaded before the service starts, preventing NullPointerException crashes on startup.
