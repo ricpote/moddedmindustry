@@ -42,7 +42,7 @@ public class PausedDialog extends BaseDialog{
 
     void rebuild(){
         cont.clear();
-
+        boolean isWeeklyChallengeOn = state.map != null && "Weekly Challenge".equals(state.map.tags.get("weekly"));
         update(() -> {
             if(state.isMenu() && isShown()){
                 hide();
@@ -69,17 +69,17 @@ public class PausedDialog extends BaseDialog{
             }
 
             cont.row();
-
-            //the button runs out of space when the editor button is added, so use the mobile text
-            cont.button(state.isEditor() ? "@hostserver.mobile" : "@hostserver", Icon.host, () -> {
-                if(net.server() && steam){
-                    platform.inviteFriends();
-                }else{
-                    ui.host.show();
-                }
-            }).disabled(b -> !((steam && net.server()) || !net.active())).colspan(state.isEditor() ? 1 : 2).width(state.isEditor() ? dw : dw * 2 + 10f)
-                .update(e -> e.setText(net.server() && steam ? "@invitefriends" : state.isEditor() ? "@hostserver.mobile" : "@hostserver"));
-
+            if(!isWeeklyChallengeOn) {
+                //the button runs out of space when the editor button is added, so use the mobile text
+                cont.button(state.isEditor() ? "@hostserver.mobile" : "@hostserver", Icon.host, () -> {
+                            if (net.server() && steam) {
+                                platform.inviteFriends();
+                            } else {
+                                ui.host.show();
+                            }
+                        }).disabled(b -> !((steam && net.server()) || !net.active())).colspan(state.isEditor() ? 1 : 2).width(state.isEditor() ? dw : dw * 2 + 10f)
+                        .update(e -> e.setText(net.server() && steam ? "@invitefriends" : state.isEditor() ? "@hostserver.mobile" : "@hostserver"));
+            }
             if(state.isEditor()){
                 cont.button("@editor.worldprocessors", Icon.logic, () -> {
                     hide();

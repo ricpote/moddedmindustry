@@ -8,4 +8,7 @@ public class WorldParams{
     public boolean saveInfo = true;
     /** Position in packed x/y format - not array format. Overrides the core position when generating with a FileMapGenerator. 0 to disable. */
     public int corePositionOverride;
+    public long mapSeed;
+    public int width;
+    public int height;
 }
