@@ -10,6 +10,9 @@ Como jogador frequente de Mindustry, quero ter acesso a um modo de "Desafio Sema
 ### Review
 *(Please add your user story review here)*
 ## Use case diagram
+<img width="787" height="601" alt="image" src="https://github.com/user-attachments/assets/ad53e025-dabf-4b20-ace3-dca3ab1a21ce" />
+<img width="865" height="644" alt="image" src="https://github.com/user-attachments/assets/af8f345d-ac37-4910-b0e3-0ebc6d4fa29f" />
+
 (*Please add the use case diagram here.*)
 ## Use case textual description
 Nome: Play Weekly Challenge 
