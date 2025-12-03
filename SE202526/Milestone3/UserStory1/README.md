@@ -140,7 +140,18 @@ Como jogador frequente de Mindustry, quero ter acesso a um modo de "Desafio Sema
 #### Review
 *(Please add your implementation summary review here)*
 ### Class diagrams
-(*Class diagrams and their discussion in natural language.*)
+
+
+
+<img width="2304" height="2348" alt="image" src="https://github.com/user-attachments/assets/44af6d8f-178a-42db-955d-8d4f1a4033ef" />
+
+- The WeeklyChalServ acts as the central controller of the weekly challenge mode, it coordinates map generation, wave creation, game progression, and stored game info. It connects Logic, Vars, and Gamemode to the InfiniteWaveClass and WeeklyGenerator, ensuring that seeds, wave data, and world layout are processed correctly. WeeklyGameInfo is the  core of saving  progression logic , while all generators and modifiers feed their output through WeeklyChalServ to maintain consistent weekly gameplay.
+
+  
+<img width="856" height="1718" alt="image" src="https://github.com/user-attachments/assets/1da0a574-32d3-4e06-b9de-f7cca47ac256" />
+
+
+- WeeklyChalServ again serves as the controller, this time managing ranking storage, score submission, and UI access. Logic sends game results to it, while MenuFragment retrieves the processed ranking data. WeeklyRankingInfo holds all submitted scores, and ScoreEntry acts as the record, with WeeklyChalServ managing how these flow between gameplay and interface.
 ### Review
 *(Please add your class diagram review here)*
 ### Sequence diagrams
