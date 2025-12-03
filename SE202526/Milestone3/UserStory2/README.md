@@ -4,18 +4,39 @@ Health Bar
 Andre Narquel (67870)
 Joao Fernandes (68180)
 ## Reviewer(s)
-João Rodrigues (67912)
-Tomás Silva (68725)
+(*Please add the user story reviewer(s) here, one in each line, providing the authors' name and surname, along with their student number. In the reviews presented in this document, add the corresponding reviewers.*)
 ## User Story:
 Como jogadores sentimos dificuldade em perceber o HP (Health Points) de cada Wave de inimigos, e como esse valor é alterado 
 pela ação das nossas defesas.
 ### Review
-Parece uma ideia muito boa, para solucionar um problema real, que sentimos durante a "gameplay". Posto isto, queriamos só 
-propor adicionar também uma barra de HP para o jogador e outra para a base
+*(Please add your user story review here)*
 ## Use case diagram
-(*Please add the use case diagram here.*)
+![Use Case Diagram.png](Use Case Diagram.png)
 ## Use case textual description
-(*Please add the use case textual description here.*)
+Este use Case representa a adição de Health Bars nas Waves Inimigas, no nosso Player e no nosso Core da base.
+O Player sofre dano durante o jogo, fazendo com que a sua Health Bar apareça no ecrã e seja atualizada automaticamente.
+As Enemy Waves são geradas pelo Game System, dando spawn aos inimigos que também sofrem dano durante o jogo, fazendo com que 
+as suas Health Bars se tornem visíveis e sejam atualizadas automaticamente.
+A Health Bar do Core aparece automaticamente no início de cada Wave e desaparece no final, independentemente do dano recebido.
+
+#### Atores:
+###### Player (Primary Actor):
+- Representa o(s) Player(s) que estão a jogar.
+
+###### Game System (Primary Actor):
+- Gera automaticamente as Waves de Inimigos durante o jogo.
+
+#### Use Cases:
+- Enemy Waves - O Game System inicia uma Wave de Inimigos.
+- Show Core Health Bar - A Health Bar do Core aparece no início da Wave e desaparece no final, independentemente do dano recebido.
+- Enemies - Representam os Inimigos que spawnam na Wave.
+- Take Damage - Representa o Player e os Inimigos sofrerem dano.
+- Show Health Bar - Representa a Health Bar do Player ou dos Inimigos e aparece quando Take Damage ocorre.
+
+#### Relações:
+- Enemy Waves includes Enemies - Sempre que há Enemy Waves, Inimigos dão spawn.
+- Enemy Waves includes Show Core Health Bar - Sempre que uma Enemy Wave é iniciada, a Health Bar do Core é exibida.
+- Take Damage includes Show Health Bar - Sempre que algum Player ou Inimigo levam dano, a Health Bar correspondente é exibida automaticamente.
 ### Review
 *(Please add your use case review here)*
 ## Implementation documentation
