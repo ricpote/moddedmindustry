@@ -270,7 +270,7 @@ public class Logic implements ApplicationListener{
                 if (state.gameOver && !state.won) {
                     Vars.custService.info.isGameActive = false;
                 }
-                Vars.custService.info.speciesCount = InfSpawner.getSpeciesCount();
+                //Vars.custService.info.speciesCount = InfSpawner.getSpeciesCount();
                 Vars.custService.saveInfo();
                 Vars.custService.saveRanking();
             }

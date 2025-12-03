@@ -45,7 +45,6 @@ public class InfiniteWaveClass {
     private Seq<UnitType> units;
     private WeeklyModifier weeklyModifier;
     private UnitType[][] species ;
-    private  int speciesCount ;
     public enum WeeklyModifier {
         NORMAL,//normal generation
         AIR_ONLY,//only air enemies
@@ -57,7 +56,6 @@ public class InfiniteWaveClass {
     public InfiniteWaveClass(){
         this.rand = new Rand(Vars.getWeeklySeed());
         this.baseDifficulty = 1;
-        this.speciesCount=1;
         this.weeklyModifier = WeeklyModifier.NORMAL;
         species=new UnitType[][] {
                 {dagger, flare,pulsar, crawler},
@@ -71,12 +69,6 @@ public class InfiniteWaveClass {
     private double waveDifficulty(int wave){
         return  (baseDifficulty + wave/60f+Math.pow(wave,0.30)*0.1);
 
-    }
-    public int getSpeciesCount(){
-        return speciesCount;
-    }
-    public void setSpeciesCount(int result){
-         this.speciesCount = result;
     }
     public Seq<SpawnGroup> generate(int wave){
         Rand rs = new Rand(Vars.getWeeklySeed() + wave);
@@ -168,18 +160,6 @@ public class InfiniteWaveClass {
         return Math.max(1, Mathf.ceil(base / Mathf.sqrt(speciesCount)));
     }
 
-
-
-    public Seq<SpawnGroup> buildSpawnGroups(int startWave, int count){
-        rand.setSeed(Vars.getWeeklySeed());
-        speciesCount=1;
-        Seq<SpawnGroup> all = new Seq<>();
-        for(int wave = startWave; wave < startWave + count; wave++){
-            all.addAll(generate(wave));
-        }
-
-        return all;
-    }
     private UnitType[] selectSpeciesDefault( float difficulty, int wave){
 
         if(wave < 10){

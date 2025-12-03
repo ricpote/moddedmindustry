@@ -82,7 +82,7 @@ public class WeeklyChalServ {
                 Vars.ui.loadfrag.show("@loading");
                 SaveIO.load(file);
                 Vars.state.wave = info.wave;
-                Vars.InfSpawner.setSpeciesCount(info.speciesCount);
+                //Vars.InfSpawner.setSpeciesCount(info.speciesCount);
                 Vars.state.map.tags.put("weekly", "Weekly Challenge");
                 updateWaves();
                 Vars.state.set(mindustry.core.GameState.State.playing);
