@@ -78,6 +78,22 @@ Como jogador frequente de Mindustry, quero ter acesso a um modo de "Desafio Sema
 (*Please add the class diagram(s) illustrating your code evolution, along with a technical description of the changes made by your team. The description may include code snippets if adequate.*)
 ### Implementation summary
 
+#### History of Commits
+- Most of the commits were made while on a discord call where we did pair programming or with the add-on Code with me.
+- In the commits "Added the Weekly Challenge button" and "Added the Weekly Map Generator and the tab for ranking and to play the challenge" we added a png for the weekly challenge button (a trophy made by us), all of the buttons (play and ranking) necessary to play the mode and the weekly map generator class that would deal with the creation of the map.
+- In the commits "Added the map generation (incomplete still)" and "The map creation is almost done, it still misses rivers, enemies and other decorations" we started to create the terrain, the ores that would spawn, the blocks chosen to appear and more.
+- In the commits after until 20 of November we tried to implement the wave spawner that would later suffer some alterations for the better.
+
+<img width="1342" height="766" alt="Captura de ecrã 2025-12-03 143341" src="https://github.com/user-attachments/assets/4813d19f-57b5-467f-b0bc-3821afd8db31" />
+
+- In the commit "Added auto-saved when you leave the game. Missing the buildSpawnGroups" we added the save option when we leave the game. We encountered some issues trying to save a file because of the way we were creating the waves (in a cycle with 1000 iterations). This issue was later fixed.
+- In the commits "acho que resolvi os spawns aparentamente yha" and then the revert commit we tried to solve the problem with the cycle with 1000 iterations that was to large to store the wave data, but we realized that there was an easier way to do it by simply creating windows of 5 waves and then replacing the old ones.
+- In the other 2 commits on November 29 we focused on ajusting the amount of enemies spawned and creating the ranking system.
+- The last 3 commits were the finishing touches where we changed some settings like the infinite resources we had for testing.
+
+<img width="1417" height="838" alt="Captura de ecrã 2025-12-03 143540" src="https://github.com/user-attachments/assets/eb92319b-f608-43d2-836a-f5abba62d345" />
+
+
 #### 1. Core Management (WeeklyChalServ.java)
 
 - Acts as the central controller for the mode. It manages the session lifecycle, distinguishing between starting a new week's challenge and resuming an existing run.
