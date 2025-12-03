@@ -10,9 +10,33 @@ Como jogadores achamos que as condições climáticas e eventos naturais deviam 
 ### Review
 *(Please add your user story review here)* 
 ## Use case diagram
-(*Please add the use case diagram here.*)
+![Use Case Diagram (UserStory3).png](Use%20Case%20Diagram%20%28UserStory3%29.png)
 ## Use case textual description
-(*Please add the use case textual description here.*)
+Este Use Case Diagram representa o funcionamento do sistema de Desastres Naturais implementado para o jogo Mindustry.
+Os eventos — Meteor, Earthquake e Tsunami — são gerados autonomamente pelo Game System, em locais e momentos aleatórios.
+As construções são afetadas de várias maneiras diferentes consoante a catástrofe em causa.
+
+#### Atores:
+###### Game System (Primary Actor):
+- Gera automaticamente desastres naturais baseado em regras internas, ciclos temporais e probabilidades.
+- Executa a lógica de cada tipo de desastre.
+- Modifica o mapa e constrói os efeitos físicos nos objetos atingidos.
+###### Structures (Secondary Actor)
+- Representam as construções que podem ser destruídas, baralhadas ou empurradas.
+
+#### Use Cases:
+- Generate Meteor Event - O Game System ativa o Meteor Event
+- Generate Tsunami Event - O Game System ativa o Tsunami Event
+- Generate Earthquake Event - O Game System ativa o Earthquake Event
+- Destroy Structures - As Estruturas são destruídas como efeito da catástrofe.
+- Push Structures - As Estruturas são empurradas como efeito da catástrofe.
+- Shuffle Structures - As Estruturas são baralhadas como efeito da catástrofe.
+#### Relações:
+- Generate Meteor Event includes Destroy Structures - O Generate Meteor Event inclui sempre a destruição de estruturas (Destroy Structures).
+- Generate Tsunami Event includes Pushes Structures - O Generate Tsunami Event inclui sempre o empurrão de estruturas (Push Structures).
+- Generate Earthquake Event includes Shuffles Structures - O Generate Earthquake Event inclui sempre a embaralhar de estruturas (Shuffle Structures).
+- Destroy Structures extends Generate Tsunami Event - O Generate Tsunami Event poderá causar a destruição de estruturas (Destroy Structures).
+- Destroy Structures extends Generate Earthquake Event - O Generate Earthquake Event poderá causar a destruição de estruturas (Destroy Structures).
 ### Review
 *(Please add your use case review here)*
 ## Implementation documentation
