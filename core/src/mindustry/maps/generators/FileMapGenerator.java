@@ -1,11 +1,15 @@
 package mindustry.maps.generators;
 
 import arc.math.geom.*;
+import arc.util.Log;
 import mindustry.*;
 import mindustry.content.*;
 import mindustry.game.*;
+import mindustry.gen.Building;
+import mindustry.gen.Groups;
 import mindustry.io.*;
 import mindustry.maps.*;
+import mindustry.maps.planet.ErekirPlanetGenerator;
 import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.blocks.storage.*;
@@ -31,6 +35,34 @@ public class FileMapGenerator implements WorldGenerator{
     public FileMapGenerator(Map map, SectorPreset preset){
         this.map = map;
         this.preset = preset;
+    }
+
+    private void injectTraderBlock(Team team){
+        CoreBuild core = null;
+        for(Building build : Groups.build){
+            if(build instanceof CoreBuild && build.team == team){
+                core = (CoreBuild) build;
+                break;
+            }
+        }
+
+        if(core == null) {
+            return;
+        }
+
+        Tile coreTile = core.tile;
+        Block traderBlock = Blocks.timCheese;
+
+        if(coreTile == null || traderBlock == null) return;
+
+        int traderX = coreTile.x - 7 ;
+        int traderY = coreTile.y - 4;
+
+        Tile targetTile = world.tile(traderX, traderY);
+
+        if (targetTile != null) {
+            targetTile.setNet(traderBlock, team, 0);
+        }
     }
 
     /** If you use this constructor, make sure to override generate()! */
@@ -122,6 +154,7 @@ public class FileMapGenerator implements WorldGenerator{
             throw new IllegalArgumentException("All maps must have a core.");
         }
 
+        injectTraderBlock(state.rules.defaultTeam);
         state.map = map;
     }
 }
