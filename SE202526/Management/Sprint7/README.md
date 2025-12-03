@@ -16,10 +16,14 @@ dos jogadores), mas também se decidiu acrescentar coisas como uma classe abstra
 um bot com o qual os jogadores poderão fazer trocas de recursos durante o jogo.
 
 ### Sprint Review Meeting: 
-*(Held at the end of the sprint, this meeting is attended by all stakeholders to demo the completed work and validate if the sprint goal has been met.)*
+Os objetivos deste Sprint foram atingidos conforme planeado, terminando assim a resolução do projeto de Engenharia de 
+Software, todos os membros do grupo fizeram a sua parte e contribuiram para a realização do compromisso.
 
 ### Sprint Retrospective Meeting: 
-*(This meeting happens after the sprint review and before the next sprint planning meeting. The team reflects on what went well, what needs improvement, and how to enhance their processes for future sprints.)*
+O desempenho do grupo neste Sprint foi bastante positivo, uma vez que cumprimos o que estava suposto
+para o sprint. Terminamos, assim o trabalho de Engenharia de Software dentro do prazo estipulado. Olhando de um ponto de 
+vista geral de todo o progresso deste trabalho podemos salientar que a entreajuda e o compromisso de todos os membros 
+desta equipa foi a chave para a realização destre trabalho.
 
 ## Relevant resources
 
@@ -33,12 +37,12 @@ um bot com o qual os jogadores poderão fazer trocas de recursos durante o jogo.
 
 ### Scrum Board at the end of the sprint
 
-Please add the scrumboard picture here.
+![img3.png](img3.png)
 
 ### Burndown Chart for the sprint
 
-Please add the burndown chart here.
+[BurndownSprint7.xlsx](BurndownSprint7.xlsx)
 
 ### Gantt Chart
 
-Please add the Gantt chart here.
+[GanttSprint7.xlsx](GanttSprint7.xlsx)
