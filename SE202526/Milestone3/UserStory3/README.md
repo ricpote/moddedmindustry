@@ -50,7 +50,7 @@ ao jogo.
 triggerEvent() e armazena propriedades genéricas como o timer e o nextEvent. Esta abstração permite adicionar desastres
 no futuro apenas herdando a classe e implementando os seus métodos.
 
-Img para adicionar
+![AbstractNaturalDisaster.png](AbstractNaturalDisaster.png)
 
 #### 2.Meteor Events (MeteorSpawner.java)
 - MeteorSpawner é uma implementação concreta do sistema de desastres naturais, herdando de NaturalDisasterSpawner.
@@ -59,11 +59,13 @@ aleatórias que causam dano em área.
 
 - A classe define o intervalo entre meteoros através do método:
 
-Img do sheduleNext()
+![ScheduleNext.png](ScheduleNext.png)
 
 - Quando o temporizador expira, o triggerEvent() é chamado:
 
-Img do trigger
+![UpdateMeteor.png](UpdateMeteor.png)
+
+![triggerEvent.png](triggerEvent.png)
 
 - O método spawnMeteor controla toda a lógica de criação de meteoros no mapa. 
   - Principais passos:
@@ -84,7 +86,7 @@ Img do trigger
 - O método generateValidPositions() gera posições válidas para os meteoros cairem usando o método isNearCore(), para 
 assegurar que não acertam na core, para não prejudicar o jogador de forma injusta.
 
-Img do isNearCore
+![isNearCore.png](isNearCore.png)
 
 #### 3. Earthquake Event (EarthquakeSpawner.java)
 - EarthquakeSpawner é uma implementação concreta do sistema de desastres naturais, herdando de NaturalDisasterSpawner.
@@ -101,11 +103,11 @@ expira dá trigger ao evento triggerEvent().
 aplicar os métodos responsáveis à deslocação de estruturas e à sua destruição no caso em que é impossível voltar a colocar
 a estrutura. Ele começa com a seleção do epicentro:
 
-Img do while
+![posEarthquake.png](posEarthquake.png)
 
 -Depois o raio do terramoto é gerado aleatoriamente e o ecrã treme proporcionalmente:
 
-Img do Vars.renderer
+![radEarthquake.png](radEarthquake.png)
 
 - O método replaceCalculationAndAnimation() é chamado e identifica os tiles e estruturas dentro do raio, guarda a lista
 de todos os tiles possíveis para recolocação e desenha as animações. A seguir no spawnEarthquake() as posições dos tiles
@@ -113,7 +115,7 @@ possíveis para recolocação são baralhados, remove-se as estruturas dentro da
 removeAffectedBuildings() e volta-se a colocá-las nas suas novas posições com o método replaceAffectedBuildings(), se 
 a sua nova posição nao for válida a construção é destruída.
 
-Img da logica de destruicao
+![destroyEarthquake.png](destroyEarthquake.png)
 
 - No final o evento é emitido.
 
@@ -133,12 +135,10 @@ método animation(). A seguir remove-se as estruturas afetadas com o método rem
 garantir que o core se estiver na lista das estruturas afetadas será removido dessa lista com o método removeCoreFromAffectedBuildings(), 
 pois o core não pode ser afetado dado que se for o jogo acaba injustamente para o jogador.
 
-Img do core a ser removido
+![coreTsunami.png](coreTsunami.png)
 
 - No final volta-se a colocar as estruturas nas suas novas posições caso seja possível, senão destrói as estruturas e o
 evento é emitido.
-
-Img da destruicao
 
 #### Eventos (EventType.java)
 - A classe EventType já existia como parte do código-base do Mindustry e define diversos eventos usados internamente 
@@ -150,7 +150,9 @@ classes de eventos:
 - Cada uma destas classes representa um tipo de notificação emitida pelo respetivo spawner, permitindo que outros 
 subsistemas do jogo reajam quando um desastre é desencadeado.
 
-Img de cada um
+![eventMeteor.png](eventMeteor.png)
+
+![eventEarthquakeTsunami.png](eventEarthquakeTsunami.png)
 
 #### Efeitos (Fx.java)
 - A classe Fx já fazia parte do código original do Mindustry e continha diversos efeitos visuais utilizados no jogo. 
@@ -165,6 +167,10 @@ representar visualmente cada evento.
 - Estes efeitos são ativados pelos respetivos Spawners (MeteorSpawner, EarthquakeSpawner e TsunamiSpawner) no momento 
 em que o desastre ocorre.
 
+![efeitos.png](efeitos.png)
+
+![efeitos2.png](efeitos2.png)
+
 
 #### Game update (Logic.java)
 - A classe Logic contém o ciclo principal de atualização do jogo (update()), responsável por processar todos os eventos,
@@ -178,6 +184,8 @@ sistemas de desastres:
 
 - Estas chamadas garantem que as classes são atualizadas a cada frame.
 
+![updateLogic.png](updateLogic.png)
+
 #### Integração dos Natural Disaster (Vars.java)
 
 - A classe Vars é responsável por manter referências globais a sistemas centrais do jogo (entidades, spawners, assets, 
@@ -187,7 +195,7 @@ três variáveis globais:
  - public static EarthquakeSpawner earthquakeSpawner;
  - public static TsunamiSpawner tsunamiSpawner;
 
-Img
+![spawnerVar.png](spawnerVar.png)
 
 - Estas variáveis permitem que outras partes do jogo — como o ciclo de atualização (Logic.update()) ou sistemas de 
 rendering e efeitos consigam aceder diretamente aos spawners dos novos desastres. Durante a inicialização do jogo, os 
@@ -196,7 +204,7 @@ spawners são criados:
  - earthquakeSpawner = new EarthquakeSpawner();
  - tsunamiSpawner = new TsunamiSpawner();
 
-Img
+![spawner2Vars.png](spawner2Vars.png)
 
 - Assim, a classe Vars passa a funcionar como um ponto central de acesso para todos os novos sistemas de desastres 
 introduzidos no projeto.
