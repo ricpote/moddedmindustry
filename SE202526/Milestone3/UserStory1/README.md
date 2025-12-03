@@ -171,7 +171,33 @@ Como jogador frequente de Mindustry, quero ter acesso a um modo de "Desafio Sema
 ### Review
 *(Please add your class diagram review here)*
 ### Sequence diagrams
-(*Sequence diagrams and their discussion in natural language.*)
+
+
+
+<img width="948" height="899" alt="image" src="https://github.com/user-attachments/assets/6711977a-06b4-4fae-89f1-81aebc1f969b" />
+
+
+-This shows how our feature handles a Weekly Challenge session.
+-WeeklyChalServ gets weekly seed from Vars then with it.
+-WeeklyChalServ checks for an existing save and either loads it or generates a new map.
+-InfiniteWaveClass prepares the incoming waves before gameplay begins.
+
+
+
+
+<img width="607" height="538" alt="image" src="https://github.com/user-attachments/assets/97bb08c4-cca5-406f-8861-445cbb8a9eca" />
+
+-Logic triggers the ranking update, and WeeklyChalServ decides whether the score is updated or not.
+-WeeklyRankingInfo stores the result and saves it for later display.
+
+
+<img width="573" height="341" alt="image" src="https://github.com/user-attachments/assets/9ad20744-8522-44bf-8346-99eadfe7ed6e" />
+
+-This shows how the system handels the player opening the ranking menu.
+-MenuFragment requests the ranking data from WeeklyChalServ, which returns the object of WeeklyRankInfo.
+-Finally MenuFragment display the scoreEntry collection from WeeklyRankInfo Object.
+
+
 #### Review
 *(Please add your sequence diagram review here)*
 ## Test specifications
