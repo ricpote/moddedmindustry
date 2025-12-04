@@ -224,7 +224,9 @@ ou quando o timer chega ao fim.
 ![img.png](images/SequenceDiagram1.png)
 ![img_1.png](images/SequenceDiagram2.png)
 #### Review
-*(Please add your sequence diagram review here)*
+O fluxo de trading é bem detalhado, cobrindo a colocação do bloco, a visualização das ofertas, e a execução condicional 
+da troca. Há uma lógica clara para a gestão de ofertas através de um timer e um limite de trocas (MAX_TRADES_DONE). A 
+interação entre os componentes como TradingSystem e CoreBuild para gestão de itens e ofertas é explícita.
 ## Test specifications
 (*Test cases specification and pointers to their implementation, where adequate.*)
 ### Review
