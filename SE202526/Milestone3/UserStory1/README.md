@@ -5,6 +5,7 @@ Weekly Challenge
 - Miguel Cordeiro (68338)
 ## Reviewer(s)
 - Tomás Silva (68725)
+- Joao Fernandes (68180)
 ## User Story:
 Como jogador frequente de Mindustry, quero ter acesso a um modo de "Desafio Semanal" com um mapa gerado proceduralmente que muda a cada semana, para poder enfrentar situações novas regularmente e ter um motivo recorrente para jogar e tentar superar as pontuações dos meus amigos.
 ### Review (Tomás Silva 68725)
@@ -172,7 +173,11 @@ Por fim, uma boa ligação entre mecânica (mapa procedural semanal) e motivaç�
 
 - WeeklyChalServ again serves as the controller, this time managing ranking storage, score submission, and UI access. Logic sends game results to it, while MenuFragment retrieves the processed ranking data. WeeklyRankingInfo holds all submitted scores, and ScoreEntry acts as the record, with WeeklyChalServ managing how these flow between gameplay and interface.
 ### Review
-*(Please add your class diagram review here)*
+#### Review feita por: Joao Fernandes 68180
+O Class Diagram está bem implementado, claro e de fácil compreensão, especialmente devido ao destaque visual das classes criadas por eles, 
+que facilita a leitura do diagrama. As relações entre classes são coerentes, bem definidas e refletem corretamente a lógica do sistema.
+Além disso, a separação de responsabilidades parece adequada, sem redundâncias evidentes, o que contribui para uma arquitetura
+consistente e organizada.
 ### Sequence diagrams
 
 
@@ -320,4 +325,6 @@ FirstWave entry is not removed.
 The Scoreboard still shows only the earliest higher score.
 
 ### Review
-*(Please add your test specification review here)*
+#### Review feita por: Joao Fernandes 68180
+Estas test specifications estão bem implementadas, com objetivos bem definidos para cada teste e passos organizados de forma lógica.
+Foi uma boa escolha de testes, sendo estas implementações importantes para o bom funcionamento desta adição ao jogo.
