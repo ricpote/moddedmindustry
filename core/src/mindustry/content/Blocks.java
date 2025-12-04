@@ -3,6 +3,7 @@ package mindustry.content;
 import arc.graphics.*;
 import arc.math.*;
 import arc.struct.*;
+import arc.util.Log;
 import mindustry.*;
 import mindustry.entities.*;
 import mindustry.entities.abilities.*;
@@ -32,6 +33,7 @@ import mindustry.world.blocks.power.*;
 import mindustry.world.blocks.production.*;
 import mindustry.world.blocks.sandbox.*;
 import mindustry.world.blocks.storage.*;
+import mindustry.world.blocks.trader.TraderBlock;
 import mindustry.world.blocks.units.*;
 import mindustry.world.consumers.*;
 import mindustry.world.draw.*;
@@ -179,7 +181,12 @@ public class Blocks{
 
     //campaign
     launchPad, advancedLaunchPad, landingPad,
-    interplanetaryAccelerator
+    interplanetaryAccelerator,
+
+    //trader mod
+    timCheese
+
+
 
     ;
 
@@ -6826,6 +6833,11 @@ public class Blocks{
             privileged = true;
         }};
 
+        timCheese = new TraderBlock("tim-cheese"){{
+            requirements(Category.effect, BuildVisibility.hidden, with());
+
+            destructible = false;
+        }};
         //endregion
     }
 }
