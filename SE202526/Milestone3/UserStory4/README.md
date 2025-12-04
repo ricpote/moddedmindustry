@@ -230,6 +230,74 @@ O fluxo de trading é bem detalhado, cobrindo a colocação do bloco, a visualiz
 da troca. Há uma lógica clara para a gestão de ofertas através de um timer e um limite de trocas (MAX_TRADES_DONE). A 
 interação entre os componentes como TradingSystem e CoreBuild para gestão de itens e ofertas é explícita.
 ## Test specifications
-(*Test cases specification and pointers to their implementation, where adequate.*)
+### Test 1: Trade bem sucedida
+###### Goal:
+- Garantir que o Core ganhe e perca os itens certos aquando de uma troca bem sucedida. 
+
+###### Steps:
+- Iniciar qualquer mapa da campanha.
+- Jogar até ter itens suficientes para uma das trades do Trader.
+- Clicar no Trader.
+- Selecionar a troca desejada.
+- Verificar se houve uma mensagem de sucesso e se os itens corretos foram retirados e adicionados ao Core.
+
+###### Expected Result:
+- Os itens corretos foram retirados e adicionados ao Core. 
+
+### Test 2: Trade mal sucedida
+###### Goal:
+- Garantir que os itens do Core não sofram alterações numa troca aquando de uma troca que não funcione.
+
+###### Steps:
+- Iniciar qualquer mapa da campanha.
+- Clicar no Trader.
+- Selecionar a troca desejada.
+- Verificar se houve uma mensagem de erro e se houveram alterações aos itens do Core.
+
+###### Expected Result:
+- Os itens no Core mantém-se inalterados e aparece uma mensagem de erro.
+
+### Test 3: Timer chegou ao fim
+###### Goal:
+- Garantir que quando o timer chega ao fim as trocas disponiveis são geradas de novo, o timer sofre reset e as trocas
+- restantes passam a ser outra vez 5
+
+###### Steps:
+- Iniciar qualquer mapa da campanha.
+- Clicar no Trader.
+- Esperar que os 10 minutos do Timer passem.
+- Verificar as possíveis alterações nas trocas, timer e número de trocas restantes.
+
+###### Expected Result:
+- As trocas disponiveis serão geradas de novo, o timer sofrerá sofre reset e as trocas
+- restantes passarão a ser outra vez 5.
+
+### Test 4: Trocas restantes esgotadas
+###### Goal:
+- Garantir que as trades disponíveis são geradas outra vez quando o player troca 5 vezes com o Trader em apenas 1 refresh.
+
+###### Steps:
+- Iniciar qualquer mapa da campanha.
+- jogar normalmente para ter itens para troca.
+- Clicar no Trader.
+- Trocar 5 vezes bem sucedidas.
+- Verificar as possíveis alterações nas trocas, timer e número de trocas restantes.
+
+###### Expected Result:
+- As trocas disponiveis serão geradas de novo, o timer sofrerá sofre reset e as trocas
+- restantes passarão a ser outra vez 5.
+
+### Test 5: Verificar o Sprite do TraderBlock
+###### Goal:
+- Garantir que o sprite foi bem carregado para o TraderBlock
+
+###### Steps:
+- Iniciar qualquer mapa da campanha
+- Verificar qual o aspeto do bloco situado em baixo e levemente à esquerda do Core.
+
+###### Expected Result:
+- O bloco será um Rato
+
+
 ### Review
 *(Please add your test specification review here)*
