@@ -359,4 +359,5 @@ Apesar de o Sequence Diagram dos outros desastres naturais ser relativamente par
 - Em lava usa efeito de lava.
 
 ### Review
-*(Please add your test specification review here)*
+Os testes são claros, objetivos e garantem alta confiabilidade na jogabilidade, estão muito bem estruturados e cobrem
+perfeitamente os comportamentos críticos dos eventos ambientais.
