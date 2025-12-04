@@ -88,6 +88,40 @@ O fluxo geral dos dois diagramas foi corretamente interpretado, identificaram co
 para explicar o seu comportamento, e ainda, mantêm coerência entre os dois processos (CoreHealthBar vs UnitHealthBar).
 
 ## Test specifications
-(*Test cases specification and pointers to their implementation, where adequate.*)
+### Test 1: Core HealthBar on/off
+###### Goal:
+- Garantir que a HealthBar do Core que aparece no canto inferior esquerdo aparece quando uma wave aparece e desligada
+- quando acabam as waves.
+
+###### Steps:
+- Iniciar qualquer mapa com pelo menos 1 Core.
+- Reparar que se não houver uma wave ativa a HealthBar do Core não aparece no HUD.
+- Esperar ou ativar uma wave.
+- Verificar que a HealthBar aparece quando a wave está ativa.
+- Jogar normalmente até a wave acabar.
+- Verificar que a HealthBar desaparece quando a wave acaba.
+
+###### Expected Result:
+- A HealthBar deve estar ativa quando a wave está no mapa, e desativada quando não há wave.
+
+### Test 2: Player and Enemy HealthBar Check
+###### Goal:
+- Garantir que as cores da HealthBar dos Enemies são alteradas à medida que as Units perdem HP.
+- Garantir que as cores da HealthBar do Player não é alterada à medida que perde HP.
+###### Steps:
+- Iniciar qualquer mapa.
+- Jogar normalmente até aparecer uma wave.
+- Verificar que os Inimigos apenas apresentam HealthBar quando já levaram Dano.
+- Disparar sobre os inimigos e verificar que à medida que os HealthPoints dos mesmos desce, a cor é alterada de verde para amarelo e para vermelho.
+- Depois de Disparar o suficiente sobre um inimigo até que o mesmo perca todos os HealthPoints, verificar que a HealthBar desaparece.
+- Esperar que um inimigo dispare sobre o Player e verificar que a HealthBar diminui mas a cor é sempre azul claro.
+
+###### Expected Result:
+- A HealthBar dos enemies e do player só é ativa quando a Unit sofre dano.
+- A cor da Healthbar dos enemies é alterada de verde para amarelo quando passa a HP intermédio, e de amarelo para vermelho quando passa para
+- HP baixo.
+- A HealthBar do Player mantém sempre a mesma cor (azul claro) independentemente dos HealthPoints do mesmo.
+
+
 ### Review
 *(Please add your test specification review here)*
