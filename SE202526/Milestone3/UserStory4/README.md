@@ -111,7 +111,7 @@ raridade do item oferecido. (para evitar stepUps que sejam "absurdos").
 getItemRarity() - serve para converter um Item na sua ItemRarity.
 
 #### TraderBlock e Blocks
-Define o bloco “Tim Cheese”: um bloco 2×2, sólido, sempre ativo,
+Define o bloco “Tim Cheese”: um bloco com lado 2, sólido, sempre ativo,
 configurável, sincronizado e sem sombra. Pertence à categoria effect,
 é indestrutível, fica oculto no menu e mostra nos stats o cooldown do
 sistema de trocas.
