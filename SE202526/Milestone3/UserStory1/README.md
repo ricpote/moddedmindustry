@@ -201,6 +201,120 @@ Como jogador frequente de Mindustry, quero ter acesso a um modo de "Desafio Sema
 #### Review
 *(Please add your sequence diagram review here)*
 ## Test specifications
-(*Test cases specification and pointers to their implementation, where adequate.*)
+### Test1 Test deterministic nature :
+
+- Goal: Our Weekly Challenge mode uses procedural generation for terrain and waves, and this generation must be deterministic for the weekly seed. This test verifies that the generation remains consistent.
+
+Steps
+
+	- 1.	From the Mindustry main menu, left-click the trophy icon labeled Weekly Challenge.
+	
+	- 2.	Select the Play option (play-button icon).
+	
+	  - Wait for the map to generate.
+	 
+	  - Observe the generated terrain.
+	 
+	  - Start playing briefly and check the number and type of enemies in the first wave.
+	 
+	- 3.	Lose the game (normally by pressing letting wave destroy the core) and click menu button on gameover screen .
+	
+	- 4.	Repeat steps 1 and 2.
+
+	
+Expected Result
+•	Terrain layout should be identical.
+•	The first wave should contain the same number and type of enemies.
+•	Any randomness in the weekly mode must be tied exactly to the weekly seed.
+
+### Test 2: Cross-Device Seed Determinism
+
+- Goal: Ensure the same weekly seed produces identical results on different devices/platforms.
+Steps:
+
+	- 1.	Perform Test 1 on Device A (PC).
+	
+	- 2.	Perform the same on Device B (Different PC).
+	
+	- 3.	Compare terrain layout, enemy counts, and enemy compositions.
+	
+Expected: Everything matches exactly across devices.
+
+
+### Test 3: Restart Consistency Test
+
+- Goal: Verify that quitting the application entirely does not change the state of the game.
+
+Steps:
+
+	- 1.	Launch Mindustry.
+	
+	- 2.	Enter Weekly Challenge → Play → observe terrain & first wave.
+	
+	- 3.	Close the game fully (terminate process).
+	
+	- 4.	Relaunch the game.
+	
+	- 5.	Repeat the same steps.
+	
+Expected: No differences between sessions.
+
+### Test 3:Insert New Score for Player
+
+- Goal: Ensure the scoreboard correctly adds a new entry for a player who has no previous score.
+
+Steps:
+
+	- 1.	Start Weekly Challenge.
+	
+	- 2.	Survive a few waves (example: reach Wave 4).
+	
+	- 3.	Lose and return to the scoreboard.
+	
+Expected Result:
+   •	A new scoreboard entry appears:
+Name – Wave 4
+
+### Test 4:Replace Lower With Higher Score
+
+- Goal:Ensure a player´s weak score is replace when they later achieve a stronger one.
+Steps:
+
+	- 1.Achieve Wave ex:5.
+	
+	- 2.See it in ScoreBoard.
+	
+	- 3.Start a new Weekly Challenge 
+	
+	 -4.Achieve Wave >first wave ex:6
+	 
+	 -5.See the ScoreBoard.
+	 
+Expected Result:
+FirstWave entry is removed.
+The Scoreboard now shows only the latest higher score.
+
+
+
+### Test 5 : Do not Replace Higher Score With Lower Score
+
+
+Goal: Ensure that a lower wave run does not overwrite a player´s higher wave run
+Steps:
+
+	- 1. Achieve Wave ex:5.
+
+	- 2. See it in ScoreBoard.
+
+	- 3. Start a new Weekly Challenge 
+	
+	- 4. Achieve Wave <first wave ex:6
+	
+	- 5. See the ScoreBoard.
+	
+Expected Result:
+FirstWave entry is not removed.
+The Scoreboard still shows only the earliest higher score.
+
 ### Review
 *(Please add your test specification review here)*

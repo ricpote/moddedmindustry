@@ -3,6 +3,8 @@ package mindustry.game;
 import arc.*;
 import arc.func.*;
 import arc.util.*;
+import mindustry.Vars;
+import mindustry.content.Planets;
 import mindustry.maps.*;
 
 /** Defines preset rule sets. */
@@ -16,6 +18,23 @@ public enum Gamemode{
         rules.allowEditRules = true;
         rules.waves = true;
         rules.waveTimer = false;
+    }),
+    infinite(rules -> {
+        rules.mapGenerator= Vars.myGen;
+        rules.seed = Vars.getWeeklySeed();
+        rules.waveTimer = true;
+        rules.waves = true;
+        rules.pvp = false;
+        rules.winWave=-1;
+        rules.waveSpacing=Time.toMinutes;
+        rules.infiniteResources = false;
+        rules.waitEnemies=true;
+        rules.showSpawns=true;
+        rules.allowEnvironmentDeconstruct = false;
+        rules.planet = Planets.sun;
+
+
+
     }),
     attack(rules -> {
         rules.attackMode = true;
@@ -53,7 +72,7 @@ public enum Gamemode{
     }
 
     Gamemode(boolean hidden, Cons<Rules> rules){
-         this(hidden, rules, m -> true);
+        this(hidden, rules, m -> true);
     }
 
     Gamemode(Cons<Rules> rules, Boolf<Map> validator){

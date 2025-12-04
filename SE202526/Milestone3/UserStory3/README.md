@@ -250,7 +250,15 @@ eventos, o que conduzia a duplicação de código e a um elevado acoplamento ent
 ### Review
 *(Please add your class diagram review here)*
 ### Sequence diagrams
-(*Sequence diagrams and their discussion in natural language.*)
+
+- O processo inicia-se com o Logic a invocar o update da classe abstrata, que verifica se o temporizador expirou e, 
+em caso afirmativo, passa a execução ao MeteorSpawner. Este começa por calcular posições seguras através de um ciclo de 
+validação para garantir que não atinge o Core e, de seguida, itera sobre 4 a 7 meteoros iniciando o efeito visual de queda. 
+Para cada meteoro é agendada uma tarefa diferida de 90 ticks que, ao terminar, executa simultaneamente a animação da 
+explosão e a notificação do evento global, finalizando com o reinício do temporizador na classe base.
+
+![SequenceDiagram.png](pngs/SequenceDiagram.png)
+
 #### Review
 *(Please add your sequence diagram review here)*
 ## Test specifications

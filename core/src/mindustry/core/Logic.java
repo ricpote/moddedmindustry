@@ -14,6 +14,7 @@ import mindustry.game.EventType.*;
 import mindustry.game.*;
 import mindustry.game.Teams.*;
 import mindustry.gen.*;
+import mindustry.io.SaveIO;
 import mindustry.maps.*;
 import mindustry.type.*;
 import mindustry.type.Weather.*;
@@ -186,6 +187,10 @@ public class Logic implements ApplicationListener{
             }
         }));
 
+        Events.on(GameOverEvent.class, e -> {
+            Vars.custService.clearInfo();
+        });
+
         Events.on(BlockBuildEndEvent.class, e -> {
             if(e.team == state.rules.defaultTeam){
                 if(e.breaking){
@@ -259,6 +264,25 @@ public class Logic implements ApplicationListener{
     }
 
     public void reset(){
+        if (state.map != null && "Weekly Challenge".equals(state.map.tags.get("weekly"))) {
+            if (Vars.custService != null) {
+                Vars.custService.info.wave = state.wave;
+                if (state.gameOver && !state.won) {
+                    Vars.custService.info.isGameActive = false;
+                }
+                //Vars.custService.info.speciesCount = InfSpawner.getSpeciesCount();
+                Vars.custService.saveInfo();
+                Vars.custService.saveRanking();
+            }
+            if (!state.gameOver) {
+                try {
+                    if (state.rules != null) state.rules.mapGenerator = null;
+                    SaveIO.save(Vars.saveDirectory.child("weeklyFile.msav"));
+                } catch (Throwable e) {
+                    Log.err(e);
+                }
+            }
+        }
         State prev = state.getState();
         //recreate gamestate - sets state to menu
         state = new GameState();
@@ -279,6 +303,12 @@ public class Logic implements ApplicationListener{
     }
 
     public void runWave(){
+        if(state.map != null && "Weekly Challenge".equals(state.map.tags.get("weekly"))){
+            if(Vars.custService != null) {
+                Vars.custService.updateWaves();
+            }
+        }
+
         spawner.spawnEnemies();
         state.wave++;
         state.wavetime = state.rules.waveSpacing * (state.isCampaign() ? state.getPlanet().campaignRules.difficulty.waveTimeMultiplier : 1f);
@@ -303,7 +333,7 @@ public class Logic implements ApplicationListener{
 
             //if there's a "win" wave and no enemies are present, win automatically
             if(state.rules.waves && (state.enemies == 0 && state.rules.winWave > 0 && state.wave >= state.rules.winWave && !spawner.isSpawning()) ||
-                (state.rules.attackMode && !state.rules.waveTeam.isAlive())){
+                    (state.rules.attackMode && !state.rules.waveTeam.isAlive())){
 
                 if(state.rules.sector.preset != null && state.rules.sector.preset.attackAfterWaves && !state.rules.attackMode){
                     //activate attack mode to destroy cores after waves are done.
@@ -394,8 +424,23 @@ public class Logic implements ApplicationListener{
 
     @Remote(called = Loc.both)
     public static void gameOver(Team winner){
+
+
         state.stats.wavesLasted = state.wave;
         state.won = player.team() == winner;
+        if(state.map != null && "Weekly Challenge".equals(state.map.tags.get("weekly"))){
+            if(Vars.custService != null){
+                if (!state.won) {
+                    String playerName = Vars.player.name;
+                    custService.rankingInfo.submitScore(playerName, state.wave);
+
+
+                }
+                custService.info.isGameActive = false;
+                custService.saveInfo();
+                custService.saveRanking();
+            }
+        }
         Time.run(60f * 3f, () -> ui.restart.show(winner));
         netClient.setQuiet();
     }
