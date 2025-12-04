@@ -6,12 +6,12 @@ Trading System
 ## Reviewer(s)
 (*Please add the user story reviewer(s) here, one in each line, providing the authors' name and surname, along with their student number. In the reviews presented in this document, add the corresponding reviewers.*)
 ## User Story:
-Como jogadores sentimos que certos minerais perdem utilidade e por consequência são muito acumulados durante o jogo e por contrário 
-certos minerais são complicados de armazenar e acabamos por ter sempre muito poucos.
+Como jogador quero uma forma de utilizar os minerais que perdem utilidade ao longo do jogo e que por consequência são excessivamente acumulados, para
+apresentarem alguma utilidade em qualquer fase do jogo.
 ### Review
 *(Please add your user story review here)* 
 ## Use case diagram
-![Use Case Diagram.png](Use Case Diagram.png)
+![Use Case Diagram.png](images/Use%20Case%20Diagram.png)
 
 ## Use case textual description
 Este Use Case representa o funcionamento do Trading System implementado. O Player interage com o Trader,que apresenta 
@@ -61,54 +61,80 @@ Tem 3 constantes que são:
 - REFRESH_INTERVAL = 36000f - tempo que leva ao Trader a dar refresh automático
   das suas ofertas (10 minutos).
 
+![img.png](images/img.png)
 
 Esta classe também guarda um array de TradeOffers
 Apresenta uma ligação ao TradingDialog (representa a UI) através da inicialização de um dialog
 dentro do construtor do TradingSystem.
 
+![img_1.png](images/img_1.png)
 
 generateNewOffers()
 substitui as ofertas atuais por novas ofertas aleatórias e da reset aos valores
 de trades feitas neste refresh (used_times) e timer.
 
+![img_2.png](images/img_2.png)
+
 update()
 reduz o valor do timer e quando o timer chega a 0 chama generateNewOffers().
+
+![img_3.png](images/img_3.png)
 
 canTrade() e executeTrade()
 canTrade verifica se o core do player tem itens suficientes para a trade e o
 executeTrade() realiza a troca (retira os itens ao core e adiciona o que o trader
 tinha estipulado na troca).
 
+![img_4.png](images/img_4.png)
+
 getTimeRemaining() - tempo restante ate ao refresh.
 getUsedTimes() - quantas trocas ja foram feitas desde o ultimo refresh.
 getOffers() - devolve o array de ofertas.
+
+![img_5.png](images/img_5.png)
 
 #### TradeOffer
 Representa uma Troca no sistema de trading
 define o item a dar, item a receber, e respetivas quantidades.
 
+![img_6.png](images/img_6.png)
+
 o createRandomTrade cria trocas com equilibrio da seguinte forma
 escolhe 2 itens aleatórios, obtém a raridade de cada um com base no enum
 que será explicado em alguns parágrafos (ItemRarity).
+
+![img_7.png](images/img_7.png)
 
 garante que os itens sao diferentes e que ambos tem raridade definida e que
 é possivel fazer trocas entre as 2 raridades(verificado no tradePossible()
 do ItemRarity).
 
+![img_8.png](images/img_8.png)
+
 gera uma quantidade de 100 a 200 e calcula a quantidade que vai ser recebida
 com base na raridade dos 2, o tal valor 100-200 e um valor random de -10 a 10.
 
+![img_9.png](images/img_9.png)
+
 retorna uma TradeOffer com os valores calculados.
+
+![img_10.png](images/img_10.png)
 
 #### ItemRarity
 É um enum que classifica todos os itens numa escala de raridade de 1 a 5.
+
+![img_11.png](images/img_11.png)
 
 o método mais relevante é o tradePossible() (já mencionado anteriormente)
 que verifica se uma troca é possivel entre 2 raridades - um item só pode
 ser trocado por outro cuja raridade não exceda em mais de 2 níveis a
 raridade do item oferecido. (para evitar stepUps que sejam "absurdos").
 
+![img_12.png](images/img_12.png)
+
 getItemRarity() - serve para converter um Item na sua ItemRarity.
+
+![img_13.png](images/img_13.png)
 
 #### TraderBlock e Blocks
 Define o bloco “Tim Cheese”: um bloco com lado 2, sólido, sempre ativo,
@@ -116,18 +142,29 @@ configurável, sincronizado e sem sombra. Pertence à categoria effect,
 é indestrutível, fica oculto no menu e mostra nos stats o cooldown do
 sistema de trocas.
 
+![img_14.png](images/img_14.png)
+
 A build interna, TraderBuild, mantém ligação ao TradingSystem.instance,
 atualiza-o a cada tick e, quando o jogador toca no bloco correto e existe
 um core aliado, abre o Trading Dialog.
 
+![img_15.png](images/img_15.png)
+![img_16.png](images/img_16.png)
+
 No Blocks class, este bloco é registado como oculto, sem custos de construção
 e indestrutível, reforçando que o “Tim Cheese” é um bloco fixo e permanente no mapa.
+
+![img_17.png](images/img_17.png)
 
 #### TradingDialog e UI
 O TradingDialog é a interface do bloco “Tim Cheese” que mostra
 as ofertas de troca do jogador. Ele exibe a imagem do bloco no
 topo e uma tabela centralizada com os itens a dar e receber,
 incluindo um botão para executar cada troca. 
+
+![img_18.png](images/img_18.png)
+![img_19.png](images/img_19.png)
+![img_20.png](images/img_20.png)
 
 O Dialog atualiza automaticamente as ofertas ao fim de 10 min ou
 das 5 trades, verifica se o jogador tem recursos suficientes e mostra 
@@ -138,8 +175,13 @@ trocas restantes. Ele conecta se diretamente ao TradingSystem do
 TraderBuild, garantindo que o estado das ofertas esteja sempre
 sincronizado com a lógica do jogo.
 
+![img_21.png](images/img_21.png)
+
 É instanciado e inicializado no UI.java que suporta o resto dos
 Dialogs e elementos de UI do jogo.
+
+![img_22.png](images/img_22.png)
+![img_23.png](images/img_23.png)
 
 #### FileMapGenerator
 O método injectTraderBlock procura o core de uma equipa e
@@ -147,11 +189,21 @@ calcula uma posição relativa (abaixo e levemente à esquerda).
 Se o core e o bloco Tim Cheese existirem, obtém o tile de destino.
 Por fim, coloca o bloco Tim Cheese nesse tile atribuindo-o à equipa.
 
+![img_24.png](images/img_24.png)
+![img_25.png](images/img_25.png)
 
 #### Review
 *(Please add your implementation summary review here)*
 ### Class diagrams
-(*Class diagrams and their discussion in natural language.*)
+
+O diagrama representa o TradingSystem como o núcleo do sistema de trocas: é um singleton que gere TradeOffers,
+usando o ItemRarity para validar e equilibrar cada troca.
+O TraderBlock e a sua TraderBuild integram este sistema no mundo do jogo, atualizando-o a cada tick e abrindo o 
+TradingDialog quando o jogador interage com o bloco. O TradingDialog apresenta as ofertas ao jogador e comunica 
+diretamente com o TradingSystem, enquanto FileMapGenerator e Blocks apenas tratam da colocação e registo do bloco 
+Trader (Tim Cheese) no mapa.
+
+![img.png](images/classDiagram.png)
 ### Review
 *(Please add your class diagram review here)*
 ### Sequence diagrams
