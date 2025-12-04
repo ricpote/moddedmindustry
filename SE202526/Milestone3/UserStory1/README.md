@@ -7,6 +7,7 @@ Weekly Challenge
 - Tomás Silva (68725)
 - Joao Fernandes (68180)
 - João Rodrigues 67912
+- André Narquel 67870
 ## User Story:
 Como jogador frequente de Mindustry, quero ter acesso a um modo de "Desafio Semanal" com um mapa gerado proceduralmente que muda a cada semana, para poder enfrentar situações novas regularmente e ter um motivo recorrente para jogar e tentar superar as pontuações dos meus amigos.
 ### Review (Tomás Silva 68725)
@@ -161,8 +162,11 @@ o registro local.
 
 
 
-#### Review
-*(Please add your implementation summary review here)*
+#### Review (André Narquel - 67870)
+A implementação está bem pensada e organizada: o WeeklyChalServ cumpre bem o papel de gerir o estado, mantendo separação
+clara entre metadados e estado pesado. O WeeklyGenerator é eficiente, criando mapas variados sem comprometer a jogabilidade,
+e o sistema de ondas infinitas é sólido, evitando crashes com geração determinística. A integração no Logic.java e o uso
+de um modo dedicado em Gamemode mostram atenção à estabilidade e isolamento da lógica, tornando o modo Weekly robusto e confiável.
 ### Class diagrams(for Clarity of our changes the classes that are fully created by us are colored with orange)
 
 <img width="2336" height="2886" alt="image" src="https://github.com/user-attachments/assets/cbaa6185-7457-4a86-a9cd-b0543e611aec" />
