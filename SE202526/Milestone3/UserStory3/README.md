@@ -264,6 +264,93 @@ explosão e a notificação do evento global, finalizando com o reinício do tem
 #### Review
 *(Please add your sequence diagram review here)*
 ## Test specifications
-(*Test cases specification and pointers to their implementation, where adequate.*)
+
+### Test 1: Meteor Spawn Safety Zone
+###### Goal:
+- Garantir que meteoros nunca caem demasiado próximos do core, respeitando o safeRadius definido na implementação.
+
+###### Steps:
+- Iniciar qualquer mapa com pelo menos 1 Core.
+- Jogar até um meteoro cair naturalmente.
+- Enquanto ocorrem quedas de meteoros:
+- Colocar várias marcas (ex.: ping) onde os meteoros caem.
+- Medir a distância entre o local de impacto e o Core mais próximo.
+
+###### Expected Result:
+- Nenhum meteoro deve cair dentro do raio de segurança (80 unidades, aproximadamente 8 tiles).
+- Todos os impactos devem ocorrer fora da zona protegida em torno dos cores.
+
+### Test 2: Meteor Damage Integrity Test
+###### Goal:
+- Garantir que meteoros causam dano real no raio esperado e destroem edifícios afetados.
+
+###### Steps:
+- Colocar vários edifícios fracos espalhados pelo mapa.
+- Esperar pela queda de meteoros.
+- Observar os edifícios atingidos.
+- Verificar o seu estado após o evento.
+
+###### Expected Result:
+- Edifícios dentro do raio do meteoro são destruídos consistentemente.
+- Edifícios fora do raio permanecem intactos.
+
+### Test 3: Earthquake Shuffle Stability Test
+###### Goal:
+- Garantir que o terramoto recoloca edifícios dentro do raio, mas não causa softlock nem posicionamentos inválidos.
+
+###### Steps:
+- Criar uma zona com muitos edifícios juntos (ex.: várias fábricas).
+- Permitir que ocorra um terramoto natural.
+- Após o terramoto observar edifícios recolocados.
+- Verificar que não aparecem em cima uns dos outros nem em posições invalidas (ex.:minerador em zona sem minério,etc...).
+- Confirmar que edifícios fora da área não se moveram.
+
+###### Expected Result:
+- Todos os edifícios dentro do raio do terramoto são deslocados para tiles válidos.
+- Nenhum edifício sobrepõe outro.
+- Edifícios fora da área não mudam de posição.
+- O jogo continua sem erros.
+
+### Test 4: Earthquake Core Protection Test
+###### Goal:
+- Garantir que o terramoto não remove nem move Core Blocks, conforme a lógica da implementação.
+
+###### Steps:
+- Iniciar um mapa com um Core simples.
+- Colocar edifícios à volta para confirmar movimentação.
+- Esperar por um terramoto.
+- Após a animação verificar se o Core permaneceu no local original.
+
+###### Expected Result:
+- O Core nunca deve desaparecer, ser movido ou ser destruído.
+
+### Test 5: Tsunami Direction Consistency
+###### Goal:
+- Verificar que o tsunami se move sempre na direção calculada (0°, 45°, 90°, …), de acordo com o índice da array directions.
+
+###### Steps:
+- Iniciar mapa com água ou lava suficiente para permitir um tsunami.
+- Quando um tsunami começar:
+- Observar a direção da onda.
+- Comparar com Point2[] directions (ex.: 0° = (0,1), 90° = (-1,0)…).
+
+###### Expected Result:
+- A onda move-se exatamente na mesma direção definida no código.
+- A animação acompanha essa direção.
+
+### Test 6: Tsunami Water vs Lava Detection
+###### Goal:
+- Garantir que o sistema distingue corretamente entre tsunami de água e tsunami de lava.
+
+###### Steps:
+- Encontrar área com um tamanho conciderável cheia de líquido.
+- Esperar tsunami observar o efeito (Fx.waterTsunami).
+- Verificar se a cor do efeito condiz com a do líquido em que ocorreu.
+
+
+###### Expected Result:
+- Em água usa efeito de água.
+- Em lava usa efeito de lava.
+
 ### Review
 *(Please add your test specification review here)*
