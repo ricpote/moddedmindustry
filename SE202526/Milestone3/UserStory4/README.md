@@ -5,6 +5,7 @@ Trading System
 - João Fernandes (68180)
 ## Reviewer(s)
 - Miguel Cordeiro 68338
+- Ricardo Pote 68245
 ## User Story:
 Como jogador quero uma forma de utilizar os minerais que perdem utilidade ao longo do jogo e que por consequência são excessivamente acumulados, para
 apresentarem alguma utilidade em qualquer fase do jogo.
@@ -206,8 +207,8 @@ diretamente com o TradingSystem, enquanto FileMapGenerator e Blocks apenas trata
 Trader (Tim Cheese) no mapa.
 
 ![img.png](images/classDiagram.png)
-### Review
-*(Please add your class diagram review here)*
+### Review Ricardo Pote 68245
+A ideia geral e o fluxo de interação estão muito bons e fáceis de perceber ao olhar para este diagrama possivelmente algo a acrescentar seria os quantificadores para que seja mais claro ainda como as interações entre classes estão definidas.
 ### Sequence diagrams
 (*Sequence diagrams and their discussion in natural language.*)
 #### Review
