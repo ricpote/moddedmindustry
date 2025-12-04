@@ -83,7 +83,10 @@ vida máxima possível, e o id da equipa de cada Unit, e compara-o com o id da e
 Health Bar é selecionada, entre COLOR_ALLY ou COLOR_ENEMY_X (X dependene da vida atual) e executa a renderização final ao chamar
 o método Draw(), desenhando assim a Health Bar final.
 #### Review
-*(Please add your sequence diagram review here)*
+O fluxo geral dos dois diagramas foi corretamente interpretado, identificaram corretamente a origem das chamadas 
+(“HudFragments” no primeiro; “Renderer” no segundo). Referem também a lógica condicional das cores, que é importante 
+para explicar o seu comportamento, e ainda, mantêm coerência entre os dois processos (CoreHealthBar vs UnitHealthBar).
+
 ## Test specifications
 (*Test cases specification and pointers to their implementation, where adequate.*)
 ### Review
