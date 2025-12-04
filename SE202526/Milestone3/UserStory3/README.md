@@ -253,8 +253,11 @@ eventos, o que conduzia a duplicação de código e a um elevado acoplamento ent
  - melhorou a legibilidade do diagrama UML final. 
 
 ![ClassDiagram3.png](pngs/ClassDiagram3.png)
-### Review
-*(Please add your class diagram review here)*
+### Review (André Narquel - 67870)
+O Class Diagram apresenta uma implementação clara e compreensível, com uma estrutura que facilita a distinção 
+visual entre as classes centrais do sistema e as de suporte. As relações de dependência e herança são coerentes
+e bem definidas. A separação de responsabilidades entre os componentes de Lógica, Spawners e Efeitos
+é apropriada e consistente com as boas práticas e com o padrão seguido pelo código do resto do código do jogo.
 ### Sequence diagrams
 
 - O processo inicia-se com o Logic a invocar o update da classe abstrata, que verifica se o temporizador expirou e, 
