@@ -4,11 +4,12 @@ Natural Disasters
 - João Rodrigues (67912)
 - Tomás Silva (68725)
 ## Reviewer(s)
-(*Please add the user story reviewer(s) here, one in each line, providing the authors' name and surname, along with their student number. In the reviews presented in this document, add the corresponding reviewers.*)
+- Miguel Cordeiro 68338
 ## User Story:
 Como jogadores achamos que as condições climáticas e eventos naturais deviam ter mais impacto no jogo, poderiam haver catástrofes naturais que interferiam diretamente com as construções dos jogadores, para tornar o jogo mais desafiante.
 ### Review
-*(Please add your user story review here)* 
+#### Review feita por: Miguel Cordeiro 68338
+- A user story segue o formato pedido e está muito completa.
 ## Use case diagram
 ![Use Case Diagram (UserStory3).png](Use%20Case%20Diagram%20%28UserStory3%29.png)
 ## Use case textual description
@@ -222,7 +223,8 @@ Effects definidas em Fx.java.
 
 
 #### Review
-*(Please add your implementation summary review here)*
+#### Review feita por: Miguel Cordeiro 68338
+- O resumo da implementação está extremamente bem feito e é acompanhado por screenshoots para um melhor entendimento da implementação
 ### Class diagrams
 - No primeiro diagrama está representado a estrutura do código na primeira fase com apenas um desastre natural, a queda de
 de meteoros. A classe MeteorSpawner é instanciada uma vez pela classe Vars, usa o atributo meteorFall da classe Fx, cria
