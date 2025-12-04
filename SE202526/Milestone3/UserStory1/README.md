@@ -4,11 +4,13 @@ Weekly Challenge
 - Ricardo Pote (68245)
 - Miguel Cordeiro (68338)
 ## Reviewer(s)
-(*Please add the user story reviewer(s) here, one in each line, providing the authors' name and surname, along with their student number. In the reviews presented in this document, add the corresponding reviewers.*)
+- Tomás Silva (68725)
 ## User Story:
 Como jogador frequente de Mindustry, quero ter acesso a um modo de "Desafio Semanal" com um mapa gerado proceduralmente que muda a cada semana, para poder enfrentar situações novas regularmente e ter um motivo recorrente para jogar e tentar superar as pontuações dos meus amigos.
-### Review
-*(Please add your user story review here)*
+### Review (Tomás Silva 68725)
+A UserStory identifica claramente o tipo de jogador (“frequente”), o que ajuda a definir o público-alvo, explica o valor da 
+funcionalidade: variedade, rejogabilidade e motivação social. A intenção está bem definida: conteúdo novo todas as semanas mais competição entre amigos.
+Por fim, uma boa ligação entre mecânica (mapa procedural semanal) e motivação do jogador.
 ## Use case diagram
 <img width="787" height="601" alt="image" src="https://github.com/user-attachments/assets/ad53e025-dabf-4b20-ace3-dca3ab1a21ce" />
 <img width="865" height="644" alt="image" src="https://github.com/user-attachments/assets/af8f345d-ac37-4910-b0e3-0ebc6d4fa29f" />
