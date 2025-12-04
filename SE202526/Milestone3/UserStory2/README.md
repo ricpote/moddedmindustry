@@ -4,7 +4,8 @@ Health Bar
 Andre Narquel (67870)
 Joao Fernandes (68180)
 ## Reviewer(s)
-(*Please add the user story reviewer(s) here, one in each line, providing the authors' name and surname, along with their student number. In the reviews presented in this document, add the corresponding reviewers.*)
+
+Ricardo Pote (68245)
 ## User Story:
 Como jogadores sentimos dificuldade em perceber o HP (Health Points) de cada Wave de inimigos, e como esse valor é alterado 
 pela ação das nossas defesas.
@@ -60,7 +61,7 @@ informações ao Core da Team().
 Esta classe acaba por ser instanciada na classe HudFragments(), permitindo assim que a barra seja exibida constantemente 
 no ecrã durante as Enemy Waves, independentemente do dano recebido, desaparecendo assim que a Wave acaba.
 ![Instance of CoreHealthBar](images/Instance%20of%20CoreHealthBar.png)
-#### Review
+#### Review(Ricardo Pote 68245 REVIEWER)
 O objectivo deste codigo é desenhar barras de vida, acredito que isto esteja corretamente identificado tambem me que fizeram  bem ao identificarem onde as duas classes criadas são utilizadas, de forma que concluo que a esta implementation summary faz um bom trabalho e é uma ferramente util para a comprensão do processo de implementação desta funcionalidade.
 ### Class diagrams
 ![Class Diagram.png](images/Class%20Diagram.png)
