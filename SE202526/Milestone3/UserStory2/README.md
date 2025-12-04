@@ -45,7 +45,7 @@ Nesta implementação criámos 2 classes novas, a classe HealthBarRenderer() e a
 A classe HealthBarRenderer() é responsável por desenhar todas as barras de vida dos units presentes no jogo, percorrendo as
 Units presentes no EntityGroup<Unit>.
 Cada Unit possui uma referência a uma Team, que determina a cor da barra, caso seja da mesma equipa ou um inimigo.
-![Defining Bar Color](Defining%20Bar%20Color.png)
+![Defining Bar Color](Defining%20Bar%20Color.png) 
 
 Ao percorrer cada Unit vai também procurar informações sobre a sua vida e o seu tamanho.
 ![Units Health Info](Units%20Health%20Info.png)
@@ -67,7 +67,19 @@ no ecrã durante as Enemy Waves, independentemente do dano recebido, desaparecen
 ### Review
 *(Please add your class diagram review here)*
 ### Sequence diagrams
-(*Sequence diagrams and their discussion in natural language.*)
+![Sequence Diagram 1](Sequence%20Diagram%201.png)
+- O processo da Core Health Bar inicia-se com o HudFragments a criar uma nova instância da CoreHealthBar, que se inicializa 
+definindo o seu tamanho através da classe Element. De seguida, no ciclo de desenho (draw), a CoreHealthBar vai buscar os dados 
+através da abstração CoreBuild, que obtém a vida atual e máxima do Core. Com os dados retornados, a barra executa uma lógica 
+condicional para decidir a cor (selecionando COLOR_LOW_HEALTH se a vida for baixa, ou COLOR_DEFAULT caso contrário) e, após 
+a seleção, finaliza o processo ao renderizar a Health Bar na interface.
+
+![Sequence Diagram 2](Sequence%20Diagram%202.png)
+- O processo inicia-se com o Renderer a invocar o método drawHealthBars() no HealthBarRenderer, que imediatamente passa a 
+iterar sobre cada unidade contidas no EntityGroup através do método each(). Para cada unidade obtida, vai buscar a vida atual,
+vida máxima possível, e o id da equipa de cada Unit, e compara-o com o id da equipa do Player. Com base nesta comparação, a cor da 
+Health Bar é selecionada, entre COLOR_ALLY ou COLOR_ENEMY_X (X dependene da vida atual) e executa a renderização final ao chamar
+o método Draw(), desenhando assim a Health Bar final.
 #### Review
 *(Please add your sequence diagram review here)*
 ## Test specifications
