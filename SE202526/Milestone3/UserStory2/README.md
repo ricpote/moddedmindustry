@@ -38,8 +38,8 @@ A Health Bar do Core aparece automaticamente no início de cada Wave e desaparec
 - Enemy Waves includes Enemies - Sempre que há Enemy Waves, Inimigos dão spawn.
 - Enemy Waves includes Show Core Health Bar - Sempre que uma Enemy Wave é iniciada, a Health Bar do Core é exibida.
 - Take Damage includes Show Health Bar - Sempre que algum Player ou Inimigo levam dano, a Health Bar correspondente é exibida automaticamente.
-### Review
-*(Please add your use case review here)*
+### Review Ricardo Pote 68245
+A intenção geral do Use Case está clara e faz sentido , o Uso de include entre Take Damage e Show Health Bar faz sentido e a descrição textual comunica bem o comportamento textual, por outro lado parace me que os nomes não estão assim tão claros  pois faz parecer que estão a confundir entre entidades e ações ex: Quando dizem enemies devieria ser uma ação como spawn enemies.
 ## Implementation documentation
 ### Implementation summary
 Nesta implementação criámos 2 classes novas, a classe HealthBarRenderer() e a classe CoreHealthBar().
