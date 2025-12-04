@@ -66,8 +66,8 @@ no ecrã durante as Enemy Waves, independentemente do dano recebido, desaparecen
 O objectivo deste codigo é desenhar barras de vida, acredito que isto esteja corretamente identificado tambem me parece que fizeram um bom trabalho ao identificarem onde as duas classes criadas são utilizadas, de forma que concluo que a esta implementation summary faz um bom trabalho e é uma ferramente util para a comprensão do processo de implementação desta funcionalidade.
 ### Class diagrams
 ![Class Diagram.png](images/Class%20Diagram.png)
-### Review
-*(Please add your class diagram review here)*
+### Review Ricardo Pote 68245
+Este class diagram apresenta a estrutura logica corretamente e utiliza corretamente a representaçao de herança no entanto poderiam ter acrescentado multiplicidade as associações entre classes .
 ### Sequence diagrams
 ![Sequence Diagram 1](images/Sequence%20Diagram%201.png)
 - O processo da Core Health Bar inicia-se com o HudFragments a criar uma nova instância da CoreHealthBar, que se inicializa 
