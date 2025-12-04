@@ -39,7 +39,9 @@ As construções são afetadas de várias maneiras diferentes consoante a catás
 - Destroy Structures extends Generate Tsunami Event - O Generate Tsunami Event poderá causar a destruição de estruturas (Destroy Structures).
 - Destroy Structures extends Generate Earthquake Event - O Generate Earthquake Event poderá causar a destruição de estruturas (Destroy Structures).
 ### Review
-*(Please add your use case review here)*
+#### Review feita por: Joao Fernandes 68180
+Este Use Case descreve de forma clara como cada desastre natural afeta o sistema e as estruturas no jogo, com boa distinção entre atores e casos de uso.
+As relações include e extend estão bem aplicadas e ajudam a perceber a lógica interna dos eventos.
 ## Implementation documentation
 (*Please add the class diagram(s) illustrating your code evolution, along with a technical description of the changes made by your team. The description may include code snippets if adequate.*)
 ### Implementation summary
@@ -262,7 +264,10 @@ explosão e a notificação do evento global, finalizando com o reinício do tem
 ![SequenceDiagram.png](pngs/SequenceDiagram.png)
 
 #### Review
-*(Please add your sequence diagram review here)*
+#### Review feita por: Joao Fernandes 68180
+O Sequence Diagram descreve claramente o fluxo de execução do sistema de meteoros, mostrando bem a interação entre a classe base e o
+MeteorSpawner. A explicação do cálculo de posições seguras e da criação de múltiplos meteoros é coerente e fácil de seguir.
+Apesar de o Sequence Diagram dos outros desastres naturais ser relativamente parecido a este, podiam estar aqui representadas também.
 ## Test specifications
 
 ### Test 1: Meteor Spawn Safety Zone
