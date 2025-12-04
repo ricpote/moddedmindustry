@@ -67,7 +67,7 @@ O objectivo deste codigo é desenhar barras de vida, acredito que isto esteja co
 ### Class diagrams
 ![Class Diagram.png](images/Class%20Diagram.png)
 ### Review Ricardo Pote 68245
-Este class diagram apresenta a estrutura logica corretamente e utiliza corretamente a representaçao de herança no entanto poderiam ter acrescentado multiplicidade as associações entre classes .
+Este class diagram apresenta a estrutura logica corretamente e utiliza corretamente a representaçao de herança no entanto poderiam ter acrescentado multiplicidade às associações entre classes .
 ### Sequence diagrams
 ![Sequence Diagram 1](images/Sequence%20Diagram%201.png)
 - O processo da Core Health Bar inicia-se com o HudFragments a criar uma nova instância da CoreHealthBar, que se inicializa 
