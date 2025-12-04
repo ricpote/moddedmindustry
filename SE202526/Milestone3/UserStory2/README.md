@@ -10,7 +10,8 @@ Ricardo Pote (68245)
 Como jogadores sentimos dificuldade em perceber o HP (Health Points) de cada Wave de inimigos, e como esse valor é alterado 
 pela ação das nossas defesas.
 ### Review
-*(Please add your user story review here)*
+A UserStory identifica claramente um problema real do jogador: falta de visibilidade sobre o HP das waves e
+relaciona-se diretamente com a experiência de jogo e feedback visual, algo crucial em jogos Tower Defense / RTS. Muito bem!
 ## Use case diagram
 ![Use Case Diagram.png](images/Use%20Case%20Diagram.png)
 ## Use case textual description
