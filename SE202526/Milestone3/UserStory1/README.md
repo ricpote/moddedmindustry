@@ -6,6 +6,7 @@ Weekly Challenge
 ## Reviewer(s)
 - Tomás Silva (68725)
 - Joao Fernandes (68180)
+- João Rodrigues 67912
 ## User Story:
 Como jogador frequente de Mindustry, quero ter acesso a um modo de "Desafio Semanal" com um mapa gerado proceduralmente que muda a cada semana, para poder enfrentar situações novas regularmente e ter um motivo recorrente para jogar e tentar superar as pontuações dos meus amigos.
 ### Review (Tomás Silva 68725)
@@ -76,7 +77,11 @@ Por fim, uma boa ligação entre mecânica (mapa procedural semanal) e motivaç�
 	- 2º System proceeds to Step 7. 
 #### Pós-condições: The local high score table is updated with the latest result if it was a record, and the game session is marked as inactive.
 ### Review
-*(Please add your use case review here)*
+Os casos de uso UC1 (Play Weekly Challenge) e UC2 (Submit Ranking) definem de forma clara e abrangente o ciclo de vida do 
+modo Weekly Challenge. O UC1 detalha o fluxo do jogo, incluindo a lógica de semente semanal e o tratamento do save do jogo. 
+O UC2 foca na persistência do recorde (onda mais alta alcançada) após o Game Over, validando corretamente o score contra 
+o registro local.
+
 ## Implementation documentation
 (*Please add the class diagram(s) illustrating your code evolution, along with a technical description of the changes made by your team. The description may include code snippets if adequate.*)
 ### Implementation summary
