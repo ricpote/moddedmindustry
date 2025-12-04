@@ -11,7 +11,7 @@ certos minerais são complicados de armazenar e acabamos por ter sempre muito po
 ### Review
 *(Please add your user story review here)* 
 ## Use case diagram
-![Use Case Diagram.png](Use Case Diagram.png)
+![Use Case Diagram.png](images/Use%20Case%20Diagram.png)
 
 ## Use case textual description
 Este Use Case representa o funcionamento do Trading System implementado. O Player interage com o Trader,que apresenta 
@@ -195,7 +195,15 @@ Por fim, coloca o bloco Tim Cheese nesse tile atribuindo-o à equipa.
 #### Review
 *(Please add your implementation summary review here)*
 ### Class diagrams
-(*Class diagrams and their discussion in natural language.*)
+
+O diagrama representa o TradingSystem como o núcleo do sistema de trocas: é um singleton que gere TradeOffers,
+usando o ItemRarity para validar e equilibrar cada troca.
+O TraderBlock e a sua TraderBuild integram este sistema no mundo do jogo, atualizando-o a cada tick e abrindo o 
+TradingDialog quando o jogador interage com o bloco. O TradingDialog apresenta as ofertas ao jogador e comunica 
+diretamente com o TradingSystem, enquanto FileMapGenerator e Blocks apenas tratam da colocação e registo do bloco 
+Trader (Tim Cheese) no mapa.
+
+![img.png](images/classDiagram.png)
 ### Review
 *(Please add your class diagram review here)*
 ### Sequence diagrams
