@@ -155,9 +155,7 @@ Como jogador frequente de Mindustry, quero ter acesso a um modo de "Desafio Sema
 
 #### Review
 *(Please add your implementation summary review here)*
-### Class diagrams
-
-
+### Class diagrams(for Clarity of our changes the classes that are fully created by us are colored with orange)
 
 <img width="2336" height="2886" alt="image" src="https://github.com/user-attachments/assets/cbaa6185-7457-4a86-a9cd-b0543e611aec" />
 
