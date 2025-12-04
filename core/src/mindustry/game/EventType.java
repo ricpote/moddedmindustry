@@ -775,4 +775,45 @@ public class EventType{
             this.action = action;
         }
     }
+
+    public static class MeteorEvent{
+        public final float x;
+        public final float y;
+        public final float rad;
+        public final float damage;
+
+        public MeteorEvent(float x, float y, float rad, float damage){
+            this.x = x;
+            this.y = y;
+            this.rad = rad;
+            this.damage = damage;
+        }
+
+    }
+
+    public static class EarthquakeEvent{
+        public final float x;
+        public final float y;
+        public final float rad;
+
+        public EarthquakeEvent(float x, float y, float rad){
+            this.x = x;
+            this.y = y;
+            this.rad = rad;
+        }
+    }
+
+    public static class TsunamiEvent{
+        public final float x;
+        public final float y;
+        public final float angle;
+        public final float length;
+
+        public TsunamiEvent(float x, float y, float angle, float length){
+            this.x = x;
+            this.y = y;
+            this.angle = angle;
+            this.length = length;
+        }
+    }
 }

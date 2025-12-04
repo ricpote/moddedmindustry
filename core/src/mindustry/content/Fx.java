@@ -7,6 +7,7 @@ import arc.math.*;
 import arc.math.geom.*;
 import arc.struct.*;
 import arc.util.*;
+import mindustry.Vars;
 import mindustry.entities.*;
 import mindustry.entities.abilities.*;
 import mindustry.gen.*;
@@ -39,6 +40,45 @@ public class Fx{
         color(Color.white);
         rect(block.fullIcon, e.x + offset, e.y + offset * 5f, (float)block.size * 8f, (float)block.size * 8f);
     }),
+
+    meteorFall = new Effect(90f, e -> {
+        float progress = e.fin();
+
+        float startX = Vars.world.unitHeight() + 200f;
+        float startY = Vars.world.unitHeight() + 200f;
+
+        float x = Mathf.lerp(startX, e.x, progress);
+        float y = Mathf.lerp(startY, e.y, progress);
+
+        Draw.color(Color.white);
+        Draw.rect(Core.atlas.find("meteor"), x, y, 48f, 48f);
+    }),
+
+    earthquake1 = new Effect(900f, e -> {
+        Draw.color(Color.white);
+        Draw.alpha(e.fout(Interp.pow3Out) * 0.4f);
+        Draw.rect(Core.atlas.find("earthquake1"), e.x, e.y, tilesize, tilesize);
+    }),
+
+    earthquake2 = new Effect(1200f, e -> {
+        Draw.color(Color.white);
+        Draw.alpha(e.fout(Interp.pow3Out) * 0.4f);
+        Draw.rect(Core.atlas.find("earthquake2"), e.x, e.y, tilesize, tilesize);
+    }),
+
+
+    waterTsunami = new Effect(20f, e -> {
+        TextureRegion frontRegion = Core.atlas.find("tsunami_water");
+        Draw.color(Color.white, e.fout());
+        Draw.rect(frontRegion, e.x, e.y, tilesize, tilesize, e.rotation);
+    }),
+
+    lavaTsunami = new Effect(20f, e -> {
+        TextureRegion frontRegion = Core.atlas.find("tsunami_lava");
+        Draw.color(Color.white, e.fout());
+        Draw.rect(frontRegion, e.x, e.y, tilesize, tilesize, e.rotation);
+    }),
+
 
     trailFade = new Effect(400f, e -> {
         if(!(e.data instanceof Trail trail)) return;

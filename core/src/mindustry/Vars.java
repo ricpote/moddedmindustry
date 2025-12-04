@@ -280,6 +280,9 @@ public class Vars implements Loadable{
     public static World world;
     public static Maps maps;
     public static WaveSpawner spawner;
+    public static NaturalDisasterSpawner meteorSpawner;
+    public static NaturalDisasterSpawner earthquakeSpawner;
+    public static NaturalDisasterSpawner tsunamiSpawner;
     public static BlockIndexer indexer;
     public static Pathfinder pathfinder;
     public static ControlPathfinder controlPath;
@@ -356,6 +359,9 @@ public class Vars implements Loadable{
         myGen=new WeeklyGenerator();
         maps = new Maps();
         spawner = new WaveSpawner();
+        meteorSpawner = new MeteorSpawner();
+        earthquakeSpawner = new EarthquakeSpawner();
+        tsunamiSpawner = new TsunamiSpawner();
         indexer = new BlockIndexer();
         pathfinder = new Pathfinder();
         controlPath = new ControlPathfinder();
