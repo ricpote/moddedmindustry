@@ -215,8 +215,12 @@ consistente e organizada.
 -Finally MenuFragment display the scoreEntry collection from WeeklyRankInfo Object.
 
 
-#### Review
-*(Please add your sequence diagram review here)*
+#### Review (André Narquel - 67870)
+Estrutura clara com boa separação de responsabilidades entre componentes (WeeklyChalServ, WeeklyRankingInfo,
+InfiniteWaveClass), cobertura abrangente dos fluxos principais com tratamento de casos alternativos
+(save exists/corrupted), e uso correto da notação com fragmentos alt/loop bem definidos.
+A sequência mostra claramente o ciclo completo desde o início do desafio semanal até à submissão e
+visualização de rankings, facilitando a compreensão da funcionalidade.
 ## Test specifications
 ### Test1 Test deterministic nature :
 
