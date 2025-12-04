@@ -124,4 +124,7 @@ para explicar o seu comportamento, e ainda, mantêm coerência entre os dois pro
 
 
 ### Review
-*(Please add your test specification review here)*
+Os testes cobrem de forma eficaz a visibilidade e o comportamento da HealthBar tanto para o Core (ligado/desligado por wave) 
+quanto para as Units (Player e Enemies). O Teste 2 é bem detalhado ao validar as mudanças de cor específicas da barra de HP 
+do inimigo (verde $\rightarrow$ amarelo $\rightarrow$ vermelho) em contraste com a cor consistente (azul claro) da barra 
+do Player. Os Expected Results resumem claramente os critérios de aprovação para cada cenário.
