@@ -5,6 +5,7 @@ Natural Disasters
 - Tomás Silva (68725)
 ## Reviewer(s)
 - Miguel Cordeiro 68338
+- Joao Fernandes 68180
 ## User Story:
 Como jogadores achamos que as condições climáticas e eventos naturais deviam ter mais impacto no jogo, poderiam haver catástrofes naturais que interferiam diretamente com as construções dos jogadores, para tornar o jogo mais desafiante.
 ### Review
