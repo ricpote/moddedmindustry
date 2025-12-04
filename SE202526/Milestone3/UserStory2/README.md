@@ -4,12 +4,12 @@ Health Bar
 Andre Narquel (67870)
 Joao Fernandes (68180)
 ## Reviewer(s)
-
 Ricardo Pote (68245)
+Tomás Silva (68725)
 ## User Story:
 Como jogadores sentimos dificuldade em perceber o HP (Health Points) de cada Wave de inimigos, e como esse valor é alterado 
 pela ação das nossas defesas, e queremos algo que nos permita visualizar isso, para facilitar a gameplay durante as waves
-### Review
+### Review (Tomás Silva 68725)
 A UserStory identifica claramente um problema real do jogador: falta de visibilidade sobre o HP das waves e
 relaciona-se diretamente com a experiência de jogo e feedback visual, algo crucial em jogos Tower Defense / RTS. Muito bem!
 ## Use case diagram
@@ -82,7 +82,7 @@ iterar sobre cada unidade contidas no EntityGroup através do método each(). Pa
 vida máxima possível, e o id da equipa de cada Unit, e compara-o com o id da equipa do Player. Com base nesta comparação, a cor da 
 Health Bar é selecionada, entre COLOR_ALLY ou COLOR_ENEMY_X (X dependene da vida atual) e executa a renderização final ao chamar
 o método Draw(), desenhando assim a Health Bar final.
-#### Review
+#### Review (Tomás Silva 68725)
 O fluxo geral dos dois diagramas foi corretamente interpretado, identificaram corretamente a origem das chamadas 
 (“HudFragments” no primeiro; “Renderer” no segundo). Referem também a lógica condicional das cores, que é importante 
 para explicar o seu comportamento, e ainda, mantêm coerência entre os dois processos (CoreHealthBar vs UnitHealthBar).
