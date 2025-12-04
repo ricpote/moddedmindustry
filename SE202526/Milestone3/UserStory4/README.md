@@ -6,6 +6,7 @@ Trading System
 ## Reviewer(s)
 - Miguel Cordeiro 68338
 - Ricardo Pote 68245
+- Tomás Silva 68725
 ## User Story:
 Como jogador quero uma forma de utilizar os minerais que perdem utilidade ao longo do jogo e que por consequência são excessivamente acumulados, para
 apresentarem alguma utilidade em qualquer fase do jogo.
@@ -48,8 +49,12 @@ O Player pode realizar até cinco trades, após a quinta trade ou após 10 minut
 - Execute Trade includes Number of Uses – Após a troca ser executada, o contador de trades é atualizado.
 - Number of Uses extends Reset Trades – Quando o Player realiza cinco Trades, as opções são resetadas.
 - Timer extends Reset Trades – Quando passam 10 minutos, as opções de trade são resetadas automaticamente.
-### Review
-*(Please add your use case review here)*
+### Review (Tomás Silva 68725)
+O Use Case Diagram (mais descrição) explica claramente como funciona o Trading System no jogo.
+Os actors e as suas responsabilidades estão identificados.
+Cada use case tem uma definição coerente.
+As relações include e extend estão bem representadas e fazem sentido com o diagrama.
+Por fim, os gatilhos de reset (5 trades ou 10 minutos) estão bem explicados.
 ## Implementation documentation
 (*Please add the class diagram(s) illustrating your code evolution, along with a technical description of the changes made by your team. The description may include code snippets if adequate.*)
 ### Implementation summary
