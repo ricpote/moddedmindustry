@@ -6,6 +6,7 @@ Natural Disasters
 ## Reviewer(s)
 - Miguel Cordeiro 68338
 - Joao Fernandes 68180
+- André Narquel 67870
 ## User Story:
 Como jogadores achamos que as condições climáticas e eventos naturais deviam ter mais impacto no jogo, poderiam haver catástrofes naturais que interferiam diretamente com as construções dos jogadores, para tornar o jogo mais desafiante.
 ### Review
@@ -358,6 +359,6 @@ Apesar de o Sequence Diagram dos outros desastres naturais ser relativamente par
 - Em água usa efeito de água.
 - Em lava usa efeito de lava.
 
-### Review
+### Review (André Narquel - 67870)
 Os testes são claros, objetivos e garantem alta confiabilidade na jogabilidade, estão muito bem estruturados e cobrem
 perfeitamente os comportamentos críticos dos eventos ambientais.
