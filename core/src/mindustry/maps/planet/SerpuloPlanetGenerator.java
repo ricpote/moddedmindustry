@@ -235,7 +235,6 @@ public class SerpuloPlanetGenerator extends PlanetGenerator{
 
     @Override
     protected void generate(){
-
         class Room{
             int x, y, radius;
             ObjectSet<Room> connected = new ObjectSet<>();
@@ -718,7 +717,6 @@ public class SerpuloPlanetGenerator extends PlanetGenerator{
 
         if(sector.hasEnemyBase()){
             basegen.generate(tiles, enemies.map(r -> tiles.getn(r.x, r.y)), tiles.get(spawn.x, spawn.y), state.rules.waveTeam, sector, difficulty);
-
             state.rules.attackMode = sector.info.attack = true;
         }else{
             state.rules.winWave = sector.info.winWave = 10 + 5 * (int)Math.max(difficulty * 10, 1);
