@@ -4,12 +4,13 @@ Trading System
 - André Narquel (67870)
 - João Fernandes (68180)
 ## Reviewer(s)
-(*Please add the user story reviewer(s) here, one in each line, providing the authors' name and surname, along with their student number. In the reviews presented in this document, add the corresponding reviewers.*)
+- Miguel Cordeiro 68338
 ## User Story:
 Como jogador quero uma forma de utilizar os minerais que perdem utilidade ao longo do jogo e que por consequência são excessivamente acumulados, para
 apresentarem alguma utilidade em qualquer fase do jogo.
 ### Review
-*(Please add your user story review here)* 
+#### Review feita por: Miguel Cordeiro 68338
+- A user story está bem feita, consoante o formato pedido e foi uma boa ideia criar outra user story pois a user story 2 era algo mais simples.
 ## Use case diagram
 ![Use Case Diagram.png](images/Use%20Case%20Diagram.png)
 
@@ -193,7 +194,8 @@ Por fim, coloca o bloco Tim Cheese nesse tile atribuindo-o à equipa.
 ![img_25.png](images/img_25.png)
 
 #### Review
-*(Please add your implementation summary review here)*
+#### Review feita por: Miguel Cordeiro 68338
+- O resumo da implementação está extremamente bem feito e é acompanhado por screenshoots para um melhor entendimento da implementação.
 ### Class diagrams
 
 O diagrama representa o TradingSystem como o núcleo do sistema de trocas: é um singleton que gere TradeOffers,
