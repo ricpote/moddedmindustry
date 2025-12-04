@@ -6,8 +6,8 @@ Trading System
 ## Reviewer(s)
 (*Please add the user story reviewer(s) here, one in each line, providing the authors' name and surname, along with their student number. In the reviews presented in this document, add the corresponding reviewers.*)
 ## User Story:
-Como jogadores sentimos que certos minerais perdem utilidade e por consequência são muito acumulados durante o jogo e por contrário 
-certos minerais são complicados de armazenar e acabamos por ter sempre muito poucos.
+Como jogador quero uma forma de utilizar os minerais que perdem utilidade ao longo do jogo e que por consequência são excessivamente acumulados, para
+apresentarem alguma utilidade em qualquer fase do jogo.
 ### Review
 *(Please add your user story review here)* 
 ## Use case diagram

@@ -11,7 +11,7 @@ pela ação das nossas defesas.
 ### Review
 *(Please add your user story review here)*
 ## Use case diagram
-![Use Case Diagram.png](Use Case Diagram.png)
+![Use Case Diagram.png](images/Use%20Case%20Diagram.png)
 ## Use case textual description
 Este use Case representa a adição de Health Bars nas Waves Inimigas, no nosso Player e no nosso Core da base.
 O Player sofre dano durante o jogo, fazendo com que a sua Health Bar apareça no ecrã e seja atualizada automaticamente.
@@ -45,36 +45,36 @@ Nesta implementação criámos 2 classes novas, a classe HealthBarRenderer() e a
 A classe HealthBarRenderer() é responsável por desenhar todas as barras de vida dos units presentes no jogo, percorrendo as
 Units presentes no EntityGroup<Unit>.
 Cada Unit possui uma referência a uma Team, que determina a cor da barra, caso seja da mesma equipa ou um inimigo.
-![Defining Bar Color](Defining%20Bar%20Color.png) 
+![Defining Bar Color](images/Defining%20Bar%20Color.png) 
 
 Ao percorrer cada Unit vai também procurar informações sobre a sua vida e o seu tamanho.
-![Units Health Info](Units%20Health%20Info.png)
+![Units Health Info](images/Units%20Health%20Info.png)
 
 No fim, a classe é chamada na classe Renderer() para se desenhar assim a sua Health Bar.
-![Drawing Health Bar](Drawing%20Health%20Bar.png)
+![Drawing Health Bar](images/Drawing%20Health%20Bar.png)
 
 A classe CoreHealthBar() é tratada como uma extensão de Elements. Nesta classe desejamos saber informações do Core no jogo, indo buscar
 informações ao Core da Team().
-![Core Health Info](Core%20Health%20Info.png)
+![Core Health Info](images/Core%20Health%20Info.png)
 
 Esta classe acaba por ser instanciada na classe HudFragments(), permitindo assim que a barra seja exibida constantemente 
 no ecrã durante as Enemy Waves, independentemente do dano recebido, desaparecendo assim que a Wave acaba.
-![Instance of CoreHealthBar](Instance%20of%20CoreHealthBar.png)
+![Instance of CoreHealthBar](images/Instance%20of%20CoreHealthBar.png)
 #### Review
 *(Please add your implementation summary review here)*
 ### Class diagrams
-![Class Diagram.png](Class Diagram.png)
+![Class Diagram.png](images/Class%20Diagram.png)
 ### Review
 *(Please add your class diagram review here)*
 ### Sequence diagrams
-![Sequence Diagram 1](Sequence%20Diagram%201.png)
+![Sequence Diagram 1](images/Sequence%20Diagram%201.png)
 - O processo da Core Health Bar inicia-se com o HudFragments a criar uma nova instância da CoreHealthBar, que se inicializa 
 definindo o seu tamanho através da classe Element. De seguida, no ciclo de desenho (draw), a CoreHealthBar vai buscar os dados 
 através da abstração CoreBuild, que obtém a vida atual e máxima do Core. Com os dados retornados, a barra executa uma lógica 
 condicional para decidir a cor (selecionando COLOR_LOW_HEALTH se a vida for baixa, ou COLOR_DEFAULT caso contrário) e, após 
 a seleção, finaliza o processo ao renderizar a Health Bar na interface.
 
-![Sequence Diagram 2](Sequence%20Diagram%202.png)
+![Sequence Diagram 2](images/Sequence%20Diagram%202.png)
 - O processo inicia-se com o Renderer a invocar o método drawHealthBars() no HealthBarRenderer, que imediatamente passa a 
 iterar sobre cada unidade contidas no EntityGroup através do método each(). Para cada unidade obtida, vai buscar a vida atual,
 vida máxima possível, e o id da equipa de cada Unit, e compara-o com o id da equipa do Player. Com base nesta comparação, a cor da 
