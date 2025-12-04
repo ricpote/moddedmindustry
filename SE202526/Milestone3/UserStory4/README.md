@@ -299,5 +299,6 @@ interação entre os componentes como TradingSystem e CoreBuild para gestão de 
 - O bloco será um Rato
 
 
-### Review
-*(Please add your test specification review here)*
+### Review (Tomás Silva 68725)
+Cada teste tem Goal, Steps e Expected Result, o que é excelente e os testes cobrem todos os casos essenciais do 
+Trading System: sucesso, falha, timer, limite de trocas, e até o sprite do bloco.
