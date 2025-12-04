@@ -199,7 +199,7 @@ três variáveis globais:
  - public static EarthquakeSpawner earthquakeSpawner;
  - public static TsunamiSpawner tsunamiSpawner;
 
-![spawnerVar.png](pngs/spawnerVar.png)
+![VarsRefactor.png](pngs/VarsRefactor.png)
 
 - Estas variáveis permitem que outras partes do jogo — como o ciclo de atualização (Logic.update()) ou sistemas de 
 rendering e efeitos consigam aceder diretamente aos spawners dos novos desastres. Durante a inicialização do jogo, os 
