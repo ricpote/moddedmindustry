@@ -6,6 +6,8 @@ Joao Fernandes (68180)
 ## Reviewer(s)
 Ricardo Pote (68245)
 Tomás Silva (68725)
+João Rodrigues (67912)
+
 ## User Story:
 Como jogadores sentimos dificuldade em perceber o HP (Health Points) de cada Wave de inimigos, e como esse valor é alterado 
 pela ação das nossas defesas, e queremos algo que nos permita visualizar isso, para facilitar a gameplay durante as waves

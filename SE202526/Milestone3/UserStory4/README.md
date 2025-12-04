@@ -7,6 +7,8 @@ Trading System
 - Miguel Cordeiro 68338
 - Ricardo Pote 68245
 - Tomás Silva 68725
+- João Rodrigues 67912
+
 ## User Story:
 Como jogador quero uma forma de utilizar os minerais que perdem utilidade ao longo do jogo e que por consequência são excessivamente acumulados, para
 apresentarem alguma utilidade em qualquer fase do jogo.
