@@ -215,7 +215,14 @@ Trader (Tim Cheese) no mapa.
 ### Review Ricardo Pote 68245
 A ideia geral e o fluxo de interação estão muito bons e fáceis de perceber ao olhar para este diagrama possivelmente algo a acrescentar seria os quantificadores para que seja mais claro ainda como as interações entre classes estão definidas.
 ### Sequence diagrams
-(*Sequence diagrams and their discussion in natural language.*)
+
+O diagrama mostra o fluxo de trading: O TraderBlock é colocado no FileMapGenerator , quando o bloco é clicado abre o 
+TradingDialog, visualiza as ofertas (TradeOffer) fornecidas pelo TradingSystem, executa uma troca se possível (fazendo 
+as trocas de itens com o core) , e o sistema atualiza o timer e gera novas ofertas quando as 5 definidas são utilizadas 
+ou quando o timer chega ao fim.
+
+![img.png](images/SequenceDiagram1.png)
+![img_1.png](images/SequenceDiagram2.png)
 #### Review
 *(Please add your sequence diagram review here)*
 ## Test specifications
