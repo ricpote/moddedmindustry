@@ -1,3 +1,8 @@
+This is a modded version of the game mindustry initially made for a course of software engineering.
+
+The added functionalities are:(Natural Disasters,Weekly Challange Mode ,Health Bars For Waves etc... and Trader character in campaign levels).
+
+
 ![Logo](core/assets-raw/sprites/ui/logo.png)
 
 [![Build Status](https://github.com/Anuken/Mindustry/workflows/Tests/badge.svg?event=push)](https://github.com/Anuken/Mindustry/actions)
